@@ -1,0 +1,138 @@
+<%- include('partials/header.ejs') %>
+
+<!-- Main Sidebar End -->
+<div class="main-content">
+  <!-- <section class="section">
+    <div class="section-body">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header" style="background-color: #212529">
+              <div class="col-12 row card-header-box">
+                <div class="col-md-6">
+                  <h4 class="float-left">Winning history Report</h4>
+                  <br />
+                </div>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <div class="row m-2">
+                <div class="col-12">Date</div>
+              </div>
+
+              <div class="row m-2">
+                <div class="col-12">
+                  <form action="" class="d-flex">
+                    <input
+                      type="date"
+                      class="form-control"
+                      style="width: 200px; margin-right: 5px"
+                    />
+                    <button
+                      class="btn btn-primary"
+                      style="background-color: #212529; color: #fff"
+                    >
+                      Save
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <section class="section">
+    <div class="section-body">
+      <!--  Wake Up List Start-->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header" style="background-color: #212529">
+              <div class="col-12 row card-header-box">
+                <div class="col-md-6">
+                  <h4 class="float-left">Winning History Report</h4>
+                  <br />
+                </div>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <div class="row m-2">
+                <div class="col-12">
+                  <div class="table-responsive">
+                    <table id="example" class="table">
+                      <thead class="t-head">
+                        <tr>
+                          <td>S.No</td>
+                          <td>Paana and Digit</td>
+                          <td>Date</td>
+                          <td>Action</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% if(!game_types[0]) { %>
+                        <tr>
+                          <td colspan="100%">No Data</td>
+                        </tr>
+                        <% } else {%> <% game_types.forEach(function(game_types,index){ %>
+                        <tr>
+                          <td><%= index+1 %></td>
+                          <!-- <td><%= game_types.user_id ? game_types.user_id.name : " " %> </td> -->
+                          <td><%= game_types.type %></td>
+                          <td><%= convertTimeStampToDate(game_types.created_at) %></td>
+                          <td>
+                            <a
+                              href="/admin/winning/details?id=<%= game_types._id %>"
+                            >
+                              <i class="btn btn-info btn-lg fas fa-eye"></i>
+                            </a>
+                            <!-- <i
+                                  class="btn btn-danger btn-lg fas fa-trash-alt"
+                                  onclick="deletegame_types('<%= game_types._id %>');"
+                                ></i> -->
+                          </td>
+                        </tr>
+
+                        <% }); %> <% } %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Customer list Ends -->
+    </div>
+  </section>
+</div>
+
+<%
+function convertTimeStampToDate(date){
+   date = Number(date)
+      var d = new Date(date),
+         month = '' + (d.getMonth() + 1),
+         day = '' + d.getDate(),
+         year = d.getFullYear();
+
+   if (month.length < 2)
+   month = '0' + month;
+   if (day.length < 2)
+   day = '0' + day;
+   var date = new Date();
+   date.toLocaleDateString();
+
+   return [day, month, year].join('-');
+}
+%>
+
+<%- include ('partials/footer.ejs') %>
+
+<script>
+  $(document).ready(function () {
+    $("#example").DataTable();
+  });
+</script>

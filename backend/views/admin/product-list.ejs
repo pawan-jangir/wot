@@ -1,0 +1,429 @@
+<%- include('partials/header.ejs') %>
+<div class="main-content">
+  <section class="section">
+    <div class="section-body">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div
+              class="card-header"
+              style="height: 70px; background-color: #212529"
+            >
+              <div class="col-12">
+                <h4 class="float-left">Product</h4>
+                <div class="head-right-btn">
+                  <button
+                    class="btn btn-sm btn-secondary float-right card-text-btn"
+                    type="submit"
+                    data-bs-toggle="modal"
+                    data-bs-target="#myModal"
+                  >
+                    <a
+                      href="#"
+                      data-ajax-popup="true"
+                      data-size="md"
+                      data-title="Invite New User"
+                      data-toggle="tooltip"
+                      title=""
+                      data-bs-original-title="Add Product"
+                    >
+                      Add
+                    </a>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12">
+                  <div class="table-responsive p-2">
+                    <table id="example" class="table table-bordered table-md">
+                      <thead>
+                        <tr class="text-center">
+                          <th>Name</th>
+                          <th>Image</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <% if(!product[0]) { %>
+                        <tr>
+                          <td colspan="100%">No Data</td>
+                        </tr>
+                        <% } else {%> <% product.forEach(function(product){ %>
+                        <tr class="text-center">
+                          <td><%= product.name %></td>
+                          <td>
+                            <img
+                              src="/uploads/product/<%= product.image %>"
+                              alt="slider"
+                              height="50px"
+                              width="50px"
+                            />
+                          </td>
+                          <td>
+                            <i
+                              class="btn btn-info btn-md fas fa-edit"
+                              id="edit_btn"
+                              data-toggle="modal"
+                              data-model="<%= JSON.stringify(product) %>"
+                            ></i>
+                            <i
+                              class="btn btn-danger btn-md fas fa-trash-alt"
+                              onclick="deletedetails('<%= product._id %>');"
+                            ></i>
+                          </td>
+                        </tr>
+
+                        <% }); %> <% } %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal" id="myModal">
+    <!-- modal  -->
+    <div
+      class="modal-dialog modal-xl"
+      style="margin-bottom: 10%"
+      role="document"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+
+        <div class="body">
+          <div class="modal-body">
+            <form
+              id="addform"
+              class="form-group font-weight-bold showcursor: true"
+            >
+              <div class="mb-3 d-grid gap-2 col-6">
+                <label for="title" class="form-label">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  class="form-control"
+                  placeholder="Enter Name"
+                />
+              </div>
+              <div class="mb-3 d-grid gap-2 col-12">
+                <label for="title" class="form-label">Base Price</label>
+                <input
+                  type="text"
+                  name="baseprice"
+                  id="baseprice"
+                  class="form-control"
+                  placeholder="Enter Base Price"
+                />
+              </div>
+              <div class="mb-3 d-grid gap-2 col-12">
+                <label for="title" class="form-label">Add-on Logo Price</label>
+                <input
+                  type="text"
+                  name="addonlogoprice"
+                  id="addonlogoprice"
+                  class="form-control"
+                  placeholder="Enter Add-on Logo Price"
+                />
+              </div>
+              <div class="mb-3 d-grid gap-2 col-12">
+                <label for="title" class="form-label">Spare Card Price</label>
+                <input
+                  type="text"
+                  name="sparecardprice"
+                  id="sparecardprice"
+                  class="form-control"
+                  placeholder="Enter Spare Card Price"
+                />
+              </div>
+              
+                <div class="mb-3 d-grid gap-2 col-6 w-50">
+                  <label for="title" class="form-label">Image</label>
+                  <input
+                    type="file"
+                    name="image"
+                    id="image"
+                    class="form-control"
+                    placeholder="Enter Image"
+                  />
+                </div>
+                <div class="mb-3 d-grid gap-2 col-6 w-50">
+                  <label for="title" class="form-label">Icon</label>
+                  <input
+                    type="file"
+                    name="icon"
+                    id="icon"
+                    class="form-control"
+                    placeholder="Enter Image"
+                  />
+                </div>
+              <div class="mb-3 d-grid gap-2 col-12">
+                <label for="description" class="form-label">Decription</label>
+                <input
+                  id="description"
+                  name="description"
+                  class="form-control"
+                  placeholder="Decription"
+                />
+              </div>
+
+              <button
+                type="submit"
+                class="btn mt-3 pull-right"
+                style="background-color: #212529; color: #fff"
+              >
+                Save
+              </button>
+            </form>
+          </div>
+          <div class="col-md-12 modal-footer"></div>
+        </div>
+      </div>
+    </div>
+    <!-- modal  -->
+  </div>
+
+  <!-- Modal body -->
+  <div class="modal fade" id="edit">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Product</h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form
+            id="editform"
+            class="form-group font-weight-bold showcursor: true"
+          >
+            <input type="hidden" id="editid" name="editid" />
+            <div class="mb-3 d-grid gap-2 col-12">
+              <label for="title" class="form-label">Name</label>
+              <input
+                type="text"
+                name="editname"
+                id="editname"
+                class="form-control"
+                placeholder="Enter Name"
+              />
+            </div>
+            <div class="mb-3 d-grid gap-2 col-12">
+              <label for="title" class="form-label">Base Price</label>
+              <input
+                type="text"
+                name="editbaseprice"
+                id="editbaseprice"
+                class="form-control"
+                placeholder="Enter Base Price"
+              />
+            </div>
+            <div class="mb-3 d-grid gap-2 col-12">
+              <label for="title" class="form-label">Add-on Logo Price</label>
+              <input
+                type="text"
+                name="editaddonlogoprice"
+                id="editaddonlogoprice"
+                class="form-control"
+                placeholder="Enter Add-on Logo Price"
+              />
+            </div>
+            <div class="mb-3 d-grid gap-2 col-12">
+              <label for="title" class="form-label">Spare Card Price</label>
+              <input
+                type="text"
+                name="editsparecardprice"
+                id="editsparecardprice"
+                class="form-control"
+                placeholder="Enter Spare Card Price"
+              />
+            </div>
+
+            <div class="mb-3 d-grid gap-2 col-6 w-50">
+              <label for="title" class="form-label">Image</label>
+              <input
+                type="file"
+                name="image"
+                id="image"
+                class="form-control"
+                placeholder="Enter Image"
+              />
+            </div>
+            <div class="mb-3 d-grid gap-2 col-6 w-50">
+              <label for="title" class="form-label">Icon</label>
+              <input
+                type="file"
+                name="icon"
+                id="icon"
+                class="form-control"
+                placeholder="Enter Image"
+              />
+            </div>
+           
+            <div class="mb-3 d-grid gap-2 col-12">
+              <label for="description" class="form-label">Decription</label>
+              <input
+                id="editdescription"
+                name="editdescription"
+                class="form-control"
+                placeholder="Decription"
+              />
+            </div>
+
+            <button
+              type="submit"
+              class="btn mt-3 pull-right"
+              style="background-color: #212529; color: #fff"
+            >
+              Save
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include ('partials/footer.ejs')%>
+<script>
+  $(document).ready(function () {
+    $("#example").DataTable();
+  });
+
+  var addform = $("#addform");
+
+  addform.on("submit", addslidersubmitHandler);
+
+  function addslidersubmitHandler(e) {
+    e.preventDefault();
+
+    // PREPARE FORM DATA
+    var formData = new FormData(addform[0]);
+    console.log(formData);
+    // // DO POST
+    $.ajax({
+      type: "POST",
+      enctype: "multipart/form-data",
+      cache: false,
+      processData: false,
+      contentType: false,
+      url: "/admin/product/add",
+      data: formData,
+    })
+      .done((res) => {
+        if (res.error == true) {
+          renderToast({ message: res.message, icon: "error" });
+        } else {
+          renderToast({ message: res.message, icon: "success" });
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        }
+      })
+      .fail(function (xhr, status, error) {
+        console.log(xhr.responseText);
+      });
+  }
+
+  $(document).on("click", "#edit_btn", function (e) {
+    let getData = $(e.target).attr("data-model");
+    let finalData = JSON.parse(getData);
+    $("#edit").modal("show");
+    var data = finalData;
+    $("#editid").val(data._id);
+    $("#editname").val(data.name);
+    $("#editdescription").val(data.description);
+    $("#editbaseprice").val(data.baseprice);
+    $("#editaddonlogoprice").val(data.addonlogoprice);
+    $("#editsparecardprice").val(data.sparecardprice);
+  });
+
+  var editform = $("#editform");
+  editform.on("submit", editSubmitHandler);
+
+  function editSubmitHandler(e) {
+    e.preventDefault();
+
+    // PREPARE FORM DATA
+    // var formData = getFormData(editform);
+    // console.log(formData);
+
+    // DO POST
+    var formData = new FormData(editform[0]);
+    console.log(formData);
+    // // DO POST
+    $.ajax({
+      type: "POST",
+      enctype: "multipart/form-data",
+      cache: false,
+      processData: false,
+      contentType: false,
+      url: "/admin/product/edit",
+      data: formData,
+    })
+      .done((res) => {
+        if (res.error == true) {
+          renderToast({ message: res.message, icon: "error" });
+        } else {
+          renderToast({ message: res.message, icon: "success" });
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        }
+      })
+      .fail(function (xhr, status, error) {
+        console.log(xhr.responseText);
+      });
+  }
+</script>
+<script>
+  function deletedetails(id) {
+    if (confirm("Do you really want to delete this record")) {
+      // DO POST
+      $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/admin/product/delete",
+        data: JSON.stringify({
+          id: id,
+        }),
+      })
+
+        .done((res) => {
+          if (res.error == true) {
+            renderToast({ message: res.message, icon: "error" });
+          } else {
+            renderToast({ message: res.message, icon: "success" });
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000);
+          }
+        })
+        .fail(function (xhr, status, error) {
+          console.log(xhr.responseText);
+        });
+    }
+  }
+</script>

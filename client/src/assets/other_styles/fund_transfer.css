@@ -1,0 +1,58 @@
+.fund-transfer-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
+
+  gap: 1.5rem;
+  padding: 1rem 1rem;
+}
+
+.fund-transfer-form section {
+  width: 100%;
+}
+
+.fund-transfer-form input[type="text"] {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.fund-transfer-form button {
+  background-color: #392c70;
+  color: white;
+  padding: 0.6rem 1rem;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.toggler {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.toggler_circle_container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 25px;
+  width: 50px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 2rem;
+  padding: 0px 5px;
+  box-sizing: content-box;
+  cursor: pointer;
+}
+
+.toggle_circle {
+  height: 80%;
+  width: 45%;
+  background-color: rgb(170, 170, 170);
+  border-radius: 50%;
+}

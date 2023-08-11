@@ -1,0 +1,861 @@
+<div class="container-2">
+  <div class="brand-logo">
+      <figure class="mb-4 text-center">
+          <img src="./assets/images/logo.png" alt="logo">
+      </figure>
+      <!-- <h3> Duty Exchange</h3> -->
+  </div>
+  <div class="button_bar">
+    <div>
+      <button class="step_button" [class.step_button_active] = "formCurrentStep >= 1">Customer Info</button>
+    </div>
+    <div>
+      <button class="step_button" disabled [class.step_button_active] = "formCurrentStep >= 2">Business Details</button>
+    </div>
+    <div>
+      <button class="step_button" disabled [class.step_button_active] = "formCurrentStep >= 3">Bank Details</button>
+    </div>
+    <div>
+      <button class="step_button" disabled [class.step_button_active] = "formCurrentStep >= 4">Other Documents</button>
+    </div>
+  </div>
+
+  <!-- progress-bar  -->
+  <div class="progressbar">
+    <div class="progress" id="progress"></div>
+
+    <div
+      class="progress-step"
+      data-title="Customer Info" [class.progress-step-active] = "formCurrentStep >= 1"
+    ></div>
+    <div class="progress-step" data-title="Business Details" [class.progress-step-active] = "formCurrentStep >= 2"></div>
+    <div class="progress-step" data-title="Bank Details" [class.progress-step-active] = "formCurrentStep >= 3"></div>
+    <div class="progress-step" data-title="Other Documents" [class.progress-step-active] = "formCurrentStep >= 4"></div>
+  </div>
+
+  <div class="phone-box-modal" [class.phone-modal-show] = "showPhoneModal">
+    <div class="phone-overlay"></div>
+    <div class="phone-body-modal">
+      <div class="phone-inner-body-modal">
+        <div class="title">Verify Phone</div>
+
+        <form action="">
+          <input
+            class="otp"
+            name="otp1"
+            id="otp1"
+            type="text"
+            oninput="digitValidate(this)"
+            onkeyup="tabChange(1)"
+            maxlength="1"
+          />
+          <input
+            class="otp"
+            name="otp2"
+            id="otp2"
+            type="text"
+            oninput="digitValidate(this)"
+            onkeyup="tabChange(2)"
+            maxlength="1"
+          />
+          <input
+            class="otp"
+            name="otp3"
+            id="otp3"
+            type="text"
+            oninput="digitValidate(this)"
+            onkeyup="tabChange(3)"
+            maxlength="1"
+          />
+          <input
+            class="otp"
+            type="text"
+            name="otp4"
+            id="otp4"
+            oninput="digitValidate(this)"
+            onkeyup="tabChange(4)"
+            maxlength="1"
+          />
+        </form>
+        <hr />
+        <button class="btn_form customBtnPhone" (click)="verifyOTP('mobile')">Verify</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="email-box-modal" [class.email-modal-show] = "showEmailModal">
+    <div class="email-overlay"></div>
+    <div class="email-body-modal">
+      <div class="email-inner-body-modal">
+        <div class="title">Verify Email</div>
+
+        <form action="">
+          <input
+            class="otp"
+            type="text"
+            name="otp1email"
+            id="otp1email"
+            oninput="digitValidate(this)"
+            onkeyup="tabChange(1)"
+            maxlength="1"
+          />
+          <input
+            class="otp"
+            type="text"
+            name="otp2email"
+            id="otp2email"
+            oninput="digitValidate(this)"
+            onkeyup="tabChange(2)"
+            maxlength="1"
+          />
+          <input
+            class="otp"
+            type="text"
+            name="otp3email"
+            id="otp3email"
+            oninput="digitValidate(this)"
+            onkeyup="tabChange(3)"
+            maxlength="1"
+          />
+          <input
+            class="otp"
+            type="text"
+            name="otp4email"
+            id="otp4email"
+            oninput="digitValidate(this)"
+            onkeyup="tabChange(4)"
+            maxlength="1"
+          />
+        </form>
+        <hr />
+        <button class="btn_form customBtnEmail" (click)="verifyOTP('email')">Verify</button>
+      </div>
+    </div>
+  </div>
+
+  <form action="javascript:void(0)" class="form-step" [class.form-step-active] = "formCurrentStep === 1">
+    <!-- steps -->
+    
+    <div class="form-content p-0">
+      <div class="input-group ">
+        <label for="contact_person_name">
+          Contact Person Name
+          <strong style="color: red">*</strong>
+        </label>
+        <input
+          type="text"
+          id="contact_person_name"
+          class="form-control"
+          placeholder="Name"
+          input-validator
+          required
+          name="name"
+          [(ngModel)]="signUpdata.name"
+        />
+      </div>
+      <div class="input-group">
+        <label>Business Name <strong style="color: red">*</strong></label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Business Name"
+          required
+          id = "business_name"
+          name="business_name"
+          [(ngModel)]="signUpdata.business_name"
+          input-validator
+        />
+      </div>
+      
+      <div class="input-group">
+        <label for="contact_person_mobile"
+          >Contact Person Mobile
+          <strong style="color: red">*</strong></label
+        >
+        <div class="verify_field">
+          <input
+            id="contact_person_mobile"
+            type="tel"
+            class="form-control"
+            placeholder="Mobile"
+            phone-validator
+            required
+            name="mobile"
+            [disabled]="signUpdata.phoneVerified"
+            [(ngModel)]="signUpdata.mobile"
+          />
+          <button type="button" class="verify-phone" (click)="showPhoneModalBox()">Verify</button>
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Entity Type <strong style="color: red">*</strong></label>
+        <select
+          style="
+            outline: none;
+            border: 1px solid rgb(214, 214, 214);
+            border-radius: 2px;
+          "
+          id="entity_type"
+          class="form-control select2"
+          name="entity_type"
+          [(ngModel)]="signUpdata.entity_type"
+        >
+          <option
+            value="0"
+            label="Choose Entity type"
+            selected="selected"
+            style="color: #ccc"
+          >
+            Choose Entity
+          </option>
+          <option value="Proprietor" label="Proprietor">Proprietor</option>
+          <option value="Partnership" label="Partnership">
+            Partnership
+          </option>
+          <option value="LLP" label="LLP">LLP</option>
+          <option value="Limited" label="Limited">Limited</option>
+          <option value="Private Limited" label="Private Limited">
+            Private Limited
+          </option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="contact_person_email"
+          >Email <strong style="color: red">*</strong></label
+        >
+        <div class="verify_field">
+          <input
+            id="contact_person_email"
+            type="email"
+            class="form-control"
+            placeholder="Email"
+            email-validator
+            required
+            name="email"
+            [disabled]="signUpdata.emailVerified"
+            [(ngModel)]="signUpdata.email"
+          />
+          <button type="button" class="verify-email" (click)="showEmailModalBox()">Verify</button>
+        </div>
+      </div>
+      <div class="input-group">
+        <label
+          >Address
+          <strong style="color: red">*</strong></label
+        >
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Address"
+          input-validator
+          required
+          id="address"
+          name="address"
+          [(ngModel)]="signUpdata.address"
+        />
+      </div>
+
+      <div class="input-group">
+        <label>Password <strong style="color: red">*</strong></label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          placeholder="Password"
+          input-validator
+          required
+          name="password"
+          [(ngModel)]="signUpdata.password"
+        />
+      </div>
+      <div class="input-group">
+        <label>State <strong style="color: red">*</strong></label>
+        <select
+          style="
+            outline: none;
+            border: 1px solid rgb(214, 214, 214);
+            border-radius: 2px;
+          "
+          id="state"
+          class="form-control select2"
+          name="state"
+          [(ngModel)]="signUpdata.state"
+        >
+          <option
+            value=""
+            label="Choose State"
+            selected="selected"
+            style="color: #ccc"
+          >
+            Choose State
+          </option>
+          <option data-value="Andhra Pradesh">Andhra Pradesh</option>
+          <option data-value="Andaman and Nicobar Islands">
+              Andaman and Nicobar Islands
+          </option>
+          <option data-value="Arunachal Pradesh">Arunachal Pradesh</option>
+          <option data-value="Assam">Assam</option>
+          <option data-value="Bihar">Bihar</option>
+          <option data-value="Chandigarh">Chandigarh</option>
+          <option data-value="Chhattisgarh">Chhattisgarh</option>
+          <option data-value="Dadar and Nagar Haveli">
+              Dadar and Nagar Haveli
+          </option>
+          <option value="Daman and Diu">Daman and Diu</option>
+          <option value="Delhi">Delhi</option>
+          <option value="Lakshadweep">Lakshadweep</option>
+          <option value="Puducherry">Puducherry</option>
+          <option value="Goa">Goa</option>
+          <option value="Gujarat">Gujarat</option>
+          <option value="Haryana">Haryana</option>
+          <option value="Himachal Pradesh">Himachal Pradesh</option>
+          <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+          <option value="Jharkhand">Jharkhand</option>
+          <option value="Karnataka">Karnataka</option>
+          <option value="Kerala">Kerala</option>
+          <option value="Madhya Pradesh">Madhya Pradesh</option>
+          <option value="Maharashtra">Maharashtra</option>
+          <option value="Manipur">Manipur</option>
+          <option value="Meghalaya">Meghalaya</option>
+          <option value="Mizoram">Mizoram</option>
+          <option value="Nagaland">Nagaland</option>
+          <option value="Odisha">Odisha</option>
+          <option value="Punjab">Punjab</option>
+          <option value="Rajasthan">Rajasthan</option>
+          <option value="Sikkim">Sikkim</option>
+          <option value="Tamil Nadu">Tamil Nadu</option>
+          <option value="Telangana">Telangana</option>
+          <option value="Tripura">Tripura</option>
+          <option value="Uttar Pradesh">Uttar Pradesh</option>
+          <option value="Uttarakhand">Uttarakhand</option>
+          <option value="West Bengal">West Bengal</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label>Confirm Password <strong style="color: red">*</strong></label>
+        <input
+          type="password"
+          id="confirm_password"
+          class="form-control"
+          placeholder="Confirm Password"
+          input-validator
+          required
+          name="confirm_password"
+          [(ngModel)]="signUpdata.confirm_password"
+        />
+      </div>
+      <div class="input-group">
+        <label>Pin Code <strong style="color: red">*</strong></label>
+        <input
+          type="text"
+          id="pin_code"
+          class="form-control"
+          placeholder="Pin Code"
+          input-validator
+          required
+          name="pin_code"
+          [(ngModel)]="signUpdata.pin_code"
+        />
+      </div>
+
+      <div class="input-group">
+        <label class="d-block"
+          >Are you an Exporter / Importer?
+          </label
+        >
+        <select
+          style="
+            outline: none;
+            border: 1px solid rgb(214, 214, 214);
+            border-radius: 2px;
+          "
+          id="ImpExp"
+          class="form-control select2"
+          name="ImpExp"
+          [(ngModel)]="signUpdata.ImpExp"
+        >
+          <option value="Exporter" label="Exporter" selected="selected">
+            Exporter
+          </option>
+          <option value="Importer" label="Importer">Importer</option>
+          <option value="Other" label="Other">Other</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label>Business PAN <strong style="color: red">*</strong></label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Business PAN"
+          required
+          id = "business_pan"
+          name="business_pan"
+          [(ngModel)]="signUpdata.business_pan"
+          input-validator
+        />
+      </div>
+      <div class="input-group">
+        <label
+          >Upload Business PAN </label
+        >
+        <div class="drop_box">
+          <header>Select File</header>
+          <input
+            type="file"
+            hidden
+            accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps"
+            style="display: none"
+            required
+            id = "business_pan_document"
+            name="business_pan_document"
+            input-validator
+            #business_pan_document
+            (change)="importBusinessPanFile($event)"
+          />
+          <button class="btn_upload" (click)="business_pan_document.click()">Choose File</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="btns-group">
+      <button type="button" class="btn_form btn-next width-50 ml-auto" (click)="signup()">
+        Next
+      </button>
+    </div>
+  </form>
+
+  <form action="javascript:void(0)" class="form-step" [class.form-step-active] = "formCurrentStep === 2">
+    <!-- steps -->
+
+    <div class="form-content">
+      <div>
+        <label>Business GSTIN <strong style="color: red">*</strong></label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Business GSTIN"
+          required
+          id = "business_gstin"
+          name="business_gstin"
+          [(ngModel)]="signUpdataStepTwo.business_gstin"
+          input-validator
+        />
+        
+      </div>
+      <div>
+        <label
+          >Upload Business GSTIN
+          <strong style="color: red">*</strong></label
+        >
+        <div class="drop_box">
+          <header>Select File</header>
+          <input
+            type="file"
+            hidden
+            accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps"
+            style="display: none"
+            required
+            id = "business_gstin_document"
+            name="business_gstin_document"
+            input-validator
+            #business_gstin_document
+            (change)="importBusinessGSTINFile($event)"
+          />
+          <button class="btn_upload" (click)="business_gstin_document.click()">Choose File</button>
+        </div>
+      </div>
+
+      <div>
+        <label
+          >Business CIN (Optional for Partnership and Proprietor)
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Business CIN"
+          required
+          id = "business_cin"
+          name="business_cin"
+          [(ngModel)]="signUpdataStepTwo.business_cin"
+        />
+      </div>
+      <div>
+        <label
+          >Business IEC <strong style="color: red">*</strong>
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Business IEC"
+          id = "business_iec"
+          name="business_iec"
+          [(ngModel)]="signUpdataStepTwo.business_iec"
+        />
+      </div>
+
+      <div>
+        <label
+          >Business ICEGATE ID <strong style="color: red">*</strong>
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Business ICEGATE ID"
+          id = "business_ice_gate_id"
+          name="business_ice_gate_id"
+          [(ngModel)]="signUpdataStepTwo.business_ice_gate_id"
+        />
+      </div>
+    </div>
+    <div class="btns-group">
+      <button type="button" class="btn_form btn-prev" style="color: white" (click)="goToStep(1)">
+        Previous
+      </button>
+      <button type="button" class="btn_form btn-next" style="color: white" (click)="submitStepTwo()">
+        Next
+      </button>
+    </div>
+  </form>
+
+  <form action="javascript:void(0)" class="form-step" [class.form-step-active] = "formCurrentStep === 3">
+    <!-- steps -->
+
+    <div class="form-content">
+      <div>
+        <label
+          >Beneficiary Name <strong style="color: red">*</strong></label
+        >
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Beneficiary Name"
+          required
+          id = "beneficiary_name"
+          name="beneficiary_name"
+          [(ngModel)]="signUpdataStepThree.beneficiary_name"
+          input-validator
+        />
+      </div>
+
+      <div>
+        <label>Bank Name <strong style="color: red">*</strong></label>
+        
+        <select class="select2 form-control" id = "bank_name" name="bank_name" [(ngModel)]="signUpdataStepThree.bank_name" #sizeValue="ngModel" >
+          <option value="AB Bank Ltd.">AB Bank Ltd.</option>
+          <option value="Abu Dhabi Commercial Bank Ltd.">Abu Dhabi Commercial Bank Ltd.</option>
+          <option value="Airtel Payments Bank Limited">Airtel Payments Bank Limited</option>
+          <option value="American Express Banking Corporation">American Express Banking Corporation</option>
+          <option value="Andhra Pradesh Grameena Vikas Bank">Andhra Pradesh Grameena Vikas Bank</option>
+          <option value="Andhra Pragathi Grameena Bank">Andhra Pragathi Grameena Bank</option>
+          <option value="Arunachal Pradesh Rural Bank">Arunachal Pradesh Rural Bank</option>
+          <option value="Aryavart Bank">Aryavart Bank</option>
+          <option value="Assam Gramin Vikash Bank">Assam Gramin Vikash Bank</option>
+          <option value="Au Small Finance Bank Limited">Au Small Finance Bank Limited</option>
+          <option value="Australia and New Zealand Banking Group Ltd.">Australia and New Zealand Banking Group Ltd.</option>
+          <option value="Axis Bank Ltd.">Axis Bank Ltd.</option>
+          <option value="Bandhan Bank Ltd.">Bandhan Bank Ltd.</option>
+          <option value="Bangiya Gramin Vikas Bank">Bangiya Gramin Vikas Bank</option>
+          <option value="Bank of America">Bank of America</option>
+          <option value="Bank of Bahrain & Kuwait BSC">Bank of Bahrain & Kuwait BSC</option>
+          <option value="Bank of Baroda">Bank of Baroda</option>
+          <option value="Bank of Ceylon">Bank of Ceylon</option>
+          <option value="Bank of China">Bank of China</option>
+          <option value="Bank of India">Bank of India</option>
+          <option value="Bank of Maharashtra">Bank of Maharashtra</option>
+          <option value="Bank of Nova Scotia">Bank of Nova Scotia</option>
+          <option value="Barclays Bank Plc.">Barclays Bank Plc.</option>
+          <option value="Baroda Gujarat Gramin Bank">Baroda Gujarat Gramin Bank</option>
+          <option value="Baroda Rajasthan Kshetriya Gramin Bank">Baroda Rajasthan Kshetriya Gramin Bank</option>
+          <option value="Baroda UP Bank">Baroda UP Bank</option>
+          <option value="BNP Paribas">BNP Paribas</option>
+          <option value="Canara Bank">Canara Bank</option>
+          <option value="Capital Small Finance Bank Limited">Capital Small Finance Bank Limited</option>
+          <option value="Central Bank of India">Central Bank of India</option>
+          <option value="Chaitanya Godavari Grameena Bank">Chaitanya Godavari Grameena Bank</option>
+          <option value="Chhattisgarh Rajya Gramin Bank">Chhattisgarh Rajya Gramin Bank</option>
+          <option value="Citibank N.A.">Citibank N.A.</option>
+          <option value="City Union Bank Ltd.">City Union Bank Ltd.</option>
+          <option value="Cooperatieve Rabobank U.A.">Cooperatieve Rabobank U.A.</option>
+          <option value="Credit Agricole Corporate & Investment Bank">Credit Agricole Corporate & Investment Bank</option>
+          <option value="Credit Suisse A.G">Credit Suisse A.G</option>
+          <option value="CSB Bank Ltd.">CSB Bank Ltd.</option>
+          <option value="CTBC Bank Co., Ltd.">CTBC Bank Co., Ltd.</option>
+          <option value="Dakshin Bihar Gramin Bank">Dakshin Bihar Gramin Bank</option>
+          <option value="DBS Bank India Limited*">DBS Bank India Limited*</option>
+          <option value="DCB Bank Ltd.">DCB Bank Ltd.</option>
+          <option value="Deutsche Bank">Deutsche Bank</option>
+          <option value="Dhanlaxmi Bank Ltd.">Dhanlaxmi Bank Ltd.</option>
+          <option value="Doha Bank Q.P.S.C">Doha Bank Q.P.S.C</option>
+          <option value="Ellaquai Dehati Bank">Ellaquai Dehati Bank</option>
+          <option value="Emirates Bank NBD">Emirates Bank NBD</option>
+          <option value="Equitas Small Finance Bank Limited">Equitas Small Finance Bank Limited</option>
+          <option value="ESAF Small Finance Bank Limited">ESAF Small Finance Bank Limited</option>
+          <option value="Federal Bank Ltd.">Federal Bank Ltd.</option>
+          <option value="Fincare Small Finance Bank Limited">Fincare Small Finance Bank Limited</option>
+          <option value="Fino Payments Bank Limited">Fino Payments Bank Limited</option>
+          <option value="First Abu Dhabi Bank PJSC">First Abu Dhabi Bank PJSC</option>
+          <option value="FirstRand Bank Ltd">FirstRand Bank Ltd</option>
+          <option value="HDFC Bank Ltd">HDFC Bank Ltd</option>
+          <option value="Himachal Pradesh Gramin Bank">Himachal Pradesh Gramin Bank</option>
+          <option value="HSBC Ltd">HSBC Ltd</option>
+          <option value="ICICI Bank Ltd.">ICICI Bank Ltd.</option>
+          <option value="IDBI Bank Ltd.">IDBI Bank Ltd.</option>
+          <option value="IDFC First Bank Ltd.">IDFC First Bank Ltd.</option>
+          <option value="India Post Payments Bank Limited">India Post Payments Bank Limited</option>
+          <option value="Indian Bank">Indian Bank</option>
+          <option value="Indian Overseas Bank">Indian Overseas Bank</option>
+          <option value="Induslnd Bank Ltd">Induslnd Bank Ltd</option>
+          <option value="Industrial & Commercial Bank of China Ltd.">Industrial & Commercial Bank of China Ltd.</option>
+          <option value="Industrial Bank of Korea">Industrial Bank of Korea</option>
+          <option value="J&K Grameen Bank">J&K Grameen Bank</option>
+          <option value="J.P. Morgan Chase Bank N.A.">J.P. Morgan Chase Bank N.A.</option>
+          <option value="Jammu & Kashmir Bank Ltd.">Jammu & Kashmir Bank Ltd.</option>
+          <option value="Jana Small Finance Bank Limited">Jana Small Finance Bank Limited</option>
+          <option value="Jharkhand Rajya Gramin Bank">Jharkhand Rajya Gramin Bank</option>
+          <option value="JSC VTB Bank">JSC VTB Bank</option>
+          <option value="Karnataka Bank Ltd.">Karnataka Bank Ltd.</option>
+          <option value="Karnataka Gramin Bank">Karnataka Gramin Bank</option>
+          <option value="Karnataka Vikas Grameena Bank">Karnataka Vikas Grameena Bank</option>
+          <option value="Karur Vysya Bank Ltd.">Karur Vysya Bank Ltd.</option>
+          <option value="KEB Hana Bank">KEB Hana Bank</option>
+          <option value="Kerala Gramin Bank">Kerala Gramin Bank</option>
+          <option value="Kookmin Bank">Kookmin Bank</option>
+          <option value="Kotak Mahindra Bank Ltd">Kotak Mahindra Bank Ltd</option>
+          <option value="Krung Thai Bank Public Co. Ltd.">Krung Thai Bank Public Co. Ltd.</option>
+          <option value="Madhya Pradesh Gramin Bank">Madhya Pradesh Gramin Bank</option>
+          <option value="Madhyanchal Gramin Bank">Madhyanchal Gramin Bank</option>
+          <option value="Maharashtra Gramin Bank">Maharashtra Gramin Bank</option>
+          <option value="Manipur Rural Bank">Manipur Rural Bank</option>
+          <option value="Mashreq Bank PSC">Mashreq Bank PSC</option>
+          <option value="Meghalaya Rural Bank">Meghalaya Rural Bank</option>
+          <option value="Mizoram Rural Bank">Mizoram Rural Bank</option>
+          <option value="Mizuho  Bank Ltd.">Mizuho  Bank Ltd.</option>
+          <option value="MUFG Bank, Ltd.">MUFG Bank, Ltd.</option>
+          <option value="Nagaland Rural Bank">Nagaland Rural Bank</option>
+          <option value="Nainital Bank Ltd.">Nainital Bank Ltd.</option>
+          <option value="NatWest Markets Plc">NatWest Markets Plc</option>
+          <option value="North East Small Finance Bank Limited">North East Small Finance Bank Limited</option>
+          <option value="Odisha Gramya Bank">Odisha Gramya Bank</option>
+          <option value="Paschim Banga Gramin Bank">Paschim Banga Gramin Bank</option>
+          <option value="Paytm Payments Bank Limited">Paytm Payments Bank Limited</option>
+          <option value="Prathama UP Gramin Bank">Prathama UP Gramin Bank</option>
+          <option value="PT Bank Maybank Indonesia TBK">PT Bank Maybank Indonesia TBK</option>
+          <option value="Puduvai Bharathiar Grama Bank">Puduvai Bharathiar Grama Bank</option>
+          <option value="Punjab & Sind Bank">Punjab & Sind Bank</option>
+          <option value="Punjab Gramin Bank">Punjab Gramin Bank</option>
+          <option value="Punjab National Bank">Punjab National Bank</option>
+          <option value="Qatar National Bank (Q.P.S.C.)">Qatar National Bank (Q.P.S.C.)</option>
+          <option value="Rajasthan Marudhara Gramin Bank">Rajasthan Marudhara Gramin Bank</option>
+          <option value="RBL Bank Ltd.">RBL Bank Ltd.</option>
+          <option value="Saptagiri Grameena Bank">Saptagiri Grameena Bank</option>
+          <option value="Sarva Haryana Gramin Bank">Sarva Haryana Gramin Bank</option>
+          <option value="Saurashtra Gramin Bank">Saurashtra Gramin Bank</option>
+          <option value="Sberbank">Sberbank</option>
+          <option value="SBM Bank (India) Limited*">SBM Bank (India) Limited*</option>
+          <option value="Shinhan Bank">Shinhan Bank</option>
+          <option value="Shivalik Small Finance Bank Limited">Shivalik Small Finance Bank Limited</option>
+          <option value="Societe Generale">Societe Generale</option>
+          <option value="Sonali Bank Ltd.">Sonali Bank Ltd.</option>
+          <option value="South Indian Bank Ltd.">South Indian Bank Ltd.</option>
+          <option value="Standard Chartered Bank">Standard Chartered Bank</option>
+          <option value="State Bank of India">State Bank of India</option>
+          <option value="Sumitomo Mitsui Banking Corporation">Sumitomo Mitsui Banking Corporation</option>
+          <option value="Suryoday Small Finance Bank Limited">Suryoday Small Finance Bank Limited</option>
+          <option value="Tamil Nadu Grama Bank">Tamil Nadu Grama Bank</option>
+          <option value="Tamilnad Mercantile Bank Ltd.">Tamilnad Mercantile Bank Ltd.</option>
+          <option value="Telangana Grameena Bank">Telangana Grameena Bank</option>
+          <option value="Tripura Gramin Bank">Tripura Gramin Bank</option>
+          <option value="UCO Bank">UCO Bank</option>
+          <option value="Ujjivan Small Finance Bank Limited">Ujjivan Small Finance Bank Limited</option>
+          <option value="Union Bank of India">Union Bank of India</option>
+          <option value="United Overseas Bank Ltd">United Overseas Bank Ltd</option>
+          <option value="Unity Small Finance Bank Limited">Unity Small Finance Bank Limited</option>
+          <option value="Utkal Grameen bank">Utkal Grameen bank</option>
+          <option value="Utkarsh Small Finance Bank Limited">Utkarsh Small Finance Bank Limited</option>
+          <option value="Uttar Bihar Gramin Bank">Uttar Bihar Gramin Bank</option>
+          <option value="Uttarakhand Gramin Bank">Uttarakhand Gramin Bank</option>
+          <option value="Uttarbanga Kshetriya Gramin Bank">Uttarbanga Kshetriya Gramin Bank</option>
+          <option value="Vidharbha Konkan Gramin Bank">Vidharbha Konkan Gramin Bank</option>
+          <option value="Woori Bank">Woori Bank</option>
+          <option value="YES Bank Ltd.">YES Bank Ltd.</option>
+      </select>
+      </div>
+
+      <div>
+        <label
+          >Bank Account Number <strong style="color: red">*</strong></label
+        >
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Bank Account Number"
+          required
+          id = "bank_account_number"
+          name="bank_account_number"
+          [(ngModel)]="signUpdataStepThree.bank_account_number"
+          input-validator
+        />
+      </div>
+
+      <div>
+        <label
+          >Confirm Account Number
+          <strong style="color: red">*</strong></label
+        >
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Bank Account Number"
+          required
+          id = "bank_confirm_account_number"
+          name="bank_confirm_account_number"
+          [(ngModel)]="signUpdataStepThree.bank_confirm_account_number"
+          input-validator
+        />
+      </div>
+
+      <div>
+        <label>IFSC <strong style="color: red">*</strong></label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="IFSC"
+          required
+          id = "bank_ifsc_code"
+          name="bank_ifsc_code"
+          [(ngModel)]="signUpdataStepThree.bank_ifsc_code"
+          input-validator
+        />
+      </div>
+
+      <div>
+        <label>Cancelled Check <strong style="color: red">*</strong></label>
+        <div class="drop_box">
+          <header>Select File</header>
+          <input
+            type="file"
+            hidden
+            accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps"
+            style="display: none"
+            required
+            id = "bank_cancelled_cheque_document"
+            name="bank_cancelled_cheque_document"
+            input-validator
+            #bank_cancelled_cheque_document
+            (change)="importCancelledChequeFile($event)"
+          />
+          <button class="btn_upload" (click)="bank_cancelled_cheque_document.click()">Choose File</button>
+        </div>
+      </div>
+    </div>
+    <div class="btns-group">
+      <button type="button" class="btn_form btn-prev" style="color: white" (click)="goToStep(2)">
+        Previous
+      </button>
+      <button type="button" class="btn_form btn-next" style="color: white" (click)="submitStepThree()">
+        Next
+      </button>
+    </div>
+  </form>
+
+  <form action="javascript:void(0)" class="form-step" [class.form-step-active] = "formCurrentStep === 4">
+    <!-- steps -->
+
+    <div class="form-content">
+      <div>
+        <label style="font-size: 16px">Partnership Deed - review <strong style="color: red">*</strong> </label>
+        <div class="drop_box">
+          <header>Select File</header>
+          <input
+            type="file"
+            hidden
+            accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps"
+            style="display: none"
+            required
+            id = "partnership_deed_document"
+            name="partnership_deed_document"
+            #partnership_deed_document
+            (change)="importDeedReviewFile($event)"
+          />
+          <button class="btn_upload" (click)="partnership_deed_document.click()">Choose File</button>
+        </div>
+      </div>
+
+      <div>
+        <label class="label_tooltip" style="font-size: 16px">Board Resolution with Signatures of Two(2)
+          Directors/Partners <strong style="color: red">*</strong>
+          <span class="label_tooltiptext">Please upload the Letter of Authorization / Board Resolution.
+              Sample copy attached here. Print the attached format on
+              Letterhead and upload signed copy.</span>
+      </label>
+
+        <div class="drop_box">
+          <header>Select File</header>
+          <input
+            type="file"
+            hidden
+            accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps"
+            style="display: none"
+            required
+            id = "board_res_document"
+            name="board_res_document"
+            #board_res_document
+            (change)="importBoardResFile($event)"
+          />
+          <button class="btn_upload" (click)="board_res_document.click()">Choose File</button>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom: 4rem">
+        <div class="card-body">
+            <h3 class="card-title">Authorize Signatory</h3>
+
+            <div class="authorize_signatory_container" *ngFor="let item of documents;let i=index">
+                <fieldset>
+                    <legend>Authorize Signatory 1</legend>
+                    <div>
+                        <label>Authorize Signatory Name
+                        <strong style="color: red">*</strong></label>
+                        <input type="text" class="form-control" name="auth_sig_pan_name_{{i}}" [(ngModel)]="item.auth_sig_pan_name" placeholder="Authorize Signatory Name" required />
+                    </div>
+                    <div>
+                        <label>Authorize Signatory PAN
+                        <strong style="color: red">*</strong></label>
+                        <input type="text" class="form-control" name="auth_sig_pan_number_{{i}}" placeholder="Authorize_Signatory_PAN" [(ngModel)]="item.auth_sig_pan_number" required />
+                    </div>
+                    <div>
+                        <label style="font-size: 16px">Upload Document for PAN</label>
+                        <div class="drop_box">
+                            <header>Select File</header>
+                            <input
+                            type="file"
+                            hidden
+                            accept="image/jpeg,image/gif,image/png,application/pdf,image/x-eps"
+                            style="display: none"
+                            required
+                            name="auth_sig_1_pan"
+                            #auth_sig_1_pan
+                            (change)="importSig1PanFile($event,i)"
+                          />
+                          <button class="btn_upload" (click)="auth_sig_1_pan.click()">Choose File</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <button id="add_more_signatory" type="button" (click)="addMore()">
+                Add More Signatory
+            </button>
+        </div>
+    </div>
+    <div class="btns-group">
+      <button type="button" class="btn_form btn-prev" style="color: white" (click)="goToStep(3)">
+        Previous
+      </button>
+      <button type="button" class="btn_form btn-next" style="color: white" (click)="submitStepFour()">
+        Next
+      </button>
+    </div>
+  </form>
+</div>

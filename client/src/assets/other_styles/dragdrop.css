@@ -1,0 +1,41 @@
+.drop_box {
+  padding: 0.6rem 1.375rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 2px dotted #c2c2c2;
+  border-radius: 5px;
+}
+
+.drop_box h4 {
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: 400;
+}
+
+.drop_box .btn {
+  text-decoration: none;
+  background-color: #2d76f5;
+  color: #ffffff;
+  padding: 7px 10px;
+  font-weight: 400;
+  font-size: 0.8125rem;
+  border: none;
+  outline: none;
+  transition: 0.3s;
+}
+
+.drop_box .btn:hover {
+  text-decoration: none;
+  background-color: #ffffff;
+  color: #2d76f5;
+  border: none;
+  outline: 1px solid #010101;
+}
+
+.drop_box .form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

@@ -1,0 +1,723 @@
+<!-- partial:partials/_navbar.html -->
+<app-header></app-header>
+
+  <!-- partial -->
+<div class="container-fluid page-body-wrapper">
+    <!-- partial:partials/_settings-panel.php -->
+    <app-sidebar></app-sidebar>
+
+    <div class="main-panel">
+        <div class="content-wrapper" style="padding: 6.5rem 1.7rem;">
+            <div class="page-header">
+                <h3 class="page-title">Dashboard</h3>
+            </div>
+            <div class="row" style="margin-top: -0.5rem">
+                <div class="col-12 grid-margin">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="button_bar">
+                                <div>
+                                    <button class="step_button" [class.step_button_active] = "currentStep >= 1">
+                                        Create a Deal
+                                    </button>
+                                </div>
+                                <div>
+                                    <button class="step_button" [class.step_button_active] = "currentStep >= 2">Scrip Details</button>
+                                </div>
+                                <div>
+                                    <button class="step_button" [class.step_button_active] = "currentStep >= 3">Review</button>
+                                </div>
+                            </div>
+
+                            <div class="progressbar">
+                                <div class="progress" id="progress"></div>
+
+                                <div class="progress-step" data-title="Create a Deal" [class.progress-step-active] = "currentStep >= 1">
+                                </div>
+                                <div class="progress-step" data-title="Scrip Details"  [class.progress-step-active] = "currentStep >= 2"></div>
+                                <div class="progress-step" data-title="Download"  [class.progress-step-active] = "currentStep >= 3"></div>
+                            </div>
+
+                            <form action="#" class="form-step" [class.form-step-active] = "currentStep == 1">
+                                <!-- steps -->
+                                <div class="row">
+                                    <div class="col-lg-5">
+                                        <div class="date_box">
+                                            <label for="date_of_agreement">Date of Agreement</label>
+                                            <input type="date" class="form-control w-100" name="date_of_agreement" id="date_of_agreement" [(ngModel)]="dealModel.date_of_agreement" />
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-content">
+                                    <div class="buyer_part">
+                                        <div class="selection_container">
+                                            <label for="select_buyer" style="display: block">Select Buyer</label>
+                                            <input type="text" id="select_buyer"                                             placeholder="Search for Buyer.." style="width: 80%" name="buyer" [(ngModel)]="dealModel.buyer" (keyup)="getUsers('buyer')" />
+
+                                            <ul id="myUL" [hidden]="!showBuyerBox">
+                                                <li data-value="{{item._id}}" *ngFor="let item of buyers" (click)="selectuserBox(item,'buyer')">
+                                                    <div>
+                                                        {{ item.name ? item.name : item.first_name+' '+item.last_name  }}
+                                                        <p style="font-size: small;color: rgba(0, 0, 0, 0.7);">
+                                                            {{item.business_ice_gate_id ? item.business_ice_gate_id : ''}}
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="buyer_info">
+                                            <div>
+                                                <p><span>Name : {{selectedBuyer && selectedBuyer.name ? (selectedBuyer.name ? selectedBuyer.name : selectedBuyer.first_name + ' '+ selectedBuyer.last_name) : ''}}</span> </p>
+                                            </div>
+                                            <div>
+                                                <p><span>Address :  {{selectedBuyer && selectedBuyer.address ? selectedBuyer.address : '' }}</span></p>
+                                            </div>
+                                            <div>
+                                                <p><span>Email ID : {{selectedBuyer && selectedBuyer.email ? selectedBuyer.email : '' }}</span></p>
+                                            </div>
+                                            <div>
+                                                <p><span>Phone Number : {{selectedBuyer && selectedBuyer.mobile ? selectedBuyer.mobile : '' }}</span></p>
+                                            </div>
+
+                                            <hr />
+
+                                            <div>
+                                                <p><span>Business PAN : {{selectedBuyer && selectedBuyer.business_pan ? selectedBuyer.business_pan : '' }}</span></p>
+                                            </div>
+                                            <div>
+                                                <p><span>GSTIN : {{selectedBuyer && selectedBuyer.business_gstin ? selectedBuyer.business_gstin : '' }}</span></p>
+                                            </div>
+                                            <div>
+                                                <p><span>IEC : {{selectedBuyer && selectedBuyer.business_iec ? selectedBuyer.business_iec : '' }}</span></p>
+                                            </div>
+                                            <div>
+                                                <p><span>ICEGATE ID : {{selectedBuyer && selectedBuyer.business_ice_gate_id ? selectedBuyer.business_ice_gate_id : '' }}</span></p>
+                                            </div>
+
+                                            <hr />
+
+                                            <div>
+                                                <p><span>Bank Account Number : {{selectedBuyer && selectedBuyer.bank_account_number ? selectedBuyer.bank_account_number : '' }}</span></p>
+                                            </div>
+                                            <div>
+                                                <p><span>Bank Name : {{selectedBuyer && selectedBuyer.bank_name ? selectedBuyer.bank_name : '' }}</span></p>
+                                            </div>
+                                            <div>
+                                                <p><span>IFSC Code : {{selectedBuyer && selectedBuyer.bank_ifsc_code ? selectedBuyer.bank_ifsc_code : '' }}</span></p>
+                                            </div>
+
+                                            <hr />
+
+                                            <!-- <div>
+                                                <p><span>Authorized Signatory Name : {{selectedBuyer && selectedBuyer.address ? selectedBuyer.address : '' }}</span></p>
+                                            </div> -->
+                                        </div>
+                                    </div>
+
+                                    <div class="seller_part">
+                                        <div class="selection_container">
+                                            <label for="select_seller" style="display: block">Select Seller</label>
+                                            <input type="text" id="select_seller" 
+                                            placeholder="Search for Seller.." name="seller" [(ngModel)]="dealModel.seller"  (keyup)="getUsers('seller')" />
+
+                                            <ul id="myUL2"  [hidden]="!showSellerBox">
+                                                <li data-value="{{item._id}}" *ngFor="let item of sellers" (click)="selectuserBox(item,'seller')">
+                                                    <div>
+                                                        {{ item.name ? item.name : item.first_name+' '+item.last_name  }}
+                                                        <p style="font-size: small;color: rgba(0, 0, 0, 0.7);">
+                                                            {{item.business_ice_gate_id ? item.business_ice_gate_id : ''}}
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="buyer_info">
+                                            <div>
+                                                <p><span>Name : {{selectedSeller && selectedSeller.name ? (selectedSeller.name ? selectedSeller.name : selectedSeller.first_name + ' '+ selectedSeller.last_name) : ''}}</span> </p>
+                                            </div>
+                                            <div>
+                                                <p><span>Address :  {{selectedSeller && selectedSeller.address ? selectedSeller.address : '' }}</span></p>
+                                            </div>
+                                            <div>
+                                                <p><span>Email ID : {{selectedSeller && selectedSeller.email ? selectedSeller.email : '' }}</span></p>
+                                            </div>
+                                            <div>
+                                                <p><span>Phone Number : {{selectedSeller && selectedSeller.mobile ? selectedSeller.mobile : '' }}</span></p>
+                                            </div>
+
+                                            <hr />
+
+                                            <div>
+                                                <p><span>Business PAN : {{selectedSeller && selectedSeller.business_pan ? selectedSeller.business_pan : '' }}</span></p>
+                                            </div>
+                                            <div>
+                                                <p><span>GSTIN : {{selectedSeller && selectedSeller.business_gstin ? selectedSeller.business_gstin : '' }}</span></p>
+                                            </div>
+                                            <div>
+                                                <p><span>IEC : {{selectedSeller && selectedSeller.business_iec ? selectedSeller.business_iec : '' }}</span></p>
+                                            </div>
+                                            <div>
+                                                <p><span>ICEGATE ID : {{selectedSeller && selectedSeller.business_ice_gate_id ? selectedSeller.business_ice_gate_id : '' }}</span></p>
+                                            </div>
+
+                                            <hr />
+
+                                            <div>
+                                                <p><span>Bank Account Number : {{selectedSeller && selectedSeller.bank_account_number ? selectedSeller.bank_account_number : '' }}</span></p>
+                                            </div>
+                                            <div>
+                                                <p><span>Bank Name : {{selectedSeller && selectedSeller.bank_name ? selectedSeller.bank_name : '' }}</span></p>
+                                            </div>
+                                            <div>
+                                                <p><span>IFSC Code : {{selectedSeller && selectedSeller.bank_ifsc_code ? selectedSeller.bank_ifsc_code : '' }}</span></p>
+                                            </div>
+
+                                            <hr />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="btns-group">
+                                    <button type="button" class="btn_form btn-next width-50 ml-auto" (click)="submitStepOne()">
+                                        Next
+                                    </button>
+                                </div>
+                            </form>
+
+                            <form action="#" class="form-step" [class.form-step-active] = "currentStep == 2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <section class="scrip_form_section">
+                                            <h3 class="card-title">Enter Scrip Data</h3>
+                                            <div class="scrip_form" action="#">
+                                                <div class="scrip_form_data">
+                                                    <div class="row">
+                                                        <div class="col-md-6 col-lg-4 col-xl-3">
+                                                            <label for="eScript">E-Scrip Number</label>
+                                                            <input type="text" id="eScript"
+                                                                placeholder="E-Scrip Number" name="eScript" [(ngModel)]="escript.eScript" input-validator />
+                                                        </div>
+
+                                                        <div class="col-md-6 col-lg-4 col-xl-3">
+                                                            <label for="type"> Type </label>
+                                                            <select name="type" id="type"
+                                                                class="type-select select2 form-control">
+                                                                <option value="0" label="Choose Type"
+                                                                    selected="selected" style="color: #ccc">
+                                                                    Choose Type
+                                                                </option>
+                                                                <option
+                                                                    value="{{item.value}}"
+                                                                    label="{{item.label}}" *ngFor="let item of escriptTypes;let i=index">
+                                                                    {{item.label}}
+                                                                </option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-md-6 col-lg-4 col-xl-3">
+                                                            <label for="issueDate">Issue Date</label>
+                                                            <input type="date" id="issueDate" placeholder="Issue Date" name="issueDate" [(ngModel)]="escript.issueDate" />
+                                                        </div>
+
+                                                        <div class="col-md-6 col-lg-4 col-xl-3">
+                                                            <label for="portcode">Port Code</label>
+                                                            <select name="portcode" id="portcode"
+                                                                class="type-select select2 form-control">
+
+                                                                <option value="" label="Select Port Code">Select
+                                                                    Port Code</option>
+
+                                                                <option
+                                                                    value="{{item.value}}"
+                                                                    label="{{item.label}}" *ngFor="let item of escriptPorts;let i=index">
+                                                                    {{item.label}}
+                                                                </option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-md-6 col-lg-4 col-xl-3 mt-3">
+                                                            <label for="originalOwner">Original Owner</label>
+                                                            <input type="text" 
+                                                                id="originalOwner"
+                                                                placeholder="Original Owner" name="originalOwner" [(ngModel)]="escript.originalOwner" input-validator />
+                                                        </div>
+
+                                                        <div class="col-md-6 col-lg-4 col-xl-3 mt-3">
+                                                            <label for="scriptBalanceValue">Scrip Bal. Value</label>
+                                                            <input type="text" id="scriptBalanceValue"
+                                                                placeholder="Value" name="scriptBalanceValue" [(ngModel)]="escript.scriptBalanceValue" input-validator />
+                                                        </div>
+
+                                                        <div class="col-md-6 col-lg-4 col-xl-3 mt-3">
+                                                            <label for="rate">Rate (%)</label>
+                                                            <input type="text" id="rate"
+                                                                placeholder="Rate" name="rate" [(ngModel)]="escript.rate" input-validator />
+                                                        </div>
+
+                                                        <div class="col-md-6 col-lg-4 col-xl-3 mt-3">
+                                                            <label for="amount">Amount</label>
+                                                            <input type="text"  id="amount"
+                                                                placeholder="Amount" name="amount" [(ngModel)]="escript.amount" input-validator />
+                                                        </div>
+
+                                                        <div
+                                                            class="col-md-3 col-lg-2 col-xl-2 align-self-end mt-3">
+                                                            <button type="button" class="btn-form" (click)="addToTable()">Add To
+                                                                Table</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+
+                                <div class="card" style="margin: 2rem auto">
+                                    <div class="card-body">
+                                        <div class="row grid-margin">
+                                            <div class="col-12">
+                                                <div id="scrip_details"></div>
+
+                                                <div class="scrip_table">
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+                                                                <th>eScript #</th>
+                                                                <th>Type</th>
+                                                                <th>Issue Date</th>
+                                                                <th>Port Code</th>
+                                                                <th>Original Owner</th>
+                                                                <th>Script Bal. Value (Rs.)</th>
+                                                                <th>Rate (%)</th>
+                                                                <th>Amount</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody *ngIf="addedEscripts.length">
+                                                            <tr *ngFor="let item of addedEscripts;let i=index">
+                                                                <td>{{ item && item.eScript ? item.eScript : '' }}</td>
+                                                                <td>{{ item.type }}</td>
+                                                                <td>{{ item.issueDate }}</td>
+                                                                <td>{{ item.portCode }}</td>
+                                                                <td>{{ item.originalOwner }}</td>
+                                                                <td>{{ item.scriptBalanceValue }}</td>
+                                                                <td>{{ item.rate }}</td>
+                                                                <td>{{ item.amount }}</td>
+                                                                <td><i class="fa fa-trash" (click)="removeItem(i)"></i></td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tbody *ngIf="!addedEscripts.length">
+                                                            <tr >
+                                                                <td colspan="8">No data added</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <h3 class="bulk_upload_heading">Bulk Upload</h3>
+
+                                <div style="display: flex;justify-content: space-between;align-items: center;">
+                                    <p style="font-size: 16px;font-weight: 500;margin-top: 1.5rem;">
+                                        Enter the required details in the template and upload
+                                        (.xls, .xlsx, .csv)
+                                    </p>
+
+                                    <a href="./assets/other_assets/Scrip-Details.xlsx" download target="_blank"
+                                        style="cursor: pointer; font-size: 18px; color: black">
+                                        Download Template
+                                        <img src="./assets/images/excel_logo.png" alt="excel_logo" class="img-fluid"
+                                            width="25px" style="margin-left: 5px" />
+                                    </a>
+                                </div>
+
+                                <div style="margin: 2rem auto">
+                                    <label class="upload_file_label" for="upload-file"
+                                        style="text-align: center; display: flex; gap: 0.7rem">
+                                        Upload file
+
+                                        <i class="fa-sharp fa-solid fa-arrow-up-from-bracket"></i></label>
+                                    <input type="file" name="upload-file" id="upload-file"
+                                        accept=".xls,.xlsx,.csv" style="display: none" input-validator
+                                        #business_pan_document
+                                        (change)="importescriptCSV($event)" />
+                                </div>
+
+                                <div class="btns-group">
+                                    <button type="button" class="btn_form btn-prev" style="color: white"  (click)="goToStep(1)">
+                                        Previous
+                                    </button>
+                                    <button type="button" class="btn_form btn-next" style="color: white" (click)="submitStepTwo()">
+                                        Next
+                                    </button>
+                                </div>
+                            </form>
+
+                            <form action="#" class="form-step p-0" [class.form-step-active] = "currentStep == 3">
+                                <!-- steps -->
+
+                                <div class="form_content mb-0">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="buyer_part">
+                                                <h3 class="card-title">
+                                                    Buyer Channel Partner/RM Details
+                                                </h3>
+
+                                                <div class="buyer_info">
+                                                    <div>
+                                                        <p><span>Name :</span></p>
+                                                    </div>
+                                                    <div>
+                                                        <p><span>Channel Partner ID :</span></p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="brokerage_field">
+                                                    <label for="buyer_brokerage">Buyer Brokerage</label>
+                                                    <div>
+                                                        <input type="text" id="buyer_brokerage"
+                                                            placeholder="Buyer Brokerage" [(ngModel)]="commisionData.buyer_brokerage" name="buyer_brokerage" (keyup)="calculateCommision()" />
+                                                        <select name="buyer_brokerage_select"
+                                                            id="buyer_brokerage_select" [(ngModel)]="commisionData.buyer_brokerage_type"  name="buyer_brokerage_type" (change)="calculateCommision()">
+                                                            <option value="%" label="%" selected="selected"
+                                                                style="color: #ccc">
+                                                                %
+                                                            </option>
+                                                            <option value="INR" label="INR">INR</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="brokerage_field">
+                                                    <label for="buyer_ref_fee">Buyer Ref Fee</label>
+                                                    <div>
+                                                        <input type="text" id="buyer_ref_fee"
+                                                            placeholder="Buyer Ref Fee"  [(ngModel)]="commisionData.buyer_ref_fee" name="buyer_ref_fee" (keyup)="calculateCommision()" />
+                                                        <select name="buyer_ref_fee_select"
+                                                            id="buyer_ref_fee_select" [(ngModel)]="commisionData.buyer_ref_fee_type" name="buyer_ref_fee_type" (change)="calculateCommision()">
+                                                            <option value="%" label="%" selected="selected"
+                                                                style="color: #ccc">
+                                                                %
+                                                            </option>
+                                                            <option value="INR" label="INR">INR</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="brokerage_field">
+                                                    <label for="buyer_ref_fee">Importer (Nett) Rate</label>
+                                                    <input type="text" id="importer" placeholder="96.75" [(ngModel)]="commisionData.importer_net_rate" name="importer_net_rate" (keyup)="calculateCommision()" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-lg-4">
+                                            <div class="seller_part">
+                                                <h4 class="card-title">
+                                                    Seller Channel Partner/RM Details
+                                                </h4>
+
+                                                <div class="seller_info">
+                                                    <div>
+                                                        <p><span>Name :</span></p>
+                                                    </div>
+                                                    <div>
+                                                        <p><span>Channel Partner ID :</span></p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="brokerage_field">
+                                                    <label for="seller_brokerage">Seller Brokerage</label>
+                                                    <div>
+                                                        <input type="text" id="seller_brokerage"
+                                                            placeholder="Seller Brokerage" [(ngModel)]="commisionData.seller_brokerage" name="seller_brokerage" (keyup)="calculateCommision()"/>
+                                                        <select name="seller_brokerage_select"
+                                                            id="seller_brokerage_select" [(ngModel)]="commisionData.seller_brokerage_type" name="seller_brokerage_type" (change)="calculateCommision()">
+                                                            <option value="%" label="%" selected="selected"
+                                                                style="color: #ccc">
+                                                                %
+                                                            </option>
+                                                            <option value="INR" label="INR">INR</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="brokerage_field">
+                                                    <label for="seller_ref_fee">Seller Ref Fee</label>
+                                                    <div>
+                                                        <input type="text" id="seller_ref_fee"
+                                                            placeholder="Seller Ref Fee" [(ngModel)]="commisionData.seller_ref_fee" name="seller_ref_fee" (keyup)="calculateCommision()" />
+                                                        <select name="seller_ref_fee_select"
+                                                            id="seller_ref_fee_select" [(ngModel)]="commisionData.seller_ref_fee_type" name="seller_ref_fee_type" (change)="calculateCommision()">
+                                                            <option value="0" label="%" selected="selected"
+                                                                style="color: #ccc">
+                                                                %
+                                                            </option>
+                                                            <option value="INR" label="INR">INR</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="brokerage_field">
+                                                    <label for="seller_ref_fee">Seller RM Rate</label>
+                                                    <input type="text" id="seller_ref_fee" placeholder="96.75" [(ngModel)]="commisionData.seller_rm_rate" name="seller_ref_fee" (keyup)="calculateCommision()" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="calculations">
+                                                <h4 class="card-title">
+                                                    Calculations
+                                                </h4>
+
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>%</th>
+                                                                <th>INR</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Buyer Brokerage</td>
+                                                                <td>{{calculationPage.buyerBrokeragePercent}}</td>
+                                                                <td>{{calculationPage.buyerBrokerageAmount}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Seller Brokerage</td>
+                                                                <td>{{calculationPage.sellerBrokeragePercent}}</td>
+                                                                <td>{{calculationPage.sellerBrokerageAmount}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Buyer Referral Fee</td>
+                                                                <td>{{calculationPage.buyerReferralFeepercent}}</td>
+                                                                <td>{{calculationPage.buyerReferralFeeAmount}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Seller Referral Fee</td>
+                                                                <td>{{calculationPage.sellerReferralFeepercent}}</td>
+                                                                <td>{{calculationPage.sellerReferralFeeAmount}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Seller Side Earning</td>
+                                                                <td>{{calculationPage.sellerSideEarningpercent}}</td>
+                                                                <td>{{calculationPage.sellerSideEarningAmount}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Buyer Side Earning</td>
+                                                                <td>{{calculationPage.buyerSideEarningpercent}}</td>
+                                                                <td>{{calculationPage.buyerSideEarningAmount}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="remark_section p-0">
+                                    <label for="remarks">Remarks</label>
+                                    <textarea name="remarks" id="remarks" cols="15" rows="4" [(ngModel)]="commisionData.remarks"></textarea>
+                                </div>
+
+                                <!--<div class="preview_button">
+                                    <button type="button" class="btn_form">Save &amp; Preview</button>
+                                </div>-->
+
+                                <div class="btns-group mt-4">
+                                    <button type="button" class="btn_form btn-prev" style="color: white"  (click)="goToStep(2)">
+                                        Previous
+                                    </button>
+                                    <button type="button" class="btn_form" style="color: white"  (click)="submitStepThree()">
+                                        Save &amp; Preview
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="view_detailModal" tabindex="-1" role="dialog" aria-labelledby="view_detailModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">Review Details</div>
+                        <div class="modal-body">
+                            <div class="card border-0">
+                                <div class="card-body p-0">
+                                    <div><strong>Date of Agreement :</strong> {{confirmModalData && confirmModalData.date_of_agreement ? confirmModalData.date_of_agreement : ''}}</div>
+            
+                                    <hr />
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr">
+                                        <div>
+                                            <h4>Buyer</h4>
+                                            <ul class="list-inline">
+                                                <li>
+                                                    Name : {{confirmModalData && confirmModalData.buyer && confirmModalData.buyer.name ? confirmModalData.buyer.name : ''}}
+                                                </li>
+                                                <li>
+                                                    Email ID : {{confirmModalData && confirmModalData.buyer && confirmModalData.buyer.email ? confirmModalData.buyer.email : ''}}
+                                                </li>
+                                                <li>
+                                                    Phone Number : {{confirmModalData && confirmModalData.buyer && confirmModalData.buyer.mobile ? confirmModalData.buyer.mobile : ''}}
+                                                </li>
+                                                <li>
+                                                    Business PAN : {{confirmModalData && confirmModalData.buyer && confirmModalData.buyer.business_pan ? confirmModalData.buyer.business_pan : ''}}
+                                                </li>
+                                                <li>
+                                                    GSTIN : {{confirmModalData && confirmModalData.buyer && confirmModalData.buyer.business_gstin ? confirmModalData.buyer.business_gstin : ''}}
+                                                </li>
+                                                <li>
+                                                    IEC : {{confirmModalData && confirmModalData.buyer && confirmModalData.buyer.business_iec ? confirmModalData.buyer.business_iec : ''}}
+                                                </li>
+                                                <li>
+                                                    ICEGATE ID : {{confirmModalData && confirmModalData.buyer && confirmModalData.buyer.business_ice_gate_id ? confirmModalData.buyer.business_ice_gate_id : ''}}
+                                                </li>
+                                                <li>
+                                                    Bank Account Number : {{confirmModalData && confirmModalData.buyer && confirmModalData.buyer.bank_account_number ? confirmModalData.buyer.bank_account_number : ''}}
+                                                </li>
+                                                <li>
+                                                    Bank Name : {{confirmModalData && confirmModalData.buyer && confirmModalData.buyer.bank_name ? confirmModalData.buyer.bank_name : ''}}
+                                                </li>
+                                                <li>
+                                                    IFSC Code : {{confirmModalData && confirmModalData.buyer && confirmModalData.buyer.bank_ifsc_code ? confirmModalData.buyer.bank_ifsc_code : ''}}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4>Seller</h4>
+                                            <ul class="list-inline">
+                                                <li>
+                                                    Name : {{confirmModalData && confirmModalData.seller && confirmModalData.seller.name ? confirmModalData.seller.name : ''}}
+                                                </li>
+                                                <li>
+                                                    Email ID : {{confirmModalData && confirmModalData.seller && confirmModalData.seller.email ? confirmModalData.seller.email : ''}}
+                                                </li>
+                                                <li>
+                                                    Phone Number : {{confirmModalData && confirmModalData.seller && confirmModalData.seller.mobile ? confirmModalData.seller.mobile : ''}}
+                                                </li>
+                                                <li>
+                                                    Business PAN : {{confirmModalData && confirmModalData.seller && confirmModalData.seller.business_pan ? confirmModalData.seller.business_pan : ''}}
+                                                </li>
+                                                <li>
+                                                    GSTIN : {{confirmModalData && confirmModalData.seller && confirmModalData.seller.business_gstin ? confirmModalData.seller.business_gstin : ''}}
+                                                </li>
+                                                <li>
+                                                    IEC : {{confirmModalData && confirmModalData.seller && confirmModalData.seller.business_iec ? confirmModalData.seller.business_iec : ''}}
+                                                </li>
+                                                <li>
+                                                    ICEGATE ID : {{confirmModalData && confirmModalData.seller && confirmModalData.seller.business_ice_gate_id ? confirmModalData.seller.business_ice_gate_id : ''}}
+                                                </li>
+                                                <li>
+                                                    Bank Account Number : {{confirmModalData && confirmModalData.seller && confirmModalData.seller.bank_account_number ? confirmModalData.seller.bank_account_number : ''}}
+                                                </li>
+                                                <li>
+                                                    Bank Name : {{confirmModalData && confirmModalData.seller && confirmModalData.seller.bank_name ? confirmModalData.seller.bank_name : ''}}
+                                                </li>
+                                                <li>
+                                                    IFSC Code : {{confirmModalData && confirmModalData.seller && confirmModalData.seller.bank_ifsc_code ? confirmModalData.seller.bank_ifsc_code : ''}}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+            
+                                    <hr />
+            
+                                    <div class="scrip_table" style="margin: 0rem auto">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>E-Scrip #</th>
+                                                    <th>Type</th>
+                                                    <th>Issue Date</th>
+                                                    <th>Port Code</th>
+                                                    <th>Original Owner</th>
+                                                    <th>Script Bal. Value (Rs.)</th>
+                                                    <th>Rate</th>
+                                                    <th>Amount</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngIf="confirmModalData && confirmModalData.escript_data">
+                                                <tr *ngFor="let item of confirmModalData.escript_data;let i=index">
+                                                    <td>{{ item && item.eScript ? item.eScript : '' }}</td>
+                                                    <td>{{ item.type }}</td>
+                                                    <td>{{ item.issueDate }}</td>
+                                                    <td>{{ item.portCode }}</td>
+                                                    <td>{{ item.originalOwner }}</td>
+                                                    <td>{{ item.scriptBalanceValue }}</td>
+                                                    <td>{{ item.rate }}</td>
+                                                    <td>{{ item.amount }}</td>
+                                                    <td>0</td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+            
+                                    <hr />
+                                    <ul class="list-inline channel_partner">
+                                        <li>
+                                            Channel Partner Name :
+                                        </li>
+                                        <li>
+                                            Channel Partner ID :
+                                        </li>
+                                        <li>
+                                            Buyer Brokerage :  {{confirmModalData && confirmModalData.commision_data ? confirmModalData.commision_data.buyer_brokerage : 0}}
+                                        </li>
+                                        <li>
+                                            Seller Brokerage : {{confirmModalData && confirmModalData.commision_data ? confirmModalData.commision_data.seller_brokerage : 0}}
+                                        </li>
+                                        <li>
+                                            Buyer Ref Fee : {{confirmModalData && confirmModalData.commision_data ? confirmModalData.commision_data.buyer_ref_fee : 0}}
+                                        </li>
+                                        <li>
+                                            Seller Ref Fee : {{confirmModalData && confirmModalData.commision_data ? confirmModalData.commision_data.seller_ref_fee : 0}}
+                                        </li>
+                                    </ul>
+                                    <hr />
+            
+                                    <div class="reject-reason" style="display: none">
+                                        <label for="rejectReason">Reject Reason</label>
+                                        <textarea name="rejectReason" id="rejectReason" cols="30"
+                                            rows="10"></textarea>
+                                    </div>
+            
+                                    <div class="popUp_action_buttons">
+                                        <button id="remove-pop" type="button"
+                                            style="background-color: rgb(166, 166, 166)" (click)="submitStepFour(0)">
+                                            Go back and Edit</button><button type="button"
+                                            style="background-color: rgb(44, 174, 44)" (click)="submitStepFour(1)">
+                                            Accept and Continue</button><button id="reject-btn" type="button"
+                                            style="background-color: rgb(244, 77, 77)" (click)="submitStepFour(2)">
+                                            Reject
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- content-wrapper ends -->
+        <app-footer></app-footer>
+    </div>
+    <!-- main-panel ends -->
+</div>

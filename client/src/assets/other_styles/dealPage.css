@@ -1,0 +1,607 @@
+:root {
+  --primary-color: rgb(57, 44, 112);
+}
+
+/* width */
+::-webkit-scrollbar {
+  height: 3px;
+  width: 5px;
+  border-radius: 0.5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.width-50 {
+  width: 50%;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/*Step buttons*/
+.button_bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow-x: scroll;
+
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  /* padding-left: 0.1rem;
+      padding-right: 0.1rem; */
+  margin: 1rem auto;
+}
+
+.step_button {
+  color: var(--primary-color);
+  font-size: 18px;
+  font-weight: 600;
+  /* background-color: var(--primary-color); */
+  background-color: #fff;
+  outline: none;
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+  padding: 1.4rem 0.7rem;
+  min-width: 190px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1114px) {
+  .button_bar {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 1rem;
+  }
+}
+
+.step_button:hover {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--primary-color);
+}
+
+.step_button_active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Progressbar */
+.progressbar {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  counter-reset: step;
+  margin: 2rem 0 4rem;
+  width: 90%;
+  margin-inline: auto;
+}
+
+.progressbar::before,
+.progress {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 4px;
+  width: 100%;
+  background-color: #dcdcdc;
+  /* changed z-index here -1 to 1 */
+  z-index: 1;
+}
+
+.progress {
+  background-color: rgb(4, 183, 107);
+  width: 0%;
+  transition: 0.3s;
+}
+
+.progress-step {
+  width: 2.1875rem;
+  height: 2.1875rem;
+  background-color: #dcdcdc;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* added z-index = 5 here  */
+  z-index: 5;
+}
+
+.progress-step::before {
+  counter-increment: step;
+  content: counter(step);
+}
+
+.progress-step::after {
+  content: attr(data-title);
+  position: absolute;
+  min-width: max-content;
+  top: calc(100% + 0.5rem);
+  font-size: 1rem;
+  color: #666;
+}
+
+@media screen and (max-width: 650px) {
+  .progress-step::after {
+    content: "";
+  }
+}
+
+.progress-step-active {
+  background-color: rgb(4, 183, 107);
+  color: #f3f3f3;
+}
+
+/* Form */
+form {
+  padding: 1rem;
+}
+
+.form-content {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 1.2rem;
+  column-gap: 2rem;
+  margin: auto;
+  padding: 1rem 1.5rem;
+}
+
+.form-step {
+  display: none;
+  transform-origin: top;
+  animation: animate 0.5s;
+}
+
+.form-step-active {
+  display: block;
+}
+
+@keyframes animate {
+  from {
+    transform: scale(1, 0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .form-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Button */
+.btns-group {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 1rem;
+}
+
+.btn_form {
+  display: block;
+  text-decoration: none;
+
+  border: none;
+
+  outline: none;
+  width: 100px;
+
+  background-color: var(--primary-color);
+  color: white;
+  text-align: center;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: 0.3s;
+
+  padding: 1rem 0rem;
+}
+
+.btn_form:hover {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--primary-color);
+}
+
+.date_box {
+  margin-inline: auto;
+  padding: 0.5rem 1.5rem;
+  /* width: fit-content; */
+  /* border: 1px solid black; */
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  /* flex-wrap: wrap;
+  gap: 1rem; */
+  /* border-radius: 5px; */
+}
+
+.date_box label {
+  display: block;
+}
+
+input[type="date"] {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  width: 200px;
+}
+
+#select_buyer,
+#select_seller {
+  background-image: url("../other_assets/search-icon.png"); /* Add a search icon to input */
+  background-position: 10px 12px; /* Position the search icon */
+  background-repeat: no-repeat; /* Do not repeat the icon image */
+  width: 100%; /* Full-width */
+  font-size: 16px; /* Increase font-size */
+  padding: 12px 20px 12px 40px; /* Add some padding */
+  border: 1px solid #ddd; /* Add a grey border */
+  margin-bottom: 12px; /* Add some space below the input */
+}
+
+#myUL3 {
+  position: absolute;
+  width: inherit;
+}
+
+#myUL,
+#myUL2,
+#myUL3 {
+  /* Remove default list styling */
+  list-style-type: none;
+  
+  padding: 0;
+  margin: 0;
+}
+
+#myUL li div,
+#myUL2 li div,
+#myUL3 li div {
+  border: 1px solid #ddd; /* Add a border to all links */
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6; /* Grey background color */
+  padding: 5px 12px; /* Add some padding */
+  text-decoration: none; /* Remove default text underline */
+  font-size: 18px; /* Increase the font-size */
+  color: black; /* Add a black text color */
+  display: block; /* Make it into a block element to fill the whole list */
+}
+
+#myUL li div:hover:not(.header),
+#myUL2 li div:hover:not(.header),
+#myUL3 li div:hover:not(.header) {
+  background-color: #eee; /* Add a hover effect to all links, except for headers */
+}
+
+/*Scrip Form*/
+
+input[type="text"] {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  width: 100%;
+}
+
+.scrip_form_section {
+  display: block;
+  margin-inline: auto;
+  padding: 1rem;
+}
+
+.scrip_form_data {
+  /* display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 1.2rem;
+  column-gap: 2rem; */
+  margin: 2rem auto;
+}
+
+.scrip_form_data input[type="text"] {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  width: 100%;
+}
+
+.scrip_form_data input[type="date"] {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  width: 100%;
+}
+
+.scrip_form_data label {
+  display: block;
+}
+
+.scrip_form_data select {
+  /* width: 47.5%; */
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.scrip_form_data option {
+  font-weight: 400;
+  font-size: 1rem;
+  color: black;
+  padding: 0.2rem auto;
+}
+
+@media screen and (max-width: 800px) {
+  .scrip_form_data select {
+    width: 100%;
+  }
+}
+
+.scrip_form_section button {
+  display: block;
+  border: none;
+  outline: none;
+  color: white;
+  background-color: rgb(40, 139, 252);
+  padding: 0.8rem 0.7rem;
+  border-radius: 0.4rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.scrip_table {
+  margin: 4rem auto;
+}
+
+.scrip_table table {
+  width: 100%;
+  margin-inline: auto;
+}
+
+.scrip_table table,
+.scrip_table th,
+.scrip_table td {
+  text-align: center;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+}
+
+.buyer_info,
+.seller_info {
+  margin-top: 1.5rem;
+  text-align: left;
+  /* display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: flex-start;
+  gap: 0.3rem; */
+}
+
+.buyer_info span,
+.seller_info span {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.upload_file_label {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  padding: 2rem;
+  border: none;
+  border-radius: 0.4rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.bulk_upload_heading {
+  font-size: 35px;
+  text-align: center;
+  margin: 5rem auto 0rem auto;
+}
+
+.action_buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 8rem;
+}
+
+.action_buttons button {
+  /* width: 150px; */
+  height: 50px;
+  /* padding: 8px 12px; */
+  text-align: center;
+  font-size: 16px;
+
+  border: none;
+  border-radius: 8px;
+  outline: none;
+
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+}
+
+.brokerage_field {
+  margin: 2rem auto 1rem auto;
+}
+
+.brokerage_field label {
+  display: block;
+  /* font-size: 20px;
+  line-height: 28px; */
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.brokerage_field div {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: start;
+  gap: 1rem;
+}
+
+.brokerage_field div select {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+
+.remark_section {
+  width: 100%;
+  display: block;
+  padding: 1rem;
+}
+
+.remark_section label {
+  /* font-size: 20px; */
+  font-weight: 600;
+  display: block;
+}
+
+.remark_section textarea {
+  width: 100%;
+  border-radius: 0.4rem;
+  padding: 1rem 1.2rem;
+}
+
+.preview_button button {
+  margin-left: 1rem;
+  padding: 0.8rem 0.5rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: white;
+  background-color: rgb(19, 114, 238);
+  border-radius: 5px;
+}
+
+.popUp_action_buttons {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.popUp_action_buttons button {
+  border: none;
+  outline: none;
+  padding: 0.5rem 0.8rem;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 0.4rem;
+  cursor: pointer;
+}
+
+.box-modal {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  overflow-y: hidden;
+  left: 0px;
+  top: 0px;
+  visibility: hidden;
+  z-index: 100;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  background: #000;
+  opacity: 0;
+  transition: opacity 1.3s;
+}
+
+.body-modal {
+  width: 60%;
+  max-height: 0px;
+  opacity: 0;
+  overflow: hidden;
+  margin: auto;
+}
+
+.inner-body-modal {
+  /* width: 80%; */
+
+  overflow-y: auto;
+  height: 80vh;
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0px 0px 65px 0px rgba(0, 0, 0, 0.43);
+}
+
+.modal-show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: visible;
+  transition: all 0.9s;
+}
+
+.modal-show .overlay {
+  opacity: 0.5;
+  transition: opacity 1.3s;
+}
+
+.modal-show .body-modal {
+  max-height: 1000px;
+  opacity: 1;
+  transition: 0.3s max-height 0.8s, 0.3s opacity 0.6s;
+}
+
+.modal-show .inner-body-modal .title {
+  font-weight: 600;
+  margin: auto;
+  margin-top: 20px;
+  font-size: 24px;
+  text-align: center;
+}
+
+.reject-reason {
+  width: 100%;
+  margin: 1rem auto 4rem auto;
+}
+
+.reject-reason label {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.reject-reason textarea {
+  width: 100%;
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+}

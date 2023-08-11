@@ -1,0 +1,131 @@
+.ad-button-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  align-items: center;
+  padding: 0.5rem 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.ad-step-button {
+  padding: 0.6rem 1.2rem;
+  border-radius: 15px;
+  background-color: white;
+  color: #392c70;
+  border: 1px solid #392c70;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.active.ad-step-button {
+  border: none;
+  background-color: #392c70;
+
+  color: white;
+}
+
+.ad-steps-sections {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+
+  padding: 0.5rem 2rem;
+}
+
+.ad-step-section {
+  display: none;
+}
+
+/* .ad-step-section:nth-child(1) {
+    display: block;
+  } */
+
+.ad-step-section p {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.acc-details-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: left;
+  margin-bottom: 1.2rem;
+}
+
+@media screen and (max-width: 700px) {
+  .acc-details-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+.acc-details-section h4 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.acc-details-section p {
+  font-size: 16px;
+  color: gray;
+  font-weight: 500;
+}
+
+.ad-back-btn {
+  border: 1px solid #ccc;
+  padding: 0.8rem 1.8rem;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.payee_form {
+  display: flex;
+  align-items: flex-end;
+  justify-content: start;
+  flex-wrap: wrap;
+  gap: 25px;
+
+  margin-bottom: 2rem;
+}
+
+.payee_form input,
+.payee_form select {
+  width: 100%;
+  padding: 0.4rem 1.5rem;
+  border: 2px solid #ccc;
+  outline: none;
+  border-radius: 8px;
+}
+
+.payee_form select {
+  color: rgb(143, 143, 143);
+}
+
+.payee_form select option {
+  color: #000;
+}
+
+.payee_form label {
+  display: block;
+  font-size: 16px;
+  color: rgb(86, 86, 86);
+  font-weight: 500;
+}
+
+.payee_form button {
+  border: none;
+  outline: none;
+
+  color: white;
+  background-color: #392c70;
+  font-size: 16px;
+
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+
+  border-radius: 5px;
+}

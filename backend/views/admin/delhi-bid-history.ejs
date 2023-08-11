@@ -1,0 +1,336 @@
+<%- include('partials/header.ejs') %>
+
+<div class="main-content">
+  <section class="section">
+    <div class="section-body">
+      <!--  Bid history Report Start-->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header" style="background-color: #212529">
+              <div class="col-12 row card-header-box">
+                <div class="col-md-6">
+                  <h4 class="float-left">Bid history Report</h4>
+                  <br />
+                </div>
+              </div>
+            </div>
+            <form id="addform">
+              <div class="row m-2 clearfix">
+                <input
+                  class="form-control"
+                  name="user_id"
+                  id="user_id"
+                  type="hidden"
+                />
+
+                <div class="col-sm-4">
+                  <label for="market_name">Market Name </label>
+                  <div class="form-group">
+                    <select
+                      class="form-control"
+                      id="market_id"
+                      name="market_id"
+                    >
+                      <option value="" disabled selected>Select Market</option>
+                      <% market_id.forEach(function(market_id) { %>
+                      <option value="<%= market_id._id %>">
+                        <%= market_id.market_name %>
+                      </option>
+                      <% }); %>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <label for="market_name">Pana & Digit </label>
+                  <div class="form-group">
+                    <select
+                      class="form-control"
+                      id="game_type_id"
+                      name="game_type_id"
+                    >
+                      <option value="" disabled selected>Select Market</option>
+                      <% game_type_id.forEach(function(game_type) { %>
+                      <option
+                        class="game_number"
+                        value="<%= game_type._id %>"
+                      >
+                        <%= game_type.type ? game_type.type : '' %>
+                      </option>
+                      <% }); %>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <label for="market_close">Select Date</label>
+                  <div class="form-group">
+                    <input
+                      type="date"
+                      class="form-control todayDate"
+                      placeholder="Date"
+                      id="date"
+                      name="date"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row m-2">
+                <div class="col-12">
+                  <button
+                    type="submit"
+                    class="btn btn-raised btn-round waves-effect"
+                    style="background-color: #212529; color: #fff"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- Customer list Ends -->
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-body">
+      <!-- Bid history Report Start-->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header" style="background-color: #212529">
+              <div class="col-12 row card-header-box">
+                <div class="col-md-6">
+                  <h4 class="float-left">Bid History Report</h4>
+                  <br />
+                </div>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <div class="row m-2">
+                <div class="col-12">
+                  <div class="table-responsive">
+                    <table id="example" class="table">
+                      <thead class="t-head">
+                        <tr>
+                          <td>S.No</td>
+                          <td>User Name</td>
+                          <td>Game Name</td>
+                          <td>Paana and Digit</td>
+                          <td>Number</td>
+                          <td>Session</td>
+                          <td>Date & Time</td>
+                          <td>Action</td>
+                        </tr>
+                      </thead>
+                      <tbody id="search-cast-list">
+                        <% if(!bid[0]) { %>
+                          <tr>
+                            <td colspan="100%">No Data</td>
+                          </tr>
+                          <% } else {%> <% bid.forEach(function(bidRecord,index){ %>
+                          <tr>
+                            <td><%= index+1 %></td>
+                            <td><%= bidRecord.user_id ? bidRecord.user_id.name : '' %></td>
+                            <td><%= bidRecord.market_id ? bidRecord.market_id.market_name  : '' %></td>
+                            <td><%= bidRecord.game_type_id ? bidRecord.game_type_id.type : '' %></td>
+                            
+                            <td><%= bidRecord.number %></td>
+                            <td><%= bidRecord.session %></td>
+                            <td><%= bidRecord.date %></td>
+                            <td> <i
+                              class="btn btn-info btn-lg fas fa-edit"
+                              id="bid_edit"
+                              data-toggle="modal"
+                              data-model='<%=JSON.stringify(bidRecord)%>'
+                            ></i></td>
+                          <% })
+                          
+                            }%>   
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Customer list Ends -->
+    </div>
+  </section>
+  <!-- Modal body -->
+  <div class="modal fade" id="edit">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Bid</h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form id="editform" class="mx-5">
+            <input type="hidden" id="editid" name="editid" />
+
+            <div class="mb-3">
+              <label for="market_close">Number</label>
+              <div class="form-group">
+                <input
+                  required=""
+                  type="text"
+                  class="form-control"
+                  name="edit_number"
+                  id="edit_number"
+                />
+              </div>
+            </div>
+            <div class="form-group col-md-2 mt-4">
+              <label>&nbsp;</label>
+              <button
+                type="submit"
+                class="btn btn-raised btn-round waves-effect"
+                style="background-color: #212529; color: #fff"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<%
+function convertTimeStampToDate(date){
+   date = Number(date)
+      var d = new Date(date),
+         month = '' + (d.getMonth() + 1),
+         day = '' + d.getDate(),
+         year = d.getFullYear();
+
+   if (month.length < 2)
+   month = '0' + month;
+   if (day.length < 2)
+   day = '0' + day;
+   var date = new Date();
+   date.toLocaleDateString();
+
+   return [day, month, year].join('-');
+}
+%>
+<%- include ('partials/footer.ejs') %>
+
+<script>
+  $(document).ready(function () {
+    $("#example").DataTable();
+  });
+
+  const form = $("#addform");
+
+  form.on("submit", submitHandler);
+
+  function submitHandler(e) {
+    e.preventDefault();
+
+    // if ($("#game_type_id").val() == null) {
+    //   alert("Please Select Pana & Digit");
+    // }
+
+    // if ($("#market_id").val() == null) {
+    //   alert("Please Select Market Name");
+
+    // }
+
+    // PREPARE FORM DATA
+    let formData = $("form");
+    let data = {
+      game_type_id: $("#game_type_id").val(),
+      market_id: $("#market_id").val(),
+      date: $("#date").val(),
+    };
+
+    $.ajax({
+      type: "POST",
+      contentType: "application/json",
+      url: "/admin/bid/delhi",
+      data: JSON.stringify(data),
+    })
+
+      // // DO POST
+      .done((res) => {
+        if (res.status == false) {
+          alert("Data Not Found");
+        } else {
+          let html = "";
+          const data = res;
+          data.map((item, index) => {
+            html += `<tr>
+            <td>${index + 1}</td>
+            <td>${item.user_id.name}</td>
+            <td>${item.game_type_id.type}</td>
+            <td>${item.market_id.market_name}</td>
+            <td>${item.number}</td>
+            <td>${item.date}</td>
+            <td>
+                <i
+                  class="btn btn-info btn-lg fas fa-edit"
+                  id="bid_edit"
+                  data-toggle="modal"
+                  data-model='${JSON.stringify(item)}'
+                ></i>
+            </td>
+            </tr>`;
+          });
+          $("#search-cast-list").html(html);
+        }
+      });
+  }
+
+  $(document).on("click", "#bid_edit", function (e) {
+    let getData = $(e.target).attr("data-model");
+    let finalData = JSON.parse(getData);
+    console.log(finalData);
+    $("#edit").modal("show");
+    var data = finalData;
+    console.log(data);
+    $("#editid").val(data._id);
+    $("#edit_number").val(data.number);
+  });
+  var editform = $("#editform");
+  editform.on("submit", editSubmitHandler);
+
+  function editSubmitHandler(e) {
+    e.preventDefault();
+
+    var formData = getFormData(editform);
+    console.log(formData);
+
+    // DO POST
+    $.ajax({
+      type: "POST",
+      contentType: "application/json",
+      url: "/admin/bid/delhi-edit",
+      data: JSON.stringify(formData),
+    })
+      .done((res) => {
+        if (res.error == true) {
+          renderToast({ message: res.message, icon: "error" });
+        } else {
+          renderToast({ message: res.message, icon: "success" });
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        }
+      })
+      .fail(function (xhr, status, error) {
+        console.log(xhr.responseText);
+      });
+  }
+</script>

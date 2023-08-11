@@ -1,0 +1,355 @@
+<%- include('partials/header.ejs') %>
+
+<div class="main-content">
+  <section class="section">
+    <div class="section-body">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div
+              class="card-header"
+              style="height: 70px; background-color: #212529"
+            >
+              <div class="col-12">
+                <h4 class="float-left">Game Type</h4>
+                <div class="head-right-btn">
+                  <button
+                    class="btn btn-sm btn-secondary float-right card-text-btn"
+                    type="submit"
+                    data-bs-toggle="modal"
+                    data-bs-target="#myModal"
+                  >
+                    <a
+                      href="#"
+                      data-ajax-popup="true"
+                      data-size="md"
+                      data-title="Invite New User"
+                      data-toggle="tooltip"
+                      title=""
+                      data-bs-original-title="Add Game Type"
+                    >
+                      Add
+                    </a>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12">
+                  <div class="table-responsive p-2">
+                    <table id="example" class="table table-bordered table-md">
+                      <thead>
+                        <tr class="text-center">
+                          <th>Type</th>
+                          <th>Logo</th>
+                          <th>Order</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <% if(!gameType[0]) { %>
+                        <tr>
+                          <td colspan="100%">No Data</td>
+                        </tr>
+                        <% } else {%> <% gameType.forEach(function(gameType){ %>
+                        <tr class="text-center">
+                          <td><%= gameType.type %></td>
+                          <td>
+                            <img
+                              src="/uploads/game_type/<%= gameType.image %>"
+                              alt="slider"
+                              height="50px"
+                              width="50px"
+                            />
+                          </td>
+                          <td><%= gameType.order %></td>
+                          <td>
+                            <i
+                              class="btn btn-info btn-lg fas fa-edit"
+                              data-json="<%= JSON.stringify(gameType) %>"
+                              onClick="showEditModal('<%= JSON.stringify(gameType) %>')"
+                            ></i>
+                          </td>
+                        </tr>
+
+                        <% }); %> <% } %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal" id="myModal">
+    <!-- modal  -->
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Game Type</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="body">
+          <div class="modal-body">
+            <form
+              id="addform"
+              class="form-group font-weight-bold showcursor: true"
+            >
+              <div class="mb-3 d-grid gap-2 col-12 mx-auto">
+                <label for="title" class="form-label">Type</label>
+                <input
+                  name="type"
+                  id="type"
+                  class="form-control"
+                  placeholder="Enter Type"
+                />
+              </div>
+
+              <div class="mb-3  d-grid gap-2 col-12 mx-auto">
+                <label for="title" class="form-label">Logo</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="image"
+                  name="image"
+                  accept="image/*"
+                />
+              </div>
+
+              <div class="mb-3 d-grid gap-2 col-12 mx-auto">
+                <label for="title" class="form-label">Order</label>
+                <input
+                  name="order"
+                  id="order"
+                  class="form-control"
+                  placeholder="Enter Order"
+                  type="number"
+                />
+              </div>
+              
+              <button
+                type="submit"
+                class="btn mt-3 pull-right"
+                style="background-color: #212529; color: #fff"
+              >
+                Save
+              </button>
+            </form>
+          </div>
+          <div class="col-md-12 modal-footer"></div>
+        </div>
+      </div>
+    </div>
+    <!-- modal  -->
+  </div>
+  <div class="modal" id="myModalEdit">
+    <!-- modal  -->
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Game Type</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="body">
+          <div class="modal-body">
+            <form
+              id="editform"
+              class="form-group font-weight-bold showcursor: true"
+            >
+              <div class="mb-3 d-grid gap-2 col-12 mx-auto">
+                <label for="title" class="form-label">Type</label>
+                <input
+                  name="record_id"
+                  id="record_id"
+                  class="form-control"
+                  type="hidden"
+                />
+                <input
+                  name="type"
+                  id="type"
+                  class="form-control"
+                  placeholder="Enter Type"
+                />
+              </div>
+
+              <div class="mb-3  d-grid gap-2 col-12 mx-auto">
+                <label for="title" class="form-label">Logo</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="image"
+                  name="image"
+                  accept="image/*"
+                />
+              </div>
+
+              <div class="mb-3 d-grid gap-2 col-12 mx-auto">
+                <label for="title" class="form-label">Order</label>
+                <input
+                  name="order"
+                  id="order"
+                  class="form-control"
+                  placeholder="Enter Order"
+                  type="number"
+                />
+              </div>
+              
+              <button
+                type="submit"
+                class="btn mt-3 pull-right"
+                style="background-color: #212529; color: #fff"
+              >
+                Save
+              </button>
+            </form>
+          </div>
+          <div class="col-md-12 modal-footer"></div>
+        </div>
+      </div>
+    </div>
+    <!-- modal  -->
+  </div>
+</div>
+
+<%- include ('partials/footer.ejs') %>
+
+<script>
+  $(document).ready(function () {
+    $("#example").DataTable();
+  });
+  function showEditModal(data){
+   $('#myModalEdit').modal('show')
+   let formD = JSON.parse(data);
+   $('#myModalEdit').find('#type').val(formD.type);
+   $('#myModalEdit').find('#order').val(formD.order);
+   $('#myModalEdit').find('#record_id').val(formD._id);
+  }
+
+  function getFormData($form) {
+    var unindexed_array = $form.serializeArray();
+    var indexed_array = {};
+
+    $.map(unindexed_array, function (n, i) {
+      indexed_array[n["name"]] = n["value"];
+    });
+
+    return indexed_array;
+  }
+
+  const form = $("#addform");
+
+  form.on("submit", submitHandler);
+
+  const formEdit = $("#editform");
+  formEdit.on("submit", submitHandlerEdit);
+
+  function submitHandler(e) {
+    e.preventDefault();
+
+    // PREPARE FORM DATA
+   
+    var addsliderform = $("#addform");
+    var formData = new FormData(addsliderform[0]);
+
+    // DO POST
+    $.ajax({
+      type: "POST",
+      enctype: "multipart/form-data",
+      processData: false,
+      contentType: false,
+      url: "/admin/gameType/add",
+      data: formData,
+    })
+
+      .done((res) => {
+        if (res.error == true) {
+          renderToast({ message: res.message, icon: "error" });
+        } else {
+          renderToast({ message: res.message, icon: "success" });
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        }
+      })
+      .fail(function (xhr, status, error) {
+        console.log(xhr.responseText);
+      });
+  }
+  function submitHandlerEdit(e) {
+    e.preventDefault();
+
+    // PREPARE FORM DATA
+   
+    var addsliderform = $("#editform");
+    var formData = new FormData(addsliderform[0]);
+
+    // DO POST
+    $.ajax({
+      type: "POST",
+      enctype: "multipart/form-data",
+      processData: false,
+      contentType: false,
+      url: "/admin/gameType/edit",
+      data: formData,
+    })
+
+      .done((res) => {
+        if (res.error == true) {
+          renderToast({ message: res.message, icon: "error" });
+        } else {
+          renderToast({ message: res.message, icon: "success" });
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        }
+      })
+      .fail(function (xhr, status, error) {
+        console.log(xhr.responseText);
+      });
+  }
+</script>
+<script>
+  function deletegameNumber(id) {
+    if (confirm("Do you really want to delete this record")) {
+      // DO POST
+      $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/admin/gameType/delete",
+        data: JSON.stringify({
+          id: id,
+        }),
+      })
+        .done((res) => {
+          if (res.error == true) {
+            renderToast({ message: res.message, icon: "error" });
+          } else {
+            renderToast({ message: res.message, icon: "success" });
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000);
+          }
+        })
+        .fail(function (xhr, status, error) {
+          console.log(xhr.responseText);
+        });
+    }
+  }
+</script>

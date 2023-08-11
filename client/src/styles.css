@@ -1,0 +1,7 @@
+/* You can add global styles to this file, and also import other style files */
+.form-content .error input,select {
+    border: 1px solid #f00 !important;
+}
+.drop_box.error {
+    border: 1px solid #f00 !important;
+}

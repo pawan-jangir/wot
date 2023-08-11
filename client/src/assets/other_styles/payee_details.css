@@ -1,0 +1,82 @@
+.payee-details-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: left;
+  margin-bottom: 1.2rem;
+}
+
+@media screen and (max-width: 700px) {
+  .payee-details-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+.payee-details-section h4 {
+  font-size: 18px;
+  color: rgb(169, 169, 169);
+  font-weight: 500;
+}
+
+.payee-details-section p {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 600;
+}
+
+.detail-heading {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 22px;
+  margin-bottom: 1rem;
+}
+
+.pd-form-section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: start;
+  gap: 1rem;
+  position: relative;
+}
+
+.pd-form-section form {
+  flex: 0.8;
+  display: flex;
+  align-items: start;
+  gap: 1rem;
+}
+
+.pd-form-section label {
+  flex: 1;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  padding: 0.5rem 2rem;
+  border-radius: 0.3rem;
+  font-weight: 500;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.pd-form-section button {
+  border-radius: 0.3rem;
+  padding: 0.5rem 1rem;
+  outline: none;
+  border: 2px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 600;
+}
+
+input[type="file"] {
+  position: absolute;
+  font-weight: 500;
+  color: rgb(164, 163, 163);
+  font-size: 16px;
+
+  top: 20%;
+  left: 40%;
+}
+
+input[type="file"]::file-selector-button {
+  display: none;
+}

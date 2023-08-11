@@ -1,0 +1,329 @@
+<%- include('partials/header.ejs') %>
+
+<div class="main-content">
+  
+
+  <section class="section">
+    <div class="section-body">
+      <!-- Bid history Report Start-->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header" style="background-color: #212529">
+              <div class="col-12 row card-header-box">
+                <div class="col-md-6">
+                  <h4 class="float-left">Fund History</h4>
+                  <br />
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12">
+                  <div class="table-responsive p-2">
+                    <table id="example" class="table table-bordered table-md">
+                      <thead class="t-head">
+                        <tr>
+                          <td>S.NO</td>
+                          <td>Amount</td>
+                          <td>Transaction Id</td>
+                          <td>Transaction Type</td>
+                          <td>Source</td>
+                          <td>Date</td>
+                          <td>Status</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% if(!all_transactions[0]) { %>
+                        <tr>
+                          <td colspan="100%">No Data</td>
+                        </tr>
+                        <% } else {%><%all_transactions.forEach(function(all_transactions,index){%>
+                        <tr>
+                          <td><%= index+1 %></td>
+                          <td><%= all_transactions.amount %></td>
+                          <td><%= all_transactions.transaction_id%></td>
+                          <td><%= all_transactions.transaction_type %></td>
+                          <td><%= all_transactions.source %></td>
+                          <td>
+                            <%=convertTimeStampToDate(all_transactions.created_at)%>
+                          </td>
+                          <td><%= all_transactions.status %></td>
+                        </tr>
+
+                        <% }); %> <% } %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Customer list Ends -->
+    </div>
+  </section>
+
+  <!-- Modal body -->
+  <div class="modal fade" id="show_winners_modal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Show Winners</h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-6">
+              <button type="button" class="btn btn-raised btn-round waves-effect btn-info">Total Bid Amount : <span class="total_bid_amount"></span></button>
+            </div>
+            <div class="col-6">
+              <button type="button" class="btn btn-raised btn-round waves-effect btn-info">Total Winning Amount : <span class="total_winning_amount"></span></button>
+            </div>
+            <div class="col-12">
+              <div class="table-responsive p-2">
+                <table id="example" class="table table-bordered table-md winner_table_html">
+                  <thead class="t-head">
+                    <tr class="text-center">
+                      <td>User Name</td>
+                      <td>Bid Amount</td>
+                      <td>Winning Amount</td>
+                      <td>Game Type</td>
+                    </tr>
+                  </thead>
+
+                  <tbody class="text-center">
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+
+<%- include ('partials/footer.ejs') %>
+<% 
+function convertTimeStampToDate(date){ 
+  date = Number(date)
+  //return date
+  //date = date.toString();
+  //date = date.split('GMT');
+  //return date[0];
+  //date = Number(date); 
+  //var d = new Date(date).toLocaleString('en-in'); 
+  return new Date(date).toLocaleString("en-IN", {timeZone: 'Asia/Kolkata'})
+  //return d; 
+} %>
+<script>
+   let date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1; // Jan is 0, dec is 11
+    var day = date.getDate();
+    if(month < 10){
+      month  = `0${month}`
+    }
+    var dateString = year + "-" + month + "-" + day;
+    $('#addform').find('.todayDate').val(dateString);
+  $(document).ready(function () {
+   
+    $("#example").DataTable();
+    $('.extra_div').css({display:'none'})
+  });
+  $(document).find('.show_extra_buttons').on('click',function(){
+    
+    $('.extra_div').css({display:'none'});
+    $('.show_winners').css({opacity:0});
+    $('.declare_res').css({opacity:0});
+    console.log($('#addform').find('#market_id').val() === null)
+    if($('#addform').find('#date').val() == '' ){
+      renderToast({ message: "Please select date", icon: "error" });
+      return
+    }
+    else if($('#addform').find('#market_id').val() === null){
+      renderToast({ message: "Please select market", icon: "error" });
+      return
+    }
+    else if($('#addform').find('#market_session').val() === null){
+      renderToast({ message: "Please select session", icon: "error" });
+      return
+    }else{
+      $('.extra_div').css({display:'block'})
+    }
+
+    
+  })
+  $(document).find('.digit_cls').on('change',function(){
+    let selectedVal = Number($(this).val());
+    let digitToBe = 0;
+    if(selectedVal > 9){
+      let StringDigit = String(selectedVal).split('');
+      let totalNoVal = 0;
+      for(let i = 0; i< StringDigit.length; i++){
+        totalNoVal += Number(StringDigit[i]);
+      }
+
+      digitToBe = Number(String(totalNoVal).split('')[(String(totalNoVal).split('')).length-1]);
+    }else{
+      digitToBe = selectedVal;
+    }
+    $('#result').val(digitToBe)
+  })
+</script>
+<script>
+  function getFormData($form) {
+    var unindexed_array = $form.serializeArray();
+    var indexed_array = {};
+
+    $.map(unindexed_array, function (n, i) {
+      indexed_array[n["name"]] = n["value"];
+    });
+
+    return indexed_array;
+  }
+
+  const form = $("#addform");
+
+  form.on("submit", submitHandler);
+
+  function submitHandler(e) {
+    e.preventDefault();
+    $('.show_winners').css({opacity:0});
+    $('.declare_res').css({opacity:0});
+    // PREPARE FORM DATA
+    var formData = getFormData($("#addform"));
+    console.log(formData);
+
+    // DO POST
+    $.ajax({
+      type: "POST",
+      contentType: "application/json",
+      url: "/admin/result/add",
+      data: JSON.stringify(formData),
+    }).done((res) => {
+        if (res.error == true) {
+          renderToast({ message: res.message, icon: "error" });
+        } else {
+          renderToast({ message: res.message, icon: "success" });
+          if($('#addform').find('#digit').val() !== null){
+            $('.show_winners').css({opacity:1});
+            $('.declare_res').css({opacity:1});
+            $('#addform').find('.show_winners').attr("data-result-id",res.data._id)
+            $('#addform').find('.declare_res').attr("data-result-id",res.data._id)
+          }
+          // setTimeout(() => {
+          //   window.location.reload();
+          // }, 1000);
+        }
+      })
+      .fail(function (xhr, status, error) {
+        console.log(xhr.responseText);
+      });
+  }
+</script>
+
+<!-- edit  -->
+<script>
+  $(document).on("click", ".show_winners", function (e) {
+    $("#show_winners_modal").modal("show");
+    var formData = getFormData($("#addform"));
+    formData.result_id = $(this).data('result-id');
+    $.ajax({
+      type: "POST",
+      contentType: "application/json",
+      url: "/admin/result/show_winners",
+      data: JSON.stringify(formData),
+    })
+      .done((res) => {
+        if (res.error == true) {
+          renderToast({ message: res.message, icon: "error" });
+        } else {
+          let winners = res.data;
+          let htmnl = '';
+          for(let i = 0; i< winners.length; i++){
+          htmnl += `
+            <tr>
+              <td>${winners[i].user_id.name}</td>
+              <td>${winners[i].amount}</td>
+              <td>${winners[i].winning_amount}</td>
+              <td>${winners[i].game_type_id.type}</td>
+            </tr>
+          `
+            $('.winner_table_html').find('tbody').html(htmnl);
+            $('.total_bid_amount').text(res.totalBidAmount);
+            $('.total_winning_amount').text(res.totalWinningAmount);
+          }
+        }
+      })
+      .fail(function (xhr, status, error) {
+        console.log(xhr.responseText);
+      });
+  });
+  $(document).on("click", ".declare_res", function (e) {
+    if (confirm("Do you really want to declare result")) {
+      var formData = getFormData($("#addform"));
+      formData.result_id = $(this).data('result-id');
+      $.ajax({
+      type: "POST",
+      contentType: "application/json",
+      url: "/admin/result/declare_result",
+      data: JSON.stringify(formData),
+    })
+      .done((res) => {
+        if (res.error == true) {
+          renderToast({ message: res.message, icon: "error" });
+        } else {
+          renderToast({ message: res.message, icon: "success" });
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        }
+      })
+      .fail(function (xhr, status, error) {
+        console.log(xhr.responseText);
+      });
+    }
+  });
+</script>
+
+<!-- delete  -->
+<script>
+  function deleteresult(id,type) {
+    if (confirm("Do you really want to delete this record")) {
+      // DO POST
+      $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/admin/result/delete",
+        data: JSON.stringify({
+          id: id,
+          type: type,
+        }),
+      })
+        .done((res) => {
+          if (res.error == true) {
+            renderToast({ message: res.message, icon: "error" });
+          } else {
+            renderToast({ message: res.message, icon: "success" });
+            setTimeout(() => {
+              window.location.reload();
+            }, 1000);
+          }
+        })
+        .fail(function (xhr, status, error) {
+          console.log(xhr.responseText);
+        });
+    }
+  }
+</script>

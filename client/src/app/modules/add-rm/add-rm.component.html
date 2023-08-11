@@ -1,0 +1,144 @@
+<!-- partial:partials/_navbar.html -->
+<app-header></app-header>
+
+  <!-- partial -->
+<div class="container-fluid page-body-wrapper">
+    <!-- partial:partials/_settings-panel.php -->
+    <app-sidebar></app-sidebar>
+
+    <div class="main-panel">
+        <div class="content-wrapper" style="padding: 6.5rem 1.7rem;">
+            <div class="page-header">
+                <h3 class="page-title" style="margin-top: -0.4rem">
+                    Add Relationship Manager
+                </h3>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-description">
+                        <form class="forms-sample">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6">
+
+                                    <div class="form-group">
+                                        <label for="ManagerName">First Name <strong style="color: red">*</strong></label>
+                                        <input type="text" class="form-control" id="first_name" placeholder="First Name" required name="first_name"  [(ngModel)]="payloadData.first_name" input-validator>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label for="ManagerName">Last Name <strong style="color: red">*</strong></label>
+                                        <input type="text" class="form-control" id="last_name" placeholder="Last Name" required name="last_name"  [(ngModel)]="payloadData.last_name" input-validator>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        <label for="RmPhoneNumber">Phone Number <strong style="color: red">*</strong></label>
+                                        <input type="text" class="form-control" id="mobile" placeholder="Enter Phone Number" maxlength="10" required name="mobile"  [(ngModel)]="payloadData.mobile" input-validator>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        <label for="RmPhoneNumber">Alternate Phone Number</label>
+                                        <input type="text" class="form-control" id="alternate_mobile" placeholder="Alternate Phone Number" maxlength="10" required name="alternate_mobile"  [(ngModel)]="payloadData.alternate_mobile" input-validator>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        <label for="InputEmail1">Email address <strong style="color: red">*</strong></label>
+                                        <input type="email" class="form-control" id="email" placeholder="Enter Email"required name="email"  [(ngModel)]="payloadData.email" input-validator>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label for="">Address <strong style="color: red">*</strong></label>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <!-- <label for="">Address</label> -->
+                                                <input type="text" name="" class="form-control" placeholder="address"required name="address" id="address"  [(ngModel)]="payloadData.address" input-validator>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group mb-0">
+                                                <label for="">State <strong style="color: red">*</strong></label>
+                                                <select class="form-control select2" id="state" required name="state"  [(ngModel)]="payloadData.state" >
+                                                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                                    <option value="Assam">Assam</option>
+                                                    <option value="Bihar">Bihar</option>
+                                                    <option value="Chandigarh">Chandigarh</option>
+                                                    <option value="Chhattisgarh">Chhattisgarh</option>
+                                                    <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli </option>
+                                                    <option value="Daman and Diu">Daman and Diu</option>
+                                                    <option value="Delhi">Delhi</option>
+                                                    <option value="Goa">Goa</option>
+                                                    <option value="Gujarat">Gujarat</option>
+                                                    <option value="Haryana">Haryana</option>
+                                                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                                    <option value="Jharkhand">Jharkhand</option>
+                                                    <option value="Karnataka">Karnataka</option>
+                                                    <option value="Kerala">Kerala</option>
+                                                    <option value="Lakshadweep">Lakshadweep</option>
+                                                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                                    <option value="Maharashtra">Maharashtra</option>
+                                                    <option value="Manipur">Manipur</option>
+                                                    <option value="Meghalaya">Meghalaya</option>
+                                                    <option value="Mizoram">Mizoram</option>
+                                                    <option value="Nagaland">Nagaland</option>
+                                                    <option value="Odisha">Odisha</option>
+                                                    <option value="Puducherry">Puducherry</option>
+                                                    <option value="Punjab">Punjab</option>
+                                                    <option value="Rajasthan">Rajasthan</option>
+                                                    <option value="Sikkim">Sikkim</option>
+                                                    <option value="Tamil Nadu">Tamil Nadu</option>
+                                                    <option value="Telangana">Telangana</option>
+                                                    <option value="Tripura">Tripura</option>
+                                                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                                    <option value="Uttarakhand">Uttarakhand</option>
+                                                    <option value="West Bengal">West Bengal</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group mb-0">
+                                                <label for="">City <strong style="color: red">*</strong></label>
+                                                <input type="text" name="" class="form-control" placeholder="City" id="city" required name="city"  [(ngModel)]="payloadData.city" input-validator>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="form-group mb-0">
+                                                <label for="">Pincode <strong style="color: red">*</strong></label>
+                                                <input type="text" class="form-control" placeholder="Pin Code" maxlength="6" required name="pin_code"  id="pin_code" [(ngModel)]="payloadData.pin_code" input-validator>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6">
+                                    <button type="button" class="btn btn-primary mr-2" (click)="addRM()">Create New RM</button>
+                                </div>
+                                
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <app-footer></app-footer>
+    </div>
+    <!-- main-panel ends -->
+</div>

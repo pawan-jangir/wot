@@ -1,0 +1,210 @@
+<!-- partial:partials/_navbar.html -->
+<app-header></app-header>
+<style>
+    .product-fields .form-check{
+        padding-left: 7px;
+    }
+    .holder-name {
+    width: 100%;
+    }
+    .companyname{
+        top : 83px !important;
+        font-size: 11px !important;
+    }
+    .kwt-file_btn-text.error {
+        border: 5px solid #f00 !important;
+    }
+</style>
+<section class="product-wrapper margin-top p-0 overflow-hidden">
+    <div class="container-fluid px-0">
+        <div class="row mx-0">
+            <div class="col-xxl-3 col-lg-4 px-0">
+                <div class="product-left-side h-100">
+                    <a href="/product">
+                        <span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 6.11616V7.88384H3.39394L8.25505 12.7449L7 14L0 7L7 0L8.25505 1.25505L3.39394 6.11616H14Z" fill="#6B677B"/></svg></span>Back to products
+                    </a>
+
+                    <p>Select the specifications & Add-ons to your cardLorem ipsum dolor sit amet, coetur adipiscing elit, sed unt</p>
+
+                    <figure class="mb-0 position-relative">
+                        <img [src]="selectedCardImg" class="img-fluid w-100" alt="">
+                        <div class="holder-name d-flex align-items-center">
+                            <div id="result">{{cardNameUser}}</div>
+                        </div>
+                        <div class="holder-name d-flex align-items-center companyname">
+                            <div id="result">{{companyName}}</div>
+                        </div>
+                    </figure>
+
+                    <h6>INR {{totalAmount}} <span>Base price + Add-ons </span></h6>
+                </div>
+            </div>
+
+            <div class="col-xxl-9 col-lg-8 px-0">
+                <div class="product-fields">
+                    <div class="material">
+                        <h5>Select the material</h5>
+                        <!-- <div class="d-flex align-items-center material-btn">
+                            <div class="form-check mb-0 d-flex align-items-center" *ngFor="let item of prouctList;let i=index">
+                                <input class="form-check-input" type="radio" (click)="getImage(item.name)" value="{{item.name}}" [(ngModel)]="flexRadioDefault" name="flexRadioDefault" id="flexRadioDefault{{item._id}}" style="background-image: url({{imgBaseUrl+item.icon}});">
+                                <label class="form-check-label ms-3" for="flexRadioDefault{{item._id}}">
+                                    {{item.name}}
+                                </label>
+                            </div>
+
+                            
+                        </div> -->
+                        <div class="d-flex align-items-center material-btn"  style="width: 146%;">
+                            <div class="form-check mb-0 d-flex align-items-center flex-column" *ngFor="let item of prouctList;let i=index">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" style="background-image: url({{imgBaseUrl+item.icon}});background-repeat:no-repeat;background-size: contain;" (click)="getImage(item.name)" value="{{item.name}}" [(ngModel)]="flexRadioDefault" name="flexRadioDefault" id="flexRadioDefault{{item._id}}">
+                                <label class="form-check-label" for="flexRadioDefault{{item._id}}">
+                                    {{item.name}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="border-line-gray">
+
+                    <form action="" class="fill-requied-detail">
+                        <h5>Fill the required details</h5>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4">
+                                <div class="form-group">
+                                    <label for="">First Name</label>
+                                    <input type="text" class="form-control" (keyup)="printName()" id="myInput" placeholder="First name" [(ngModel)]="cardUsrFirstName" [ngModelOptions]="{standalone: true}" input-validator>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4">
+                                <div class="form-group">
+                                    <label for="">Last Name</label>
+                                    <input type="text" class="form-control" (keyup)="printName()" id="Inputname" placeholder="Last name" [(ngModel)]="cardUsrLastName" [ngModelOptions]="{standalone: true}" input-validator>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row my-4">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="">Company name (Optional)</label>
+                                    <input type="text" class="form-control" (keyup)="printName()" placeholder="Company name" [(ngModel)]="companyName" [ngModelOptions]="{standalone: true}">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <hr class="border-line-gray">
+
+                    <!-- <div class="select-color">
+                        <h5>Select the color</h5>
+
+                        <div class="d-flex align-items-center color-select">
+                            <div class="form-check text-start">
+                                <input class="form-check-input" name="selectedColor" [(ngModel)]="selectedColor" type="radio" value="classic" id="flexCheckClassic">
+                                <label class="form-check-label mt-3" for="flexCheckClassic">
+                                    Classic
+                                </label>
+                            </div>
+                            <div class="form-check text-start ms-4">
+                                <input class="form-check-input" name="selectedColor" [(ngModel)]="selectedColor" type="radio" value="#fff" id="flexCheckWhite">
+                                <label class="form-check-label mt-3" for="flexCheckWhite">
+                                    White
+                                </label>
+                            </div>
+                            
+                            <div class="customize-card ms-4">
+                                <a href="javascript:void(0)" class="custom-card" (click)="opencolor.click()">
+                                    <img src="./assets/images/custom-card.svg" class="img-fluid" alt="" >
+                                </a>
+                                <p></p>
+                                <input type="file" #opencolor name="customColor"  style="width: 70px;height: 10px;text-align: center;line-height: 10px;opacity: 0;" name="selectedColor" (change)="importDoc($event)">
+                                <label for="" class="mt-3">Customize your card</label>
+                                
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <div class="customize-card">
+                        <h4>Customize your card</h4>
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="inner-card d-flex align-items-center">
+                                    <figure class="card-img">
+                                        <!-- <p></p> -->
+                                        <input type="file" #opencolor name="customColor"  style="display: none;" name="selectedColor" (change)="importDoc($event)">
+                                        <img src="./assets/images/add-design.png" class="img-fluid" alt="" style="cursor: pointer;" (click)="opencolor.click()">
+                                    </figure>
+                                    <p>Add your image / card custom design</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="border-line-gray">
+                   
+                    <div class="threegrid">
+                        <div class="row mb-5">
+                            <div class="col-md-5 col-lg-5 col-xxl-5">
+                                <div class="add-logo">
+                                    <div class="form-check mb-4 ps-0 w-auto">
+                                        <input class="form-check-input ms-0 me-2" type="checkbox"  id="flexCheckDefault" [(ngModel)]="isLogoAdded" name="isLogoAdded" (change)="calculatePrice()">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Add Logo on the card
+                                        </label>
+                                    </div>
+
+                                    <div class="customize-card ps-0">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="inner-card d-flex align-items-center" (click)="selectFile.click()" style="cursor: pointer;">
+                                                    <figure class="card-img">
+                                                        <input type="file" name="demo2" #selectFile (change)="importLogo($event)" style="display: none;" />
+                                                        <img src="./assets/images/your-logo.png" class="img-fluid" alt="">
+                                                    </figure>
+                                                    
+                                                    <p>Add Logo</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-5 col-lg-5 col-xxl-5">
+                                <div class="spare-card">
+                                    <div class="form-check mb-4 ps-0 w-auto">
+                                        <input class="form-check-input ms-0 me-2" type="checkbox" value="" id="flexCheckspare" [(ngModel)]="isSparePartAdded" name="isSparePartAdded" (change)="calculatePrice()">
+                                        <label class="form-check-label" for="flexCheckspare">
+                                            Add a spare card
+                                        </label>
+                                    </div>
+                                    <div class="customize-card ps-0">
+                                        <div class="row">
+                                            <div class="col-lg-12 add-logo">
+                                                <div class="inner-card d-flex align-items-center">
+                                                    <figure class="card-img">
+                                                        <img src="./assets/images/add-spare.png" class="img-fluid" alt="">
+                                                        <input type="file" style="display:none;">
+                                                        Add spare
+                                                    </figure>
+                                                    <p>Add a spare card</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <a type="button" href="javascript:void(0)" (click)="addtoCart()" class="btn btn-primary">Proceed to pay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<app-footer></app-footer>

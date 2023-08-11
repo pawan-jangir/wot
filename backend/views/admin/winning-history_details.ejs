@@ -1,0 +1,120 @@
+<%- include('partials/header.ejs') %>
+
+<!-- Main Sidebar End -->
+<div class="main-content">
+  <!-- <section class="section">
+    <div class="section-body">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header" style="background-color: #212529">
+              <div class="col-12 row card-header-box">
+                <div class="col-md-6">
+                  <h4 class="float-left">Winning history Report</h4>
+                  <br />
+                </div>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <div class="row m-2">
+                <div class="col-12">Date</div>
+              </div>
+
+              <div class="row m-2">
+                <div class="col-12">
+                  <form action="" class="d-flex">
+                    <input
+                      type="date"
+                      class="form-control"
+                      style="width: 200px; margin-right: 5px"
+                    />
+                    <button class="btn btn-primary">Save</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <section class="section">
+    <div class="section-body">
+      <!--  Wake Up List Start-->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header" style="background-color: #212529">
+              <div class="col-12 row card-header-box">
+                <div class="col-md-6">
+                  <h4 class="float-left">Winning History Report</h4>
+                  <br />
+                </div>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <div class="row m-2">
+                <div class="col-12">
+                  <div class="table-responsive">
+                    <table id="example" class="table text-center">
+                      <thead class="t-head">
+                        <tr>
+                          <td>S.No</td>
+                          <td>User Name</td>
+                          <td>Game Name</td>
+                          <td>Market Type</td>
+                          <!-- <td>Paana and Digit</td> -->
+                          <!-- <td>Points</td> -->
+                          <td>Amount</td>
+                          <td>Date</td>
+                          <!-- <td>Time</td>
+                            <td>Type</td> -->
+                          <!-- <td>Action</td> -->
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% if(!winning_history[0]) { %>
+                        <tr>
+                          <td colspan="100%">No Data</td>
+                        </tr>
+                        <% } else {%> <%winning_history.forEach(function(winning_history,index){%>
+                        <tr>
+                          <td><%= index+1 %></td>
+                          <td>
+                            <%= winning_history.user_id ?winning_history.user_id.name : "" %>
+                          </td>
+                          <td>
+                            <%= winning_history.market_id ?winning_history.market_id.market_name : "" %>
+                          </td>
+
+                          <td>
+                            <%= winning_history.market_id ? winning_history.market_id.market_type: "" %>
+                          </td>
+                          
+                          <!-- <td><%= winning_history.number %></td> -->
+                          <td><%= winning_history.winning_amount %></td>
+                          <td><%= winning_history.created_at %></td>
+                        </tr>
+
+                        <% }); %> <% } %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Customer list Ends -->
+    </div>
+  </section>
+</div>
+
+<%- include ('partials/footer.ejs') %>
+<script>
+  $(document).ready(function () {
+    $("#example").DataTable();
+  });
+</script>

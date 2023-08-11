@@ -1,0 +1,196 @@
+<!-- partial:partials/_navbar.html -->
+<app-header></app-header>
+<style>
+    .product-fields .form-check{
+        padding-left: 7px;
+    }
+    .holder-name {
+    width: 100%;
+    }
+    .companyname{
+        top : 83px !important;
+        font-size: 11px !important;
+    }
+    .kwt-file_btn-text.error {
+        border: 5px solid #f00 !important;
+    }
+</style>
+<section class="product-wrapper margin-top p-0 overflow-hidden">
+    <div class="container-fluid px-0">
+        <div class="row mx-0">
+            <div class="col-xxl-3 col-lg-4 px-0">
+                <div class="product-left-side h-100">
+                    <a href="/product">
+                        <span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 6.11616V7.88384H3.39394L8.25505 12.7449L7 14L0 7L7 0L8.25505 1.25505L3.39394 6.11616H14Z" fill="#6B677B"/></svg></span>Back to products
+                    </a>
+
+                    <p>Select the specifications & Add-ons to your cardLorem ipsum dolor sit amet, coetur adipiscing elit, sed unt</p>
+
+                    <figure class="mb-0 position-relative">
+                        <img [src]="selectedCardImg" class="img-fluid w-100" alt="">
+                        <div class="holder-name d-flex align-items-center">
+                            <div id="result">{{cardNameUser}}</div>
+                        </div>
+                        <div class="holder-name d-flex align-items-center companyname">
+                            <div id="result">{{companyName}}</div>
+                        </div>
+                    </figure>
+
+                    <h6>INR {{totalAmount}} <span>Base price + Add-ons </span></h6>
+                </div>
+            </div>
+
+            <div class="col-xxl-9 col-lg-8 px-0">
+                <div class="product-fields">
+                    <div class="material">
+                        <h5>Select the material</h5>
+                        <div class="d-flex align-items-center material-btn">
+                            <div class="form-check mb-0 d-flex align-items-center" *ngFor="let item of prouctList;let i=index">
+                                <input class="form-check-input" type="radio" (click)="getImage(item.name)" value="{{item.name}}" [(ngModel)]="flexRadioDefault" name="flexRadioDefault" id="flexRadioDefault{{item._id}}" style="background-image: url({{imgBaseUrl+item.icon}});">
+                                <label class="form-check-label ms-3" for="flexRadioDefault{{item._id}}">
+                                    {{item.name}}
+                                </label>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+
+                    <hr class="border-line-gray">
+
+                    <form action="" class="fill-requied-detail">
+                        <h5>Fill the required details</h5>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4">
+                                <div class="form-group">
+                                    <label for="">First Name</label>
+                                    <input type="text" class="form-control" (keyup)="printName()" id="myInput" placeholder="First name" [(ngModel)]="cardUsrFirstName" [ngModelOptions]="{standalone: true}" input-validator>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4">
+                                <div class="form-group">
+                                    <label for="">Last Name</label>
+                                    <input type="text" class="form-control" (keyup)="printName()" id="Inputname" placeholder="Last name" [(ngModel)]="cardUsrLastName" [ngModelOptions]="{standalone: true}" input-validator>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row my-4">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="">Company name (Optional)</label>
+                                    <input type="text" class="form-control" (keyup)="printName()" placeholder="Company name" [(ngModel)]="companyName" [ngModelOptions]="{standalone: true}">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <hr class="border-line-gray">
+
+                    <div class="select-color">
+                        <h5>Select the color</h5>
+
+                        <div class="d-flex align-items-center color-select">
+                            <div class="form-check text-start">
+                                <input class="form-check-input" name="selectedColor" [(ngModel)]="selectedColor" type="radio" value="classic" id="flexCheckClassic">
+                                <label class="form-check-label mt-3" for="flexCheckClassic">
+                                    Classic
+                                </label>
+                            </div>
+                            <div class="form-check text-start ms-4">
+                                <input class="form-check-input" name="selectedColor" [(ngModel)]="selectedColor" type="radio" value="#fff" id="flexCheckWhite">
+                                <label class="form-check-label mt-3" for="flexCheckWhite">
+                                    White
+                                </label>
+                            </div>
+                            
+                            <div class="customize-card ms-4">
+                                <a href="javascript:void(0)" class="custom-card" (click)="opencolor.click()">
+                                    <img src="./assets/images/custom-card.svg" class="img-fluid" alt="" >
+                                </a>
+                                <p></p>
+                                <input type="file" #opencolor name="customColor"  style="width: 70px;height: 10px;text-align: center;line-height: 10px;opacity: 0;" name="selectedColor" (change)="importDoc($event)">
+                                <label for="" class="mt-3">Customize your card</label>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="border-line-gray">
+                    <div class="threegrid">
+                        <div class="row mb-5">
+                            <div class="col-md-4 col-lg-3 col-xxl-3">
+                                <div class="add-logo">
+                                    <div class="form-check ps-0">
+                                        <input class="form-check-input ms-0 me-2" type="checkbox"  id="flexCheckDefault" [(ngModel)]="isLogoAdded" name="isLogoAdded" (change)="calculatePrice()">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Add Logo on the card
+                                        </label>
+                                    </div>
+
+                                    <div class="row mt-4">
+                                        <div class="col-lg-12">
+                                            <div class="form-group" (click)="selectFile.click()">
+                                                <input id="demo2" class="demo1" type="file" data_btn_text="Select file" placeholder="Drop here to upload or," name="demo2" #selectFile (change)="importLogo($event)" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 mt-4">
+                                            <div class="short-paragraph">
+                                                <p class="mb-0"><span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M8.75 5.75H7.25V4.25H8.75M8.75 11.75H7.25V7.25H8.75M8 0.5C7.01509 0.5 6.03982 0.693993 5.12987 1.0709C4.21993 1.44781 3.39314 2.00026 2.6967 2.6967C1.29018 4.10322 0.5 6.01088 0.5 8C0.5 9.98912 1.29018 11.8968 2.6967 13.3033C3.39314 13.9997 4.21993 14.5522 5.12987 14.9291C6.03982 15.306 7.01509 15.5 8 15.5C9.98912 15.5 11.8968 14.7098 13.3033 13.3033C14.7098 11.8968 15.5 9.98912 15.5 8C15.5 7.01509 15.306 6.03982 14.9291 5.12987C14.5522 4.21993 13.9997 3.39314 13.3033 2.6967C12.6069 2.00026 11.7801 1.44781 10.8701 1.0709C9.96018 0.693993 8.98491 0.5 8 0.5Z" fill="#6B677B"/>
+                                                </svg></span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-lg-3 col-xxl-3">
+                                <div class="spare-card">
+                                    <div class="form-check mb-4 ps-0">
+                                        <input class="form-check-input ms-0 me-2" type="checkbox" value="" id="flexCheckspare" [(ngModel)]="isSparePartAdded" name="isSparePartAdded" (change)="calculatePrice()">
+                                        <label class="form-check-label" for="flexCheckspare">
+                                            Add a spare card
+                                        </label>
+                                    </div>
+
+                                    <div class="spare-box mt-4">
+                                        <img src="./assets/images/spare-card.png" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="short-paragraph mt-4">
+                                        <p class="mb-0"><span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.75 5.75H7.25V4.25H8.75M8.75 11.75H7.25V7.25H8.75M8 0.5C7.01509 0.5 6.03982 0.693993 5.12987 1.0709C4.21993 1.44781 3.39314 2.00026 2.6967 2.6967C1.29018 4.10322 0.5 6.01088 0.5 8C0.5 9.98912 1.29018 11.8968 2.6967 13.3033C3.39314 13.9997 4.21993 14.5522 5.12987 14.9291C6.03982 15.306 7.01509 15.5 8 15.5C9.98912 15.5 11.8968 14.7098 13.3033 13.3033C14.7098 11.8968 15.5 9.98912 15.5 8C15.5 7.01509 15.306 6.03982 14.9291 5.12987C14.5522 4.21993 13.9997 3.39314 13.3033 2.6967C12.6069 2.00026 11.7801 1.44781 10.8701 1.0709C9.96018 0.693993 8.98491 0.5 8 0.5Z" fill="#6B677B"/>
+                                        </svg></span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut </p>
+                                    </div>
+                                    <!-- <h5>Add a spare card</h5>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut </p>
+                                    <button type="button" class="btn btn-primary">Proceed to pay</button> -->
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 col-lg-3 col-xxl-3">
+                                <div class="custom-card-title">
+                                    <h5>Customize your card <span><svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0.333008 6.66657V8.33324H10.333L5.74967 12.9166L6.93301 14.0999L13.533 7.4999L6.93301 0.899902L5.74967 2.08324L10.333 6.66657H0.333008Z" fill="#202A3D"/></svg></span></h5>
+                                </div>
+                                <div class="custom-box mt-4">
+                                    <img src="./assets/images/custom-card.png" class="img-fluid" alt="">
+                                </div>
+                                <div class="short-paragraph mt-4">
+                                    <p class="mb-0"><span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.75 5.75H7.25V4.25H8.75M8.75 11.75H7.25V7.25H8.75M8 0.5C7.01509 0.5 6.03982 0.693993 5.12987 1.0709C4.21993 1.44781 3.39314 2.00026 2.6967 2.6967C1.29018 4.10322 0.5 6.01088 0.5 8C0.5 9.98912 1.29018 11.8968 2.6967 13.3033C3.39314 13.9997 4.21993 14.5522 5.12987 14.9291C6.03982 15.306 7.01509 15.5 8 15.5C9.98912 15.5 11.8968 14.7098 13.3033 13.3033C14.7098 11.8968 15.5 9.98912 15.5 8C15.5 7.01509 15.306 6.03982 14.9291 5.12987C14.5522 4.21993 13.9997 3.39314 13.3033 2.6967C12.6069 2.00026 11.7801 1.44781 10.8701 1.0709C9.96018 0.693993 8.98491 0.5 8 0.5Z" fill="#6B677B"/>
+                                    </svg></span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a type="button" href="javascript:void(0)" (click)="addtoCart()" class="btn btn-primary">Proceed to pay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<app-footer></app-footer>

@@ -1,0 +1,72 @@
+.deal-details-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: left;
+  margin-bottom: 1.2rem;
+}
+
+@media screen and (max-width: 700px) {
+  .deal-details-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+.deal-details-section h4 {
+  font-size: 18px;
+  color: rgb(0, 0, 0, 0.9);
+  font-weight: 500;
+}
+
+.deal-details-section p {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 600;
+}
+
+.buyerAndSeller {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 1.2rem;
+  column-gap: 2rem;
+  margin: 1.5rem auto;
+}
+
+.buyerAndSeller strong {
+  font-size: 18px;
+  color: rgb(0, 0, 0, 0.9);
+  font-weight: 500;
+}
+
+@media screen and (max-width: 800px) {
+  .buyerAndSeller {
+    grid-template-columns: 1fr;
+  }
+}
+
+.scrip_table {
+  margin: 4rem auto;
+}
+
+.scrip_table table {
+  width: 100%;
+  margin-inline: auto;
+}
+
+.scrip_table table,
+.scrip_table th,
+.scrip_table td {
+  text-align: center;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+}
+
+
+.buyerAndSeller ul li, .rm_details ul li{
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.buyerAndSeller ul li:not(:first-child), .rm_details ul li:not(:first-child){
+  margin-top: 10px;
+}

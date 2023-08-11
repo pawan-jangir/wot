@@ -1,0 +1,21 @@
+.input-group.error select{
+    border: 1px solid #f00;
+}
+.input-group.error .select2-selection.select2-selection--single{
+    border: 1px solid #f00 !important;
+}
+.form-content .error .select2-selection.select2-selection--single{
+    border: 1px solid #f00 !important;
+}
+.form-group.error input{
+    border: 1px solid #f00 !important;
+}
+.form-group.error .select2-selection.select2-selection--single{
+    border: 1px solid #f00 !important;
+}
+.error input,select{
+    border: 1px solid #f00 !important;
+}
+.error .select2-selection.select2-selection--single{
+    border: 1px solid #f00 !important;
+}

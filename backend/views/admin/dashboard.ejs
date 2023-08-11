@@ -1,0 +1,483 @@
+<%- include('partials/header.ejs') %>
+
+<div class="main-content">
+  <section class="section">
+    <div class="section-body">
+      <div class="row">
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats statistic-box mb-4">
+            <div
+              class="d-card-header d-card-header-dashboard card-header-warning card-header-icon position-relative border-0 text-center px-3 py-0"
+            >
+              <p
+                class="card-category text-uppercase fs-10 font-weight-bold text-muted"
+              ></p>
+              <div
+                class="card-icon d-flex align-items-center justify-content-center"
+              >
+                <a href="/admin/users/list"><i class="fas fa-users"></i></a>
+              </div>
+              Total Users
+              <p></p>
+            </div>
+            <div class="d-card-footer p-3 text-center">
+              <div class="stats">
+                <a href="/admin/users/list" class="text-white"
+                  ><h3 class="card-title fs-18 font-weight-bold">
+                    <%= users %>
+                  </h3></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats statistic-box mb-4">
+            <div
+              class="d-card-header d-card-header-dashboard card-header-warning card-header-icon position-relative border-0 text-center px-3 py-0"
+            >
+              <p
+                class="card-category text-uppercase fs-10 font-weight-bold text-muted"
+              ></p>
+              <div
+                class="card-icon d-flex align-items-center justify-content-center"
+              >
+                <a href="/admin/users/list"><i class="fas fa-users"></i></a>
+              </div>
+              Total Approved Users
+              <p></p>
+            </div>
+            <div class="d-card-footer p-3 text-center">
+              <div class="stats">
+                <a href="/admin/users/list" class="text-white"
+                  ><h3 class="card-title fs-18 font-weight-bold">
+                    <%= approvedUsers %>
+                  </h3></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats statistic-box mb-4">
+            <div
+              class="d-card-header d-card-header-dashboard card-header-warning card-header-icon position-relative border-0 text-center px-3 py-0"
+            >
+              <p
+                class="card-category text-uppercase fs-10 font-weight-bold text-muted"
+              ></p>
+              <div
+                class="card-icon d-flex align-items-center justify-content-center"
+              >
+                <a href="/admin/users/unapprovd_list"
+                  ><i class="fas fa-user-circle"></i
+                ></a>
+              </div>
+              Total Unapproved Users
+              <p></p>
+            </div>
+            <div class="d-card-footer p-3 text-center">
+              <div class="stats">
+                <a href="/admin/users/unapprovd_list" class="text-white"
+                  ><h3 class="card-title fs-18 font-weight-bold">
+                    <%= unapprovedUsers %>
+                  </h3></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats statistic-box mb-4">
+            <div
+              class="d-card-header d-card-header-dashboard card-header-warning card-header-icon position-relative border-0 text-center px-3 py-0"
+            >
+              <p
+                class="card-category text-uppercase fs-10 font-weight-bold text-muted"
+              ></p>
+              <div
+                class="card-icon d-flex align-items-center justify-content-center"
+              >
+                <a href="/admin/delhi_game/list"
+                  ><i class="fas fa-calendar-minus"></i
+                ></a>
+              </div>
+              Total Delhi Games
+              <p></p>
+            </div>
+            <div class="d-card-footer p-3 text-center">
+              <div class="stats">
+                <a href="/admin/delhi_game/list" class="text-white"
+                  ><h3 class="card-title fs-18 font-weight-bold">
+                    <%= delhigames %>
+                  </h3></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="row">
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats statistic-box mb-4">
+            <div
+              class="d-card-header d-card-header-dashboard card-header-warning card-header-icon position-relative border-0 text-center px-3 py-0"
+            >
+              <p
+                class="card-category text-uppercase fs-10 font-weight-bold text-muted"
+              ></p>
+              <div
+                class="card-icon d-flex align-items-center justify-content-center"
+              >
+                <a href="/admin/mumbai_game/list"
+                  ><i class="fas fa-calendar-check"></i
+                ></a>
+              </div>
+              Total Mumbai Games
+              <p></p>
+            </div>
+            <div class="d-card-footer p-3 text-center">
+              <div class="stats">
+                <a href="/admin/mumbai_game/list" class="text-white"
+                  ><h3 class="card-title fs-18 font-weight-bold">
+                    <%= mumbaigames %>
+                  </h3></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats statistic-box mb-4">
+            <div
+              class="d-card-header d-card-header-dashboard card-header-warning card-header-icon position-relative border-0 text-center px-3 py-0"
+            >
+              <p
+                class="card-category text-uppercase fs-10 font-weight-bold text-muted"
+              ></p>
+              <div
+                class="card-icon d-flex align-items-center justify-content-center"
+              >
+                <a href="/admin/starline_game/list"
+                  ><i class="fas fa-calendar-minus"></i
+                ></a>
+              </div>
+              Total Starline Games
+              <p></p>
+            </div>
+            <div class="d-card-footer p-3 text-center">
+              <div class="stats">
+                <a href="/admin/starline_game/list" class="text-white"
+                  ><h3 class="card-title fs-18 font-weight-bold">
+                    <%= starlinegames %>
+                  </h3></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats statistic-box mb-4">
+            <div
+              class="d-card-header d-card-header-dashboard card-header-warning card-header-icon position-relative border-0 text-center px-3 py-0"
+            >
+              <p
+                class="card-category text-uppercase fs-10 font-weight-bold text-muted"
+              ></p>
+              <div
+                class="card-icon d-flex align-items-center justify-content-center"
+              >
+                <a href="/admin/bid/delhi-list"
+                  ><i class="fas fa-calendar-minus"></i
+                ></a>
+              </div>
+              Total Delhi Bid
+              <p></p>
+            </div>
+            <div class="d-card-footer p-3 text-center">
+              <div class="stats">
+                <a href="/admin/bid/delhi-list" class="text-white"
+                  ><h3 class="card-title fs-18 font-weight-bold">
+                    <%= delhi_bid %>
+                  </h3></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats statistic-box mb-4">
+            <div
+              class="d-card-header d-card-header-dashboard card-header-warning card-header-icon position-relative border-0 text-center px-3 py-0"
+            >
+              <p
+                class="card-category text-uppercase fs-10 font-weight-bold text-muted"
+              ></p>
+              <div
+                class="card-icon d-flex align-items-center justify-content-center"
+              >
+                <a href="/admin/bid/mumbai-list"
+                  ><i class="fas fa-calendar-check"></i
+                ></a>
+              </div>
+              Total Mumbai Bid
+              <p></p>
+            </div>
+            <div class="d-card-footer p-3 text-center">
+              <div class="stats">
+                <a href="/admin/bid/mumbai-list" class="text-white"
+                  ><h3 class="card-title fs-18 font-weight-bold">
+                    <%= mumbai_bid %>
+                  </h3></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- <div class="row">
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats statistic-box mb-4">
+            <div
+              class="d-card-header d-card-header-dashboard card-header-warning card-header-icon position-relative border-0 text-center px-3 py-0"
+            >
+              <p
+                class="card-category text-uppercase fs-10 font-weight-bold text-muted"
+              ></p>
+              <div
+                class="card-icon d-flex align-items-center justify-content-center"
+              >
+                <a href="/admin/bid/starline-list"
+                  ><i class="fas fa-calendar-minus"></i
+                ></a>
+              </div>
+              Total Starline Bid
+              <p></p>
+            </div>
+            <div class="d-card-footer p-3 text-center">
+              <div class="stats">
+                <a href="/admin/bid/starline-list" class="text-white"
+                  ><h3 class="card-title fs-18 font-weight-bold">
+                    <%= starline_bid %>
+                  </h3></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats statistic-box mb-4">
+            <div
+              class="d-card-header d-card-header-dashboard card-header-warning card-header-icon position-relative border-0 text-center px-3 py-0"
+            >
+              <p
+                class="card-category text-uppercase fs-10 font-weight-bold text-muted"
+              ></p>
+              <div
+                class="card-icon d-flex align-items-center justify-content-center"
+              >
+                <i class="fa fa-inr"></i>
+              </div>
+              Total Delhi Bid Amount
+              <p></p>
+            </div>
+            <div class="d-card-footer p-3 text-center">
+              <div class="stats">
+                <h3 class="card-title fs-18 font-weight-bold">
+                  <%= delhi_amount %>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats statistic-box mb-4">
+            <div
+              class="d-card-header d-card-header-dashboard card-header-warning card-header-icon position-relative border-0 text-center px-3 py-0"
+            >
+              <p
+                class="card-category text-uppercase fs-10 font-weight-bold text-muted"
+              ></p>
+              <div
+                class="card-icon d-flex align-items-center justify-content-center"
+              >
+                <i class="fa fa-inr"></i>
+              </div>
+              Total Mumbai Bid Amount
+              <p></p>
+            </div>
+            <div class="d-card-footer p-3 text-center">
+              <div class="stats">
+                <h3 class="card-title fs-18 font-weight-bold">
+                  <%= mumbai_amount %>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats statistic-box mb-4">
+            <div
+              class="d-card-header d-card-header-dashboard card-header-warning card-header-icon position-relative border-0 text-center px-3 py-0"
+            >
+              <p
+                class="card-category text-uppercase fs-10 font-weight-bold text-muted"
+              ></p>
+              <div
+                class="card-icon d-flex align-items-center justify-content-center"
+              >
+                <i class="fa fa-inr"></i>
+              </div>
+              Total Starline Bid Amount
+              <p></p>
+            </div>
+            <div class="d-card-footer p-3 text-center">
+              <div class="stats">
+                <h3 class="card-title fs-18 font-weight-bold">
+                  <%= starline_amount %>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats statistic-box mb-4">
+            <div
+              class="d-card-header d-card-header-dashboard card-header-warning card-header-icon position-relative border-0 text-center px-3 py-0"
+            >
+              <p
+                class="card-category text-uppercase fs-10 font-weight-bold text-muted"
+              ></p>
+              <div
+                class="card-icon d-flex align-items-center justify-content-center"
+              >
+                <a href="/admin/payment_requests/list"
+                  ><i class="fa fa-inr"></i
+                ></a>
+              </div>
+              Total Withdrawal Amount
+              <p></p>
+            </div>
+            <div class="d-card-footer p-3 text-center">
+              <div class="stats">
+                <a href="/admin/payment_requests/list" class="text-white"
+                  ><h3 class="card-title fs-18 font-weight-bold">
+                    <%= total_withdrawl %>
+                  </h3></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+          <div class="card card-stats statistic-box mb-4">
+            <div
+              class="d-card-header d-card-header-dashboard card-header-warning card-header-icon position-relative border-0 text-center px-3 py-0"
+            >
+              <p
+                class="card-category text-uppercase fs-10 font-weight-bold text-muted"
+              ></p>
+              <div
+                class="card-icon d-flex align-items-center justify-content-center"
+              >
+                <a href="/admin/payment_requests/list"
+                  ><i class="fa fa-inr"></i>
+                </a>
+              </div>
+              Pending Withdrawal Amount
+              <p></p>
+            </div>
+            <div class="d-card-footer p-3 text-center">
+              <div class="stats">
+                <a href="/admin/payment_requests/list" class="text-white"
+                  ><h3 class="card-title fs-18 font-weight-bold">
+                    <%= pending_withdrawl %>
+                  </h3></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+    <div class="card col-12">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table col-12">
+            <thead class="bg-inverse text-white">
+              <tr>
+                <th>Request Date</th>
+                <th>User Name</th>
+                <th>Amount</th>
+                <th>Wallet Balance</th>
+                <th>Mobile Number</th>
+                <th>Email ID</th>
+                <th>Payment Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if(!all_requests[0]) { %>
+              <tr>
+                <td colspan="100%">No Data</td>
+              </tr>
+              <% } else {%>
+              <%all_requests.forEach(function(record){%>
+              <tr>
+                <td>
+                  <%= convertTimeStampToDate(record.created_at) %>
+                </td>
+                <td>
+                  <%= record.user_id ? record.user_id.name : '' %>
+                </td>
+                <td><%= record.amount %></td>
+                <td><%= record.user_id.wallet %></td>
+                <td><%= record.user_id.mobile_number %></td>
+                <td><%= record.user_id.email %></td>
+                <td>
+                  <%= record.status == 1 ? 'Pending' :
+                  (record.status== 2 ? 'Completed' : 'Cancelled')
+                  %>
+                </td>
+                
+              </tr>
+              <% }); %> <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<%- include('partials/footer.ejs') %>
+<%
+function convertTimeStampToDate(date){
+   date = Number(date)
+      var d = new Date(date),
+         month = '' + (d.getMonth() + 1),
+         day = '' + d.getDate(),
+         year = d.getFullYear();
+
+   if (month.length < 2)
+   month = '0' + month;
+   if (day.length < 2)
+   day = '0' + day;
+   var date = new Date();
+   date.toLocaleDateString();
+
+   return [day, month, year].join('-');
+}
+%>

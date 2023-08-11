@@ -1,0 +1,418 @@
+<%- include('partials/header.ejs') %>
+
+<!-- Main Content -->
+<div class="main-content">
+  <section class="section">
+    <div class="section-body">
+      <!--  Bid history Report Start-->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header" style="background-color: #212529">
+              <div class="col-12 row card-header-box">
+                <div class="col-md-6">
+                  <h4 class="float-left">Select Game</h4>
+                  <br />
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <form id="addform">
+                <div class="row">
+                  <div class="col-sm-2">
+                    <label for="market_close">Market Name</label>
+                    <div class="form-group">
+                      <input
+                        required=""
+                        type="text"
+                        class="form-control"
+                        placeholder="Market Name"
+                        name="market_name"
+                        id="market_name"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="market_name">Market Type </label>
+                    <select
+                      class="form-control show-tick"
+                      id="market_type"
+                      required=""
+                      name="market_type"
+                    >
+                      <option value="" required="">Select</option>
+                      <option value="Starline">Starline</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-3">
+                    <label for="market_open">Market Open Time</label>
+
+                    <div class="form-group">
+                      <input
+                        type="time"
+                        id="open_time"
+                        name="open_time"
+                        required=""
+                        class="form-control"
+                        placeholder="Enter Market Open Time"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <label for="market_close">Market Close Time</label>
+
+                    <div class="form-group">
+                      <input
+                        type="time"
+                        id="close_time"
+                        name="close_time"
+                        required=""
+                        class="form-control"
+                        placeholder="Enter Market Close Time"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group col-md-2">
+                    <label for="market_name">Status </label>
+                    <select
+                      class="form-control show-tick"
+                      id="status"
+                      required=""
+                      name="status"
+                    >
+                      <option value="" required="">Select</option>
+                      <option value="Active">Active</option>
+                      <option value="Inactive">Inactive</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-2 mt-2">
+                    <label>&nbsp;</label>
+                    <button
+                      type="submit"
+                      name="addmarket"
+                      id="addmarket"
+                      class="btn btn-raised btn-round waves-effect"
+                      style="background-color: #212529; color: #fff"
+                    >
+                      Add Market
+                    </button>
+                  </div>
+
+                  <div class="col-md-6"></div>
+                </div>
+
+                <div class="form-group">
+                  <div id="error"></div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Customer list Ends -->
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-body">
+      <!-- Bid history Report Start-->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header" style="background-color: #212529">
+              <div class="col-12 row card-header-box">
+                <div class="col-md-6">
+                  <h4 class="float-left">Starline Game List</h4>
+                  <br />
+                </div>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <div class="row m-2">
+                <div class="col-12">
+                  <div class="table-responsive">
+                    <table id="example" class="table">
+                      <thead>
+                        <tr>
+                          <td>S.No</td>
+                          <td>Game Name</td>
+                          <td>Open Time</td>
+                          <td>Close Time</td>
+                          <td>Market Status</td>
+                          <td>Action</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% if(!game[0]) { %>
+                        <tr>
+                          <td colspan="100%">No Data</td>
+                        </tr>
+                        <% } else {%> <% game.forEach(function(game,index){ %>
+                        <tr>
+                          <td><%= index+1 %></td>
+                          <td><%= game.market_name %></td>
+                          <td><%= game.open_time %></td>
+                          <td><%= game.close_time %></td>
+                          <td><%= game.status %></td>
+                          <td>
+                            <i
+                              class="btn btn-info btn-lg fas fa-edit"
+                              id="edit_btn"
+                              data-toggle="modal"
+                              data-model="<%= JSON.stringify(game) %>"
+                            ></i>
+                            <i
+                              class="btn btn-danger btn-lg fas fa-trash-alt"
+                              onclick="deletegame('<%= game._id %>');"
+                            ></i>
+                          </td>
+                        </tr>
+
+                        <% }); %> <% } %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Customer list Ends -->
+    </div>
+  </section>
+
+  <!-- Modal body -->
+  <div class="modal fade" id="edit">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Edit Game</h4>
+          <button type="button" class="close" data-dismiss="modal">
+            &times;
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form id="editform" class="mx-5">
+            <input type="hidden" id="editid" name="editid" />
+
+            <div class="mb-3">
+              <label for="market_close">Market Name</label>
+              <div class="form-group">
+                <input
+                  required=""
+                  type="text"
+                  class="form-control"
+                  placeholder="Market Name"
+                  name="edit_market_name"
+                  id="edit_market_name"
+                />
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="market_name">Market Type </label>
+              <select
+                class="form-control show-tick"
+                id="edit_market_type"
+                required=""
+                name="edit_market_type"
+              >
+                <option value="" required="">Select</option>
+                <option value="Starline">Starline</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="market_open">Market Open Time</label>
+              <div class="form-group">
+                <div class="form-group">
+                  <input
+                    type="time"
+                    id="edit_open_time"
+                    name="edit_open_time"
+                    required=""
+                    class="form-control"
+                    placeholder="Enter Market Open Time"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="market_close">Market Close Time</label>
+              <div class="form-group">
+                <div class="form-group">
+                  <input
+                    type="time"
+                    id="edit_close_time"
+                    name="edit_close_time"
+                    required=""
+                    class="form-control"
+                    placeholder="Enter Market Close Time"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="market_name">Status </label>
+              <select
+                class="form-control show-tick"
+                id="edit_status"
+                required=""
+                name="edit_status"
+              >
+                <option value="" required="">Select</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+              </select>
+            </div>
+            <div class="form-group col-md-2 mt-4">
+              <label>&nbsp;</label>
+              <button
+                type="submit"
+                name="addmarket"
+                id="addmarket"
+                class="btn btn-raised btn-round waves-effect"
+                style="background-color: #212529; color: #fff"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Main Content -->
+
+<%- include ('partials/footer.ejs') %>
+<script>
+  $(document).ready(function () {
+    $("#example").DataTable();
+  });
+
+  function getFormData($form) {
+    var unindexed_array = $form.serializeArray();
+    var indexed_array = {};
+
+    $.map(unindexed_array, function (n, i) {
+      indexed_array[n["name"]] = n["value"];
+    });
+
+    return indexed_array;
+  }
+
+  const form = $("#addform");
+
+  form.on("submit", submitHandler);
+
+  function submitHandler(e) {
+    e.preventDefault();
+
+    // PREPARE FORM DATA
+    let data = {
+      market_name: $("#market_name").val(),
+      market_type: $("#market_type").val(),
+      open_time: $("#open_time").val(),
+      close_time: $("#close_time").val(),
+      status: $("#status").val(),
+    };
+    console.log(data);
+
+    // DO POST
+    $.ajax({
+      type: "POST",
+      contentType: "application/json",
+      url: "/admin/starline_game/add",
+      data: JSON.stringify(data),
+    })
+
+      .done((res) => {
+        if (res.error == true) {
+          renderToast({ message: res.message, icon: "error" });
+        } else {
+          renderToast({ message: res.message, icon: "success" });
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        }
+      })
+      .fail(function (xhr, status, error) {
+        console.log(xhr.responseText);
+      });
+  }
+
+  $(document).on("click", "#edit_btn", function (e) {
+    let getData = $(e.target).attr("data-model");
+    let finalData = JSON.parse(getData);
+    $("#edit").modal("show");
+    var data = finalData;
+    $("#editid").val(data._id);
+    $("#edit_market_name").val(data.market_name);
+    $("#edit_market_type").val(data.market_type);
+    $("#edit_open_time").val(data.open_time);
+    $("#edit_close_time").val(data.close_time);
+    $("#edit_status").val(data.status);
+  });
+
+  var editform = $("#editform");
+  editform.on("submit", editSubmitHandler);
+
+  function editSubmitHandler(e) {
+    e.preventDefault();
+
+    var formData = getFormData(editform);
+    console.log(formData);
+
+    // DO POST
+    $.ajax({
+      type: "POST",
+      contentType: "application/json",
+      url: "/admin/starline_game/edit",
+      data: JSON.stringify(formData),
+    })
+      .done((res) => {
+        if (res.error == true) {
+          renderToast({ message: res.message, icon: "error" });
+        } else {
+          renderToast({ message: res.message, icon: "success" });
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        }
+      })
+      .fail(function (xhr, status, error) {
+        console.log(xhr.responseText);
+      });
+  }
+</script>
+<script>
+  function deletegame(id) {
+    if (confirm("Do you really want to delete this record")) {
+      // DO POST
+      $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/admin/starline_game/delete",
+        data: JSON.stringify({
+          id: id,
+        }),
+      })
+        .done((res) => {
+          if (res.error == true) {
+            renderToast({ message: res.message, icon: "error" });
+          } else {
+            renderToast({ message: res.message, icon: "success" });
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000);
+          }
+        })
+        .fail(function (xhr, status, error) {
+          console.log(xhr.responseText);
+        });
+    }
+  }
+</script>

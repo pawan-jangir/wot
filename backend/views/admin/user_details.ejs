@@ -1,0 +1,441 @@
+<%- include('partials/header.ejs') %>
+
+<style>
+  .user-details-head {
+    background: #212529 !important;
+  }
+  .user-details-head p {
+    color: white;
+  }
+  .user-details-img {
+    background-color: white !important;
+    height: auto;
+    margin: 0 auto;
+    padding: 5px;
+    overflow: hidden;
+    position: absolute;
+    border: 4px solid #212529;
+    top: -22px;
+    left: 17px;
+  }
+</style>
+
+<div class="main-content">
+  <section class="section">
+    <div class="section-body">
+      <div class="row">
+        <!-- admin box -->
+        <!-- <div class="col-md-4">
+          <div class="card">
+            <div class="card-header user-details-head">
+              <div class="user-name">
+                <h4><%-record.name%></h4>
+                <p><b><%-record.mobile_number%></b></p>
+              </div>
+            </div>
+            <div class="card-body position-relative p-5">
+              <div class="user-details-img">
+                <img
+                  src="/uploads/profile/<%= record.image %>"
+                  alt="<%= record.image %>"
+                  style="width: 70px; height: auto"
+                />
+              </div>
+            </div>
+            <div class="card-footer mt-3" style="border-top: 1px solid #cdc3c3">
+              <h6 class="pb-3">Available Balance</h6>
+              <span><%= record.wallet %></span>
+              <div class="mt-3 mb-2 row">
+                <div class="col-md-6">
+                  <button
+                    class="btn btn-success w-100"
+                    style="font-size: 12px"
+                    type="submit"
+                    data-bs-toggle="modal"
+                    data-bs-target="#myModal"
+                  >
+                    Add Fund
+                  </button>
+                </div>
+                <div class="col-md-6">
+                  <button
+                    class="btn btn-danger w-100"
+                    style="font-size: 12px"
+                    type="submit"
+                    data-bs-toggle="modal"
+                    data-bs-target="#myModal2"
+                  >
+                    Withdrawal Fund
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+        <!-- user -->
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header" style="background-color: #212529">
+              <h4>Personal Information</h4>
+            </div>
+            <div class="personal-information row m-2 pt-2">
+              <div class="col-md-6 d-flex justify-content-between">
+                <h6><b>Full Name</b></h6>
+                <span><%-record.name%></span>
+              </div>
+              <div class="col-md-6 d-flex justify-content-between"></div>
+            </div>
+
+            <div
+              class="personal-information row m-2 pt-2 pb-2"
+              style="border-top: 1px solid #cdc3c3"
+            >
+              <div class="col-md-6 d-flex justify-content-between">
+                <h6><b>Mobile :</b></h6>
+                <span><%-record.mobile_number%></span>
+              </div>
+              <div class="col-md-6 d-flex justify-content-between"></div>
+            </div>
+          </div>
+
+          
+        </div>
+        <div class="col-12">
+          <div class="card">
+            <div
+              class="card-header"
+              style="height: 70px; background-color: #212529"
+            >
+              <div class="col-12">
+                <h4 class="float-left">Orders</h4>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12">
+                  <div class="table-responsive p-2">
+                    <table id="example" class="table table-bordered table-md">
+                      <thead class="t-head">
+                        <tr class="text-center">
+                          <th>S.NO</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Mobile</th>
+                          <th>Order Id</th>
+                          <th>Amount </th>
+                          <th>Status</th>
+                          <th>Created At</th>
+                          <th>Details</th>
+                        </tr>
+                      </thead>
+
+
+                      <tbody class="text-center" ]>
+                        <% if(!all_orders[0]) { %>
+                        <tr>
+                          <td colspan="100%">No Data</td>
+                        </tr>
+                        <% } else {%> <% all_orders.forEach(function(recordData,index){ %>
+                        <tr>
+                          <td><%= index+1 %></td>
+                         
+
+                          <td><%= recordData.fullname %></td>
+                          <td><%= recordData.email %></td>
+                          <td><a href="https://wa.me/<%= recordData.phone %>" target="_blank"><%= recordData.phone %></a></td>
+                          <td><%= recordData.order_id %></td>
+                          <td><%= recordData.grandTotal %></td>
+                          <td><%= recordData.status %></td>
+                        
+                          <td>
+                            <%= convertTimeStampToDate(recordData.created_at) %>
+                          </td>
+                          <td>
+                          <a
+                              href="/admin/orders/view/<%= recordData._id %>"
+                              data-toggle="tooltip"
+                              target= "_blank"
+                              data-bs-original-title="View Details"
+                              ><i class="btn btn-info btn-lg fa-solid fa-eye"></i
+                            ></a>
+                              </td>
+                        </tr>
+                        <% }); %> <% } %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <!-- Modal Popup Start-->
+  <div class="modal" id="myModal">
+    <!-- modal  -->
+    <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Fund</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="body">
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-12 col-12 text-center">
+                <span class="invite-warning"></span>
+              </div>
+              <form id="submitForm">
+                <input
+                  class="form-control"
+                  type="hidden"
+                  name="user_id"
+                  id="user_id"
+                  value="<%= userId %>"
+                />
+                <div class="col-md-12 col-12 form-group invite_user_div">
+                  <label for="amount" class="col-form-label">Amount</label>
+                  <input
+                    class="form-control"
+                    type="number"
+                    name="amount"
+                    id="amount"
+                    placeholder="Please enter amount"
+                  />
+                </div>
+                <div class="col-md-12 modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-light"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-primary check-invite-members"
+                    style="background-color: #212529"
+                  >
+                    Add
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- modal  -->
+  </div>
+  <!-- end -->
+
+  <!-- Withdrawl Modal Popup Start-->
+  <div class="modal" id="myModal2">
+    <!-- modal  -->
+    <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Withdrawl Fund</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="body">
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-12 col-12 text-center">
+                <span class="invite-warning"></span>
+              </div>
+              <form id="submitForm2">
+                <input
+                  class="form-control"
+                  type="hidden"
+                  name="user_id"
+                  id="user_id"
+                  value="<%= userId %>"
+                />
+                <div class="col-md-12 col-12 form-group invite_user_div">
+                  <label for="amount" class="col-form-label">Amount</label>
+                  <input
+                    class="form-control"
+                    type="number"
+                    name="amount"
+                    id="amount_add"
+                    placeholder="Please enter amount"
+                  />
+                </div>
+                <div class="col-md-12 modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-light"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-primary check-invite-members"
+                    style="background-color: #212529"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- modal  -->
+      </div>
+    </div>
+  </div>
+  <!-- end -->
+</div>
+
+<%
+function convertTimeStampToDate(date){
+   date = Number(date)
+      var d = new Date(date),
+         month = '' + (d.getMonth() + 1),
+         day = '' + d.getDate(),
+         year = d.getFullYear();
+
+   if (month.length < 2)
+   month = '0' + month;
+   if (day.length < 2)
+   day = '0' + day;
+   var date = new Date();
+   date.toLocaleDateString();
+
+   return [day, month, year].join('-');
+}
+%>
+
+<%- include ('partials/footer.ejs') %>
+<script>
+  $(document).ready(function () {
+    $("#example1").DataTable();
+  });
+  $(document).ready(function () {
+    $("#example2").DataTable();
+  });
+  $(document).ready(function () {
+    $("#example3").DataTable();
+  });
+  $(document).ready(function () {
+    $("#example4").DataTable();
+  });
+</script>
+<script>
+  function getFormData($form) {
+    var unindexed_array = $form.serializeArray();
+    var indexed_array = {};
+
+    $.map(unindexed_array, function (n, i) {
+      indexed_array[n["name"]] = n["value"];
+    });
+
+    return indexed_array;
+  }
+  var addform = $("#submitForm");
+  addform.on("submit", submitFormHandler);
+
+  function submitFormHandler(e) {
+    e.preventDefault();
+    if ($("input[name='amount']").val() == "") {
+      renderToast({ message: "Please enter amount", icon: "error" });
+      return false;
+    }
+
+    var formData = getFormData(addform);
+    console.log(formData);
+
+    $.ajax({
+      type: "POST",
+      contentType: "application/json",
+      url: "/admin/users/add-fund",
+      data: JSON.stringify(formData),
+    })
+      .done((res) => {
+        console.log(res);
+        if (res.error == true) {
+          renderToast({ message: res.message, icon: "error" });
+        } else {
+          renderToast({ message: res.message, icon: "success" });
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        }
+      })
+      .fail(function (xhr, status, error) {
+        Snackbar.show({
+          text: xhr.responseText,
+          pos: "bottom-right",
+          customClass: "snackbar-custom-d",
+          showAction: false,
+        });
+      });
+  }
+</script>
+
+<script>
+  function getFormData($form) {
+    var unindexed_array = $form.serializeArray();
+    var indexed_array = {};
+
+    $.map(unindexed_array, function (n, i) {
+      indexed_array[n["name"]] = n["value"];
+    });
+
+    return indexed_array;
+  }
+  var submitform = $("#submitForm2");
+  submitform.on("submit", submitFormHandler);
+
+  function submitFormHandler(e) {
+    e.preventDefault();
+
+    var formData = getFormData(submitform);
+    console.log(formData);
+
+    $.ajax({
+      type: "POST",
+      contentType: "application/json",
+      url: "/admin/users/withdraw-fund",
+      data: JSON.stringify(formData),
+    })
+      .done((res) => {
+        alert(res.message);
+        if (res.error == true) {
+          renderToast({ message: res.message, icon: "error" });
+        } else {
+          renderToast({ message: res.message, icon: "success" });
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        }
+      })
+      .fail(function (xhr, status, error) {
+        Snackbar.show({
+          text: xhr.responseText,
+          pos: "bottom-right",
+          customClass: "snackbar-custom-d",
+          showAction: false,
+        });
+      });
+  }
+</script>

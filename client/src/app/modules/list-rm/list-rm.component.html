@@ -1,0 +1,62 @@
+<!-- partial:partials/_navbar.html -->
+<app-header></app-header>
+
+  <!-- partial -->
+<div class="container-fluid page-body-wrapper">
+    <!-- partial:partials/_settings-panel.php -->
+    <app-sidebar></app-sidebar>
+
+    <div class="main-panel">
+        <div class="content-wrapper" style="padding: 6.5rem 1.7rem;">
+            <div class="page-header">
+                <h3 class="page-title">
+                  Relationship Managers
+                </h3>
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Relationship Managers</li>
+                  </ol>
+                </nav>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Relationship Managers</h4>
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="table-responsive">
+                        <table id="order-listing" class="table" datatable >
+                          <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Email ID</th>
+                                <th>State</th>
+                                <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of rmList;let i=index">
+                                <td>{{ i+1 }}</td>
+                                <td>{{ item.first_name + ' ' + item.last_name}}</td>
+                                <td>{{ item.mobile }}</td>
+                                <td>{{ item.email }}</td>
+                                <td>{{ item.state }}</td>
+                                <td>
+                                  <button class="btn btn-outline-primary">View</button>
+                                </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <app-footer></app-footer>
+    </div>
+    <!-- main-panel ends -->
+</div>

@@ -1,0 +1,22 @@
+.balance-card div:nth-child(1) {
+  background: linear-gradient(85deg, #392c70, #6a005b);
+  padding-left: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+
+  color: white;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.balance-card div:nth-child(2) {
+  padding-left: 1.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  font-size: 24px;
+  font-weight: 700;
+  color: #6a005b;
+}

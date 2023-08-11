@@ -1,0 +1,156 @@
+.button-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  align-items: center;
+  padding: 0.5rem 2rem;
+}
+
+.step-button {
+  padding: 0.6rem 1.2rem;
+  border-radius: 15px;
+
+  background-color: white;
+  color: #392c70;
+  border: 1px solid #392c70;
+
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.active.step-button {
+  border: none;
+  background-color: #392c70;
+
+  color: white;
+}
+
+.steps-sections {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+
+  padding: 0.5rem 2rem;
+}
+
+.step-section {
+  display: none;
+}
+
+.single-payee-form {
+  /* width: 100%; */
+  padding: 1rem;
+}
+
+.single-payee-form-group {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 1.2rem;
+  column-gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 700px) {
+  .single-payee-form-group {
+    grid-template-columns: 1fr;
+  }
+}
+
+.single-payee-form-group label {
+  display: block;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.single-payee-form-group input {
+  border: 2px solid #ccc;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  width: 100%;
+  outline: none;
+}
+
+.cancelled-cheque-section {
+  width: 100%;
+  display: block;
+  margin: 0.5rem auto 1.5rem auto;
+}
+
+.cancelled-cheque-section div {
+  display: flex;
+  align-items: flex-start;
+  justify-content: start;
+  gap: 0rem;
+  position: relative;
+}
+
+.cancelled-cheque-section div label {
+  flex: 1;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  padding: 0.5rem 2rem;
+  border-radius: 0.3rem;
+  font-weight: 500;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.cancelled-cheque-section div button {
+  border-radius: 0.3rem;
+  padding: 0.5rem 1rem;
+  outline: none;
+  border: 2px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 600;
+}
+
+input[type="file"] {
+  position: absolute;
+  font-weight: 500;
+  color: rgb(164, 163, 163);
+  font-size: 16px;
+
+  top: 20%;
+  left: 40%;
+}
+
+input[type="file"]::file-selector-button {
+  display: none;
+}
+
+.add-payee-button {
+  border: none;
+  outline: none;
+
+  color: white;
+  background-color: #392c70;
+  font-size: 16px;
+
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+
+  border-radius: 5px;
+}
+
+.upload_file_label {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  padding: 2rem;
+  border: none;
+  border-radius: 0.4rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+
+  cursor: pointer;
+  font-size: 20px;
+}

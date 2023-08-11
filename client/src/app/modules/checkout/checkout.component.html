@@ -1,0 +1,158 @@
+
+<!-- partial:partials/_navbar.html -->
+<app-header></app-header>
+<section class="checkout-page mt-4">
+    <div class="container-fluid px-lg-5">
+        <div class="row">
+            <div class="col-lg-8 col-md-7">
+                <div class="form-detail">
+                    <h5>Shipping Address</h5>
+
+                    <div class="form-group">
+                        <label for="">Full Name *</label>
+                        <input name="fullname" id="fullname" type="text" class="form-control" placeholder="Enter your Full Name" [(ngModel)]="checkoutData.fullname" [ngModelOptions]="{standalone: true}" input-validator>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Email Address *</label>
+                                <input name="email" id="email" type="text" class="form-control" placeholder="Enter your Email" [(ngModel)]="checkoutData.email" [ngModelOptions]="{standalone: true}" input-validator>
+                            </div>                            
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Confirmation Email *</label>
+                                <input name="confirm_email" id="confirm_email" type="text" class="form-control" placeholder="Enter your Email" [(ngModel)]="checkoutData.confirm_email" [ngModelOptions]="{standalone: true}" input-validator>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-4">
+                        <label for="">Phone Number *</label>
+                        <input name="phone" id="phone" type="number" class="form-control" placeholder="Enter your phone number (Only digits)" [(ngModel)]="checkoutData.phone" [ngModelOptions]="{standalone: true}" input-validator>
+                    </div>
+
+                    <div class="form-group mt-4">
+                        <label for="">Street name and house number *</label>
+                        <input name="house_no" id="house_no" type="text" class="form-control" placeholder="Enter your Street name and house number" [(ngModel)]="checkoutData.house_no" [ngModelOptions]="{standalone: true}" input-validator>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">City *</label>
+                                <input name="city" id="city" type="text" class="form-control" [(ngModel)]="checkoutData.city" [ngModelOptions]="{standalone: true}" input-validator>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for=""></label>
+                                <select name="region" id="region" class="form-control" [(ngModel)]="checkoutData.region" [ngModelOptions]="{standalone: true}" input-validator>
+                                    <option value="">Select region</option>
+                                    <option value="Haryana">Haryana</option>
+                                    <option value="Rajasthan">Rajasthan</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-4">
+                            <div class="form-group">
+                                <label for="">Postal Code</label>
+                                <input name="postal_code" id="postal_code" type="number" class="form-control" placeholder="Enter your Postal Code" [(ngModel)]="checkoutData.postal_code" [ngModelOptions]="{standalone: true}" input-validator>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-4">
+                            <div class="form-group">
+                                <label for="">Password</label>
+                                <input name="password" id="password" type="password" class="form-control" placeholder="Enter your Password" [(ngModel)]="checkoutData.password" [ngModelOptions]="{standalone: true}" input-validator>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+
+                <!-- <div class="shipping-method mt-4">
+                    <h4>Shipping Method</h4>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Free Shipping
+                                <span>7-30 business days</span>
+                            </label>
+                        </div>
+
+                        <span>$0</span>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="form-check mb-0">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Free Shipping
+                                <span>7-30 business days</span>
+                            </label>
+                        </div>
+                        <span>$7.50</span>
+                    </div>
+
+                </div> -->
+            </div>
+
+            <div class="col-lg-4 col-md-5">
+                <div class="order-block">
+                    <h5>Your Order</h5>
+
+                    <div class="d-flex align-items-start">
+                        <img [src]="imgBaseUrl+originalProduct.icon" class="img-fluid" alt="">
+                        <div class="order-name ms-3">
+                            <h6>{{originalProduct.name}} <span>(INR {{currentProduct.amount}})</span></h6>
+                            <p class="size">Logo Added : {{ currentProduct.islogoAdded ? 'Yes' : 'No' }}</p>
+                            <p class="size">Spare Card Added : {{ currentProduct.isSparePartAdded ? 'Yes' : 'No' }}</p>
+                            <!-- <p [ngStyle]="{'background-color':currentProduct.selectedColor}">Card Color : {{ currentProduct.selectedColor }}</p> -->
+                        </div>
+                    </div>
+
+                    <div class="discount mt-3">
+                        <h5>Discount Code</h5>
+
+                        <div class="d-flex align-items-center">
+                            <input type="text" class="form-control" placeholder="Add discount code" [(ngModel)]="couponCode" [ngModelOptions]="{standalone: true}" name="coupon_code">
+                            <button type="button" class="btn btn-default" (click)="checkCouponCode()">Apply</button>
+                        </div>
+                        
+                    </div>
+
+                    <div class="subtotal-table">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>Subtotal</th>
+                                    <td>INR {{currentProduct.amount}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Discount</th>
+                                    <td>-INR {{discountObj ? calculatePrice(discountObj) : 0}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Shipment Cost</th>
+                                    <td>INR 0</td>
+                                </tr>
+                                <tr>
+                                    <th>Grand Total</th>
+                                    <td>INR {{grandTotal}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <button type="button" class="btn btn-primary w-100" (click)="makePayment(currentProduct._id)">Continue to payment</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<app-footer></app-footer>

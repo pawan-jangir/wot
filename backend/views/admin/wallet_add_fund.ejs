@@ -1,0 +1,237 @@
+<%- include('partials/header.ejs') %>
+
+<div class="main-content">
+  
+
+  <section class="section">
+    <div class="section-body">
+      <!-- Bid history Report Start-->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header" style="background-color: #212529">
+              <div class="col-12 row card-header-box">
+                <div class="col-md-6">
+                  <h4 class="float-left">Fund History</h4>
+                  <br />
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12">
+                  <form
+                    id="addform"
+                    class="form-group font-weight-bold showcursor: true"
+                  >
+                    <div class="col-sm-12">
+                      <label for="market_id">User Name</label>
+                      <div class="form-group">
+                        <select
+                          class="form-control"
+                          id="user_id"
+                          name="user_id"
+                        >
+                          <option value="" disabled selected>
+                            Select User Name
+                          </option>
+                          <% recordData.forEach(function(user) { %>
+                          <option value="<%= user._id %>">
+                            <%= user.name ? user.name : user.mobile_number  %> ( <%= user.wallet %> INR)
+                          </option>
+                          <% }); %>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="mb-3 d-grid gap-2 col-12 mx-auto">
+                      <label for="title" class="form-label">Amount</label>
+                      <input
+                        name="amount"
+                        id="amount"
+                        class="form-control"
+                        placeholder="Enter Amount"
+                        type="number"
+                      />
+                    </div>
+                    
+                    <button
+                      type="submit"
+                      class="btn mt-3 pull-right"
+                      style="background-color: #212529; color: #fff"
+                    >
+                      Add Amount
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Customer list Ends -->
+    </div>
+  </section>
+
+  <!-- Modal body -->
+  
+</div>
+
+<!-- Main Content -->
+
+<%- include ('partials/footer.ejs') %>
+<% 
+function convertTimeStampToDate(date){ 
+  //return date
+  //date = date.toString();
+  //date = date.split('GMT');
+  //return date[0];
+  //date = Number(date); 
+  //var d = new Date(date).toLocaleString('en-in'); 
+  return new Date(date).toLocaleString("en-IN", {timeZone: 'Asia/Kolkata'})
+  //return d; 
+} %>
+<script>
+   
+</script>
+<script>
+  function getFormData($form) {
+    var unindexed_array = $form.serializeArray();
+    var indexed_array = {};
+
+    $.map(unindexed_array, function (n, i) {
+      indexed_array[n["name"]] = n["value"];
+    });
+
+    return indexed_array;
+  }
+
+  const form = $("#addform");
+
+  form.on("submit", submitHandler);
+
+  function submitHandler(e) {
+    e.preventDefault();
+    $('.show_winners').css({opacity:0});
+    $('.declare_res').css({opacity:0});
+    // PREPARE FORM DATA
+    var formData = getFormData($("#addform"));
+    console.log(formData);
+
+    // DO POST
+    $.ajax({
+      type: "POST",
+      contentType: "application/json",
+      url: "/admin/wallet/add-fund",
+      data: JSON.stringify(formData),
+    }).done((res) => {
+        if (res.error == true) {
+          renderToast({ message: res.message, icon: "error" });
+        } else {
+          renderToast({ message: res.message, icon: "success" });
+         
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        }
+      })
+      .fail(function (xhr, status, error) {
+        console.log(xhr.responseText);
+      });
+  }
+</script>
+
+<!-- edit  -->
+<script>
+  $(document).on("click", ".show_winners", function (e) {
+    $("#show_winners_modal").modal("show");
+    var formData = getFormData($("#addform"));
+    formData.result_id = $(this).data('result-id');
+    $.ajax({
+      type: "POST",
+      contentType: "application/json",
+      url: "/admin/result/show_winners",
+      data: JSON.stringify(formData),
+    })
+      .done((res) => {
+        if (res.error == true) {
+          renderToast({ message: res.message, icon: "error" });
+        } else {
+          let winners = res.data;
+          let htmnl = '';
+          for(let i = 0; i< winners.length; i++){
+          htmnl += `
+            <tr>
+              <td>${winners[i].user_id.name}</td>
+              <td>${winners[i].amount}</td>
+              <td>${winners[i].winning_amount}</td>
+              <td>${winners[i].game_type_id.type}</td>
+            </tr>
+          `
+            $('.winner_table_html').find('tbody').html(htmnl);
+            $('.total_bid_amount').text(res.totalBidAmount);
+            $('.total_winning_amount').text(res.totalWinningAmount);
+          }
+        }
+      })
+      .fail(function (xhr, status, error) {
+        console.log(xhr.responseText);
+      });
+  });
+  $(document).on("click", ".declare_res", function (e) {
+    if (confirm("Do you really want to declare result")) {
+      var formData = getFormData($("#addform"));
+      formData.result_id = $(this).data('result-id');
+      $.ajax({
+      type: "POST",
+      contentType: "application/json",
+      url: "/admin/result/declare_result",
+      data: JSON.stringify(formData),
+    })
+      .done((res) => {
+        if (res.error == true) {
+          renderToast({ message: res.message, icon: "error" });
+        } else {
+          renderToast({ message: res.message, icon: "success" });
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        }
+      })
+      .fail(function (xhr, status, error) {
+        console.log(xhr.responseText);
+      });
+    }
+  });
+</script>
+
+<!-- delete  -->
+<script>
+  function deleteresult(id,type) {
+    if (confirm("Do you really want to delete this record")) {
+      // DO POST
+      $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/admin/result/delete",
+        data: JSON.stringify({
+          id: id,
+          type: type,
+        }),
+      })
+        .done((res) => {
+          if (res.error == true) {
+            renderToast({ message: res.message, icon: "error" });
+          } else {
+            renderToast({ message: res.message, icon: "success" });
+            setTimeout(() => {
+              window.location.reload();
+            }, 1000);
+          }
+        })
+        .fail(function (xhr, status, error) {
+          console.log(xhr.responseText);
+        });
+    }
+  }
+</script>

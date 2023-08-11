@@ -1,0 +1,193 @@
+<%- include('partials/header.ejs') %>
+
+<div class="main-content">
+  <section class="section">
+    <div class="section-body">
+      <!--  Bid history Report Start-->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header" style="background-color: #212529">
+              <div class="col-12 row card-header-box">
+                <div class="col-md-6">
+                  <h4 class="float-left">Bid</h4>
+                  <br />
+                </div>
+              </div>
+            </div>
+            <form id="addform">
+              <div class="row m-2 clearfix">
+                <div class="col-sm-4">
+                  <label for="market_close">Select Date</label>
+                  <div class="form-group">
+                    <input
+                      type="date"
+                      class="form-control"
+                      placeholder="Date"
+                      id="searchText"
+                      name="searchText"
+                      required=""
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row m-2">
+                <div class="col-12">
+                  <button
+                    type="submit"
+                    class="btn btn-raised btn-round waves-effect"
+                    style="background-color: #212529; color: #fff"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- Customer list Ends -->
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-body">
+      <!-- Bid history Report Start-->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header" style="background-color: #212529">
+              <div class="col-12 row card-header-box">
+                <div class="col-md-6">
+                  <h4 class="float-left">Bid Date Wise</h4>
+                  <br />
+                </div>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <div class="row m-2">
+                <div class="col-12">
+                  <div class="table-responsive">
+                    <table id="example" class="table">
+                      <thead class="t-head">
+                      <tr>
+                        <td>S.No</td>
+                        <td>User Mobile</td>
+                        <td>Game Name</td>
+                        <td>Paana and Digit</td>
+                        <td>Points</td>
+                        <td>Date & Time</td>
+                      </tr>
+                      </thead>
+                      <tbody id="search-cast-list"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Customer list Ends -->
+    </div>
+  </section>
+</div>
+
+<!-- Main Content -->
+<%
+function convertTimeStampToDate(date){
+   date = Number(date)
+      var d = new Date(date),
+         month = '' + (d.getMonth() + 1),
+         day = '' + d.getDate(),
+         year = d.getFullYear();
+
+   if (month.length < 2)
+   month = '0' + month;
+   if (day.length < 2)
+   day = '0' + day;
+   var date = new Date();
+   date.toLocaleDateString();
+
+   return [day, month, year].join('-');
+}
+%>
+<%- include ('partials/footer.ejs') %>
+
+<script>
+$(document).ready(function () {
+    $("#example").DataTable();
+  });
+
+  function deletegame(id) {
+    if (confirm("Do you really want to delete this record")) {
+      // DO POST
+      $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/admin/bid/delhi-delete",
+        data: JSON.stringify({
+          id: id,
+        }),
+      })
+      .done((res) => {
+        if (res.error == true) {
+          renderToast({ message: res.message, icon: "error" });
+        } else {
+          renderToast({ message: res.message, icon: "success" });
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        }
+      })
+      .fail(function (xhr, status, error) {
+        console.log(xhr.responseText);
+      });
+    }
+  }
+</script>
+
+<script>
+  const form = $("#addform");
+
+  form.on("submit", submitHandler);
+
+  function submitHandler(e) {
+    e.preventDefault();
+
+    // PREPARE FORM DATA
+    let formData = $("form");
+    let data = {
+      searchText: $("#searchText").val(),
+    };
+
+    // DO POST
+    $.ajax({
+      type: "POST",
+      contentType: "application/json",
+      url: "/admin/starline_game/starline_search",
+      data: JSON.stringify(data),
+    })
+      // // DO POST
+      .done((res) => {
+        if (res.status == false) {
+          alert("Data Not Found");
+        } else {
+          let html = "";
+          const data = res;
+          console.log(data);
+          data.map((item, index) => {
+            html += `<tr>
+            <td>${index + 1}</td>
+            <td>${item.user_id.name}</td>
+            <td>${item.game_type_id.type}</td>
+            <td>${item.market_id.market_name}</td>
+            <td>${item.number}</td>
+            <td>${item.created_at}</td>
+            </tr>`;
+          });
+          $("#search-cast-list").html(html);
+        }
+      });
+  }
+</script>
