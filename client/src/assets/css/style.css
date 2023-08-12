@@ -137,7 +137,7 @@ label{
 }
 
 .banner-content p{
-    color: #6B677B;
+    color: #BFBFBF;
     font-size: 28px;
     font-weight: 500;
     padding: 0 0 55px;
@@ -561,7 +561,7 @@ button.btn.btn-default.search-btn{
 }
 
 .contact-wrapper {
-    height: 100vh;
+    height: 100%;
 }
 
 /* .paading-left {
@@ -1676,13 +1676,11 @@ span.quoteimg.bottom-quote {
 
 .holder-name {
     position: absolute;
-    top: 124px;
-    height: 40px;
+    bottom: 44px;
     left: 16px;
     width: auto;
     background: transparent;
-    color: #6B677B;
-    line-height: 40px;
+    color: #BFBFBF;
     padding: 0 0 0 10px;
     font-family: Poppins;
     font-size: 16px;
@@ -2066,7 +2064,7 @@ img.img-fluid.sm-spare-img {
 
 .holder-name.companyname {
     top: auto;
-    bottom: 30px;
+    bottom: 22px;
 }
 
 
@@ -2085,7 +2083,100 @@ img.img-fluid.sm-spare-img {
 .about-banner .heading h4::after {
     width: 69%;
 }
-    
+
+.address-side {
+    padding: 100px 120px 120px 100px;
+}
+
+.banner-wrapper .banner-inside{
+    background-size: contain;
+}
+
+.banner-content p {
+    font-size: 22px;
+}
+
+.threecolumn-grid .steps {
+    padding: 15px;
+}
+
+.interaction-box {
+    padding: 40px 20px;
+}
+
+.tech-content h4 {
+    width: 100%;
+    padding: 0 0 20px;
+    font-size: 30px;
+    line-height: 42px;
+}
+
+.tech-content h5 {
+    padding: 0 0 20px;
+}
+
+.contact-form {
+    padding: 40px 0 60px 110px;
+}
+
+.fob-content p {
+    width: 80%;
+}
+
+.fob-content ul.list-inline li:not(:first-child) {
+    margin-left: 10px;
+}
+
+.fob-content ul.list-inline li {
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.glance-box {
+    padding: 0 10px;
+}
+
+.glance-box p {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.inner-card p {
+    font-size: 12px;
+}
+
+.material, .fill-requied-detail, .select-color, .threegrid, .customize-card, .threegrid{
+    padding-right: 20px;
+}
+
+.holder-name {
+    height: auto;
+    line-height: unset;
+}
+
+.holder-name.companyname div#result {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.inner-card .card-img {
+    margin: 0 30px 0 0;
+}
+
+.add-logo .inner-card p {
+    font-size: 15px;
+}
+
+.banner-content {
+    padding: 0 0 0 100px;
+}
+
+.frame-banner ul.list-inline li {
+    font-size: 14px;
+    line-height: 20px;
+    padding: 0 20px;
+}
+
 }
 
 @media screen and (max-width:1800px) {
@@ -2103,8 +2194,26 @@ img.img-fluid.sm-spare-img {
     background-size: contain;
 }
 
+.fill-requied-detail label {
+    font-size: 14px;
+    line-height: 18px;
+}
+
 .banner-cotnent {
     padding: 0 6rem 0 6rem;
+}
+
+.holder-name.companyname {
+    top: auto;
+    bottom: 15px;
+}
+
+.inner-card p {
+    font-size: 12px;
+}
+
+.add-logo .inner-card p {
+    font-size: 14px;
 }
 
 .about-img {
@@ -2147,6 +2256,18 @@ img.img-fluid.sm-spare-img {
     padding-bottom: 0;
 }
 
+.header .navbar-nav .nav-item:not(:first-child) {
+    margin-left: 20px;
+}
+
+.header .navbar-nav .nav-item .nav-link.buy-btn {
+    padding: 8px 10px;
+}
+
+.header .navbar-nav .nav-item .nav-link, .header .navbar-nav .nav-item .nav-link.login-btn{
+    font-size: 15px;
+    line-height: 22px;
+}
 
 
 }
@@ -2195,8 +2316,12 @@ img.img-fluid.sm-spare-img {
     padding: 40px 20px 50px 40px;
 }
 
-.material, .fill-requied-detail, .select-color, .spare-card {
-    padding: 0 50px 0 50px;
+.material, .fill-requied-detail, .select-color {
+    padding: 0 20px 0 20px;
+}
+
+.customize-card, .threegrid{
+    padding: 0 20px;
 }
 
 .navbar-light .navbar-toggler {
@@ -2206,6 +2331,14 @@ img.img-fluid.sm-spare-img {
 
 .navbar-light .navbar-toggler:focus{
     box-shadow: none;
+}
+
+.add-logo .inner-card p {
+    font-size: 14px;
+}
+
+.product-left-side {
+    padding-left: 30px;
 }
     
 }
@@ -2382,7 +2515,7 @@ section{
 }
 
 
-.customize-card, .material, .fill-requied-detail, .select-color, .threegrid, .spare-card{
+.customize-card, .material, .fill-requied-detail, .select-color, .threegrid{
     padding: 0 20px;
 }
 
@@ -2411,4 +2544,15 @@ section{
 
 }
 
+@media screen and (max-width:479px) {
+
+.product-fields .form-check {
+    width: 40%;
+}
+
+/* .customize-card{
+    padding-right: 0;
+} */
+    
+}
 
