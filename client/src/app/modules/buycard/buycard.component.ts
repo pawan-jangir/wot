@@ -13,7 +13,8 @@ import {DefaultService} from '../../services/default.service';
   styleUrls: ['./buycard.component.css']
 })
 export class BuycardComponent implements OnInit {
-  public flexRadioDefault:any='classic pvc'
+  showFootNote: boolean = false;
+  public flexRadioDefault:any=''
   public showLoading = false
   public prouctList:any=[]
   public imgBaseUrl:any=''
@@ -44,6 +45,7 @@ export class BuycardComponent implements OnInit {
     this.defaultService.getProductList().subscribe((res) => {
       this.showLoading = false;
       this.prouctList = res.data
+      this.flexRadioDefault = res.data[0].name
       this.imgBaseUrl = res.img_url
       this.getImage(this.flexRadioDefault)
     },
@@ -189,6 +191,11 @@ export class BuycardComponent implements OnInit {
 
     if(this.isSparePartAdded){
       this.totalAmount = this.totalAmount+this.spareprice
+    }
+    if(this.isLogoAdded){
+      this.showFootNote = true
+    }else{
+      this.showFootNote = false
     }
   }
 

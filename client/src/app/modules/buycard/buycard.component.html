@@ -20,7 +20,7 @@
                         <span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 6.11616V7.88384H3.39394L8.25505 12.7449L7 14L0 7L7 0L8.25505 1.25505L3.39394 6.11616H14Z" fill="#6B677B"/></svg></span>Back to products
                     </a>
 
-                    <p>Select the specifications & Add-ons to your cardLorem ipsum dolor sit amet, coetur adipiscing elit, sed unt</p>
+                    <p>Select the specifications & Add-ons to your card</p>
 
                     <figure class="mb-0 position-relative">
                         <img [src]="selectedCardImg" class="img-fluid w-100 rotate-card" alt="">
@@ -92,34 +92,7 @@
                     
                     <hr class="border-line-gray">
 
-                    <!-- <div class="select-color">
-                        <h5>Select the color</h5>
-
-                        <div class="d-flex align-items-center color-select">
-                            <div class="form-check text-start">
-                                <input class="form-check-input" name="selectedColor" [(ngModel)]="selectedColor" type="radio" value="classic" id="flexCheckClassic">
-                                <label class="form-check-label mt-3" for="flexCheckClassic">
-                                    Classic
-                                </label>
-                            </div>
-                            <div class="form-check text-start ms-4">
-                                <input class="form-check-input" name="selectedColor" [(ngModel)]="selectedColor" type="radio" value="#fff" id="flexCheckWhite">
-                                <label class="form-check-label mt-3" for="flexCheckWhite">
-                                    White
-                                </label>
-                            </div>
-                            
-                            <div class="customize-card ms-4">
-                                <a href="javascript:void(0)" class="custom-card" (click)="opencolor.click()">
-                                    <img src="./assets/images/custom-card.svg" class="img-fluid" alt="" >
-                                </a>
-                                <p></p>
-                                <input type="file" #opencolor name="customColor"  style="width: 70px;height: 10px;text-align: center;line-height: 10px;opacity: 0;" name="selectedColor" (change)="importDoc($event)">
-                                <label for="" class="mt-3">Customize your card</label>
-                                
-                            </div>
-                        </div>
-                    </div> -->
+                    
 
                     <div class="customize-card">
                         <h4>Customize your card</h4>
@@ -144,23 +117,23 @@
                         <div class="row mb-5">
                             <div class="col-md-5 col-lg-5 col-xxl-5">
                                 <div class="add-logo">
-                                    <div class="form-check mb-4 ps-0 w-auto">
+                                    <!-- <div class="form-check mb-4 ps-0 w-auto">
                                         <input class="form-check-input ms-0 me-2" type="checkbox"  id="flexCheckDefault" [(ngModel)]="isLogoAdded" name="isLogoAdded" (change)="calculatePrice()">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Add Logo on the card
                                         </label>
-                                    </div>
+                                    </div> -->
 
                                     <div class="customize-card ps-0">
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <div class="inner-card position-relative" (click)="selectFile.click()" style="cursor: pointer;">
+                                                <div class="inner-card position-relative" >
                                                     <div class="form-check w-auto parent-checkbox">
-                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefaultnew">
+                                                        <input class="form-check-input" type="checkbox"  id="flexCheckDefaultnew" [(ngModel)]="isLogoAdded" name="isLogoAdded" (change)="calculatePrice()">
                                                     </div>
                                                     <div class="d-flex align-items-center">
                                                         <figure class="card-img">
-                                                            <input type="file" name="demo2" #selectFile (change)="importLogo($event)" style="display: none;" />
+                                                            
                                                             <img src="./assets/images/your-logo.png" class="img-fluid" alt="">
                                                         </figure>
                                                         
@@ -168,8 +141,8 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group mt-4">
-                                                    <input id="demo2" class="demo1" type="file" data_btn_text="Add Logo" placeholder="" name="demo2[]" />
+                                                <div class="form-group mt-4" (click)="selectFile.click()" [ngStyle]="{'display': showFootNote ? 'block' : 'none' }">
+                                                    <input id="demo2" class="demo1" type="file" (change)="importLogo($event)" data_btn_text="Add Logo" placeholder="" #selectFile name="demo2[]" />
                                                 </div>
                                             </div>
                                         </div>
@@ -180,18 +153,18 @@
 
                             <div class="col-md-5 col-lg-5 col-xxl-5">
                                 <div class="spare-card">
-                                    <div class="form-check mb-4 ps-0 w-auto">
+                                    <!-- <div class="form-check mb-4 ps-0 w-auto">
                                         <input class="form-check-input ms-0 me-2" type="checkbox" value="" id="flexCheckspare" [(ngModel)]="isSparePartAdded" name="isSparePartAdded" (change)="calculatePrice()">
                                         <label class="form-check-label" for="flexCheckspare">
                                             Add a spare card
                                         </label>
-                                    </div>
+                                    </div> -->
                                     <div class="customize-card ps-0">
                                         <div class="row">
                                             <div class="col-lg-12 add-logo">
                                                 <div class="inner-card position-relative">
                                                     <div class="form-check w-auto parent-checkbox">
-                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefaultnew">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckspare" [(ngModel)]="isSparePartAdded" name="isSparePartAdded" (change)="calculatePrice()">
                                                     </div>
                                                     <div class="d-flex align-items-center">
                                                         <figure class="card-img">
