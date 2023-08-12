@@ -1301,7 +1301,7 @@ hr.border-line{
 
 /* Plugin Style Start */
 .kwt-file {
-  /* max-width: 380px; */
+  max-width: 380px;
   margin: 0;
   position: relative;
 }
@@ -1592,8 +1592,8 @@ span.quoteimg.bottom-quote {
 
 .product-fields {
     padding: 70px 0;
-    /* height: calc(100vh - 70px); */
-    overflow: hidden;
+    height: calc(100vh - 70px);
+    overflow-x: hidden;
 }
 
 .description-text p{
@@ -1676,10 +1676,10 @@ span.quoteimg.bottom-quote {
 
 .holder-name {
     position: absolute;
-    top: 124px;
+    top: 64px;
+    width: 14%;
     height: 40px;
-    left: 16px;
-    width: auto;
+    left: 26px;
     background: transparent;
     color: #6B677B;
     line-height: 40px;
@@ -1864,6 +1864,269 @@ img.img-fluid.sm-spare-img {
     top: auto;
 }
 
+@media screen and (min-width:1600px) and (max-width:1920px) {
+
+.about-banner .heading h4::after {
+    width: 76%;
+}
+    
+}
+
+@media screen and (min-width:1200px) and (max-width:1599px) {
+
+.about-banner .heading h4::after {
+    width: 69%;
+}
+    
+}
+
+
+@media screen and (max-width:1200px) {
+
+.about-banner .heading h4::after {
+    width: 56%;
+    background-size: contain;
+}
+
+.banner-cotnent {
+    padding: 0 6rem 0 6rem;
+}
+
+.about-img {
+    Width: 337px;
+    height: 353px;
+}
+
+.address-side {
+    padding: 70px 60px 120px 100px;
+}
+
+.tech-content h4{
+    width: 100%;
+    font-size: 24px;
+    line-height: 35px;
+}
+
+.tech-content {
+    padding: 60px 50px 60px 70px;
+}
+
+.frame-banner .heading h2 {
+    font-size: 35px;
+    line-height: 50px;
+}
+
+.frame-banner ul.list-inline li {
+    width: 25%;
+    font-size: 14px;
+    padding: 0 0px;
+}
+
+.card-look-wrapper .form-group label {
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.how-work {
+    padding-left: 40px;
+    padding-bottom: 0;
+}
+
+}
+
+
+
+@media screen and (max-width:991px) {
+.header .navbar-nav .nav-item:not(:first-child) {
+    margin-left: 0;
+}
+
+.tech-content h4 {
+    width: 90%;
+}
+
+.contact-form{
+    padding-top: 0;
+    padding-left: 0;
+}
+
+.contact-wrapper .contact-form {
+    padding: 70px 0 120px 100px;
+}
+
+.address-side {
+    padding: 70px 40px 120px 30px;
+}
+
+.tech-content {
+    padding: 40px 20px 50px 40px;
+}
+
+.material, .fill-requied-detail, .select-color, .spare-card {
+    padding: 0 50px 0 50px;
+}
+
+.navbar-light .navbar-toggler{
+    border: 0;
+}
+
+.navbar-light .navbar-toggler:focus{
+    box-shadow: none;
+}
+    
+}
+
+@media screen and (max-width:767px){
+.frame-banner ul.list-inline::after {
+    width: 60%;
+}
+
+.frame-banner ul.list-inline li {
+    width: 38%;
+    font-size: 12px;
+    line-height: 19px;
+    padding: 0 10px;
+}
+
+.frame-banner .heading h2 {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    padding: 0 0 20px;
+}
+
+.frame-banner .heading p {
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.card-look-wrapper .form-group label {
+    font-size: 12px;
+}
+
+.tech-content h4 {
+    width: 80%;
+    padding: 0 0 20px;
+    font-size: 26px;
+    line-height: 28px;
+}
+
+.hover-box{
+    width: 300px;
+    left: 15px;
+}
+
+.interaction-box{
+    border-right: 0;
+    border-bottom: 2px solid #F0F0F0;
+}
+
+.banner-content {
+    padding: 60px 0 0 0;
+}
+
+.banner-content h2 {
+    font-size: 28px;
+}
+
+.banner-content p {
+    font-size: 20px;
+}
+
+.banner-wrapper .banner-inside{
+    background: #fff;
+}
+
+.quote-img {
+    position: absolute;
+    top: -50px;
+    left: 20px;
+    width: 50px;
+}
+
+.top-bar-line, .bottom-bar-line{
+    display: none;
+}
+
+figure.user-img {
+    text-align: center;
+}
+
+.review-content{
+    padding-right: 0;
+    text-align: center;
+}
+
+.FAQ-wrapper .accordion-button {
+    font-size: 15px;
+}
+
+.FAQ-wrapper .accordion-item .accordion-body p {
+    font-size: 13px;
+    line-height: 20px;
+}
+
+section{
+    padding: 30px 0;
+}
+
+.price-content {
+    padding: 0 30px 50px;
+}
+
+.video-box {
+    height: 350px;
+}
+
+.absluate-content {
+    left: 0;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.video-box img.img-fluid.w-100 {
+    object-fit: cover;
+    height: 100%;
+}
+
+.review-content p {
+    font-size: 16px;
+    line-height: 24px;
+    padding: 0 20px 50px;
+}
+
+.view-heading h4 {
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.heading h4 {
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.interaction-wrapper {
+    background: #F7F6F9;
+    padding: 40px 0;
+}
+
+.price-content h4 {
+    padding: 0 0 45px;
+}
+
+.price-content p {
+    font-size: 14px;
+    padding: 0 0 45px;
+    line-height: 21px;
+}
+
+.price-wrapper ul.list-inline li {
+    padding-left: 40px;
+}
+
+}
+
+
 /*--------------footer css(09-08-2023)---------------*/
 .footer{
     background-color: #000;
@@ -1909,7 +2172,7 @@ img.img-fluid.sm-spare-img {
     width: 90px;
     background-color: #1c1c1c;
     height: 64px;
-    margin: 0 0 8px;
+    margin-left: 0;
     float: none;
     position: relative;
 }
@@ -2007,408 +2270,3 @@ img.img-fluid.sm-spare-img {
     background-color: #000;
     border-radius: 50%;
 }
-
-.navbar-light .navbar-toggler-icon{
-    background-image: none;
-}
-
-.navbar-light .navbar-toggler-icon {
-    color: #fff;
-    font-size: 30px;
-    padding-top: 8px;
-}
-
-.material-btn .form-check:nth-child(3) .form-check-input[type=radio], .material-btn .form-check:nth-child(4) .form-check-input[type=radio]{
-    background-color: #ddd9d9;
-}
-
-.form-check.parent-checkbox {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 0 !important;
-}
-
-.form-check.parent-checkbox .form-check-input {
-    margin: 0;
-    border: 1px #d9d9d9 solid;
-    width: 40px;
-    height: 30px;
-    background-color: transparent;
-}
-
-.form-check.parent-checkbox .form-check-input:checked{
-    background-color: transparent;
-    background-image: url('../images/black-check.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 25px;
-}
-
-.rotate-card{
-    transition: all .3s ease-in-out;
-}
-
-.product-left-side a.rotate-btn {
-    width: 100%;
-    display: block;
-    text-align: center;
-    margin-top: 10px;
-}
-
-.rotate-card.active{
-    -webkit-transform: rotateY( 180deg);
-    -moz-transform: rotateY( 180deg);
-    -o-transform: rotateY( 180deg);
-    transform: rotateY( 180deg);
-}
-
-
-.holder-name.companyname {
-    top: auto;
-    bottom: 30px;
-}
-
-
-/*----------Media CSS-------------*/
-
-@media screen and (min-width:1600px) and (max-width:1920px) {
-
-.about-banner .heading h4::after {
-    width: 76%;
-}
-    
-}
-
-@media screen and (min-width:1200px) and (max-width:1599px) {
-
-.about-banner .heading h4::after {
-    width: 69%;
-}
-    
-}
-
-@media screen and (max-width:1800px) {
-.product-fields .form-check {
-    width: 18%;
-}
-    
-}
-
-
-@media screen and (max-width:1200px) {
-
-.about-banner .heading h4::after {
-    width: 56%;
-    background-size: contain;
-}
-
-.banner-cotnent {
-    padding: 0 6rem 0 6rem;
-}
-
-.about-img {
-    Width: 337px;
-    height: 353px;
-}
-
-.address-side {
-    padding: 70px 60px 120px 100px;
-}
-
-.tech-content h4{
-    width: 100%;
-    font-size: 24px;
-    line-height: 35px;
-}
-
-.tech-content {
-    padding: 60px 50px 60px 70px;
-}
-
-.frame-banner .heading h2 {
-    font-size: 35px;
-    line-height: 50px;
-}
-
-.frame-banner ul.list-inline li {
-    width: 25%;
-    font-size: 14px;
-    padding: 0 0px;
-}
-
-.card-look-wrapper .form-group label {
-    font-size: 12px;
-    line-height: 18px;
-}
-
-.how-work {
-    padding-left: 40px;
-    padding-bottom: 0;
-}
-
-
-
-}
-
-
-
-@media screen and (max-width:991px) {
-.header .navbar-nav .nav-item:not(:first-child) {
-    margin-left: 0;
-}
-
-.tech-content h4 {
-    width: 90%;
-}
-
-.navbar-collapse {
-    position: fixed;
-    height: 100vh;
-    left: -100%;
-    top: 85px;
-    background: #000;
-    width: 100%;
-    padding: 0 20px;
-    transition: all .1s ease-in-out;
-    -webkit-transition: all .1s ease-in-out;
-}
-
-.navbar-collapse.show{
-    left: 0;
-}
-
-.contact-form{
-    padding-top: 0;
-    padding-left: 0;
-}
-
-.contact-wrapper .contact-form {
-    padding: 70px 0 120px 100px;
-}
-
-.address-side {
-    padding: 70px 40px 120px 30px;
-}
-
-.tech-content {
-    padding: 40px 20px 50px 40px;
-}
-
-.material, .fill-requied-detail, .select-color, .spare-card {
-    padding: 0 50px 0 50px;
-}
-
-.navbar-light .navbar-toggler {
-    border: 0;
-    padding: 0;
-}
-
-.navbar-light .navbar-toggler:focus{
-    box-shadow: none;
-}
-    
-}
-
-@media screen and (max-width:767px){
-.frame-banner ul.list-inline::after {
-    width: 60%;
-}
-
-.frame-banner ul.list-inline li {
-    width: 38%;
-    font-size: 12px;
-    line-height: 19px;
-    padding: 0 10px;
-}
-
-.material, .fill-requied-detail, .select-color{
-    padding: 0 20px 0;
-}
-
-.product-fields {
-    padding: 40px 0;
-}
-
-.frame-banner .heading h2 {
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 30px;
-    padding: 0 0 20px;
-}
-
-.frame-banner .heading p {
-    font-size: 14px;
-    line-height: 22px;
-}
-
-.card-look-wrapper .form-group label {
-    font-size: 12px;
-}
-
-.tech-content h4 {
-    width: 80%;
-    padding: 0 0 20px;
-    font-size: 26px;
-    line-height: 28px;
-}
-
-.hover-box{
-    width: 300px;
-    left: 15px;
-}
-
-.interaction-box{
-    border-right: 0;
-    border-bottom: 2px solid #F0F0F0;
-}
-
-.banner-content {
-    padding: 60px 0 0 0;
-}
-
-.banner-content h2 {
-    font-size: 28px;
-}
-
-.banner-content p {
-    font-size: 20px;
-}
-
-.banner-wrapper .banner-inside{
-    background-position: 120% 100%;
-    background-size: 470px;
-}
-
-.quote-img {
-    position: absolute;
-    top: -50px;
-    left: 20px;
-    width: 50px;
-}
-
-.top-bar-line, .bottom-bar-line{
-    display: none;
-}
-
-figure.user-img {
-    text-align: center;
-}
-
-.review-content{
-    padding-right: 0;
-    text-align: center;
-}
-
-.FAQ-wrapper .accordion-button {
-    font-size: 15px;
-}
-
-.FAQ-wrapper .accordion-item .accordion-body p {
-    font-size: 13px;
-    line-height: 20px;
-}
-
-section{
-    padding: 30px 0;
-}
-
-.price-content {
-    padding: 0 30px 50px;
-}
-
-.video-box {
-    height: 350px;
-}
-
-.absluate-content {
-    left: 0;
-    width: 100%;
-    padding: 0 20px;
-}
-
-.video-box img.img-fluid.w-100 {
-    object-fit: cover;
-    height: 100%;
-}
-
-.review-content p {
-    font-size: 16px;
-    line-height: 24px;
-    padding: 0 20px 50px;
-}
-
-.view-heading h4 {
-    font-size: 20px;
-    line-height: 24px;
-}
-
-.heading h4 {
-    font-size: 20px;
-    line-height: 30px;
-}
-
-.interaction-wrapper {
-    background: #F7F6F9;
-    padding: 40px 0;
-}
-
-.price-content h4 {
-    padding: 0 0 45px;
-}
-
-.price-content p {
-    font-size: 14px;
-    padding: 0 0 45px;
-    line-height: 21px;
-}
-
-.price-wrapper ul.list-inline li {
-    padding-left: 40px;
-}
-
-.header .container-fluid{
-    align-items: center;
-}
-
-.product-left-side {
-    padding: 40px 30px 40px 30px;
-}
-
-
-.product-fields .form-check {
-    padding: 0;
-    width: 32%;
-}
-
-
-.customize-card, .material, .fill-requied-detail, .select-color, .threegrid, .spare-card{
-    padding: 0 20px;
-}
-
-.threecolumn-grid {
-    padding: 50px 0;
-}
-
-.inner-side {
-    margin: 0 auto 0;
-    width: 100%;
-}
-
-.add-logo .inner-card p {
-    font-size: 14px;
-}
-
-.footer {
-    background-size: auto;
-}
-
-.product-fields {
-    height: 100%;
-}
-
-
-
-}
-
-

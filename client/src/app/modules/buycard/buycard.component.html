@@ -7,10 +7,6 @@
     .holder-name {
     width: 100%;
     }
-    .companyname{
-        top : 83px !important;
-        font-size: 11px !important;
-    }
     .kwt-file_btn-text.error {
         border: 5px solid #f00 !important;
     }
@@ -27,7 +23,8 @@
                     <p>Select the specifications & Add-ons to your cardLorem ipsum dolor sit amet, coetur adipiscing elit, sed unt</p>
 
                     <figure class="mb-0 position-relative">
-                        <img [src]="selectedCardImg" class="img-fluid w-100" alt="">
+                        <img [src]="selectedCardImg" class="img-fluid w-100 rotate-card" alt="">
+                        
                         <div class="holder-name d-flex align-items-center">
                             <div id="result">{{cardNameUser}}</div>
                         </div>
@@ -35,7 +32,7 @@
                             <div id="result">{{companyName}}</div>
                         </div>
                     </figure>
-
+                    <a class="rotate-btn" href="javascript:;"><img src="./assets/images/rotate-btn.png" class="img-fluid" alt=""></a>
                     <h6>INR {{totalAmount}} <span>Base price + Add-ons </span></h6>
                 </div>
             </div>
@@ -54,8 +51,8 @@
 
                             
                         </div> -->
-                        <div class="d-flex align-items-center material-btn"  style="width: 146%;">
-                            <div class="form-check mb-0 d-flex align-items-center flex-column" *ngFor="let item of prouctList;let i=index">
+                        <div class="d-flex flex-wrap align-items-xl-center align-items-start material-btn">
+                            <div class="form-check mb-4 d-flex align-items-center flex-column" *ngFor="let item of prouctList;let i=index">
                                 <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" style="background-image: url({{imgBaseUrl+item.icon}});background-repeat:no-repeat;background-size: contain;" (click)="getImage(item.name)" value="{{item.name}}" [(ngModel)]="flexRadioDefault" name="flexRadioDefault" id="flexRadioDefault{{item._id}}">
                                 <label class="form-check-label" for="flexRadioDefault{{item._id}}">
                                     {{item.name}}
@@ -157,13 +154,22 @@
                                     <div class="customize-card ps-0">
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <div class="inner-card d-flex align-items-center" (click)="selectFile.click()" style="cursor: pointer;">
-                                                    <figure class="card-img">
-                                                        <input type="file" name="demo2" #selectFile (change)="importLogo($event)" style="display: none;" />
-                                                        <img src="./assets/images/your-logo.png" class="img-fluid" alt="">
-                                                    </figure>
-                                                    
-                                                    <p>Add Logo</p>
+                                                <div class="inner-card position-relative" (click)="selectFile.click()" style="cursor: pointer;">
+                                                    <div class="form-check w-auto parent-checkbox">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefaultnew">
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <figure class="card-img">
+                                                            <input type="file" name="demo2" #selectFile (change)="importLogo($event)" style="display: none;" />
+                                                            <img src="./assets/images/your-logo.png" class="img-fluid" alt="">
+                                                        </figure>
+                                                        
+                                                        <p>Add Logo</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group mt-4">
+                                                    <input id="demo2" class="demo1" type="file" data_btn_text="Add Logo" placeholder="" name="demo2[]" />
                                                 </div>
                                             </div>
                                         </div>
@@ -183,13 +189,18 @@
                                     <div class="customize-card ps-0">
                                         <div class="row">
                                             <div class="col-lg-12 add-logo">
-                                                <div class="inner-card d-flex align-items-center">
-                                                    <figure class="card-img">
-                                                        <img src="./assets/images/add-spare.png" class="img-fluid" alt="">
-                                                        <input type="file" style="display:none;">
-                                                        Add spare
-                                                    </figure>
-                                                    <p>Add a spare card</p>
+                                                <div class="inner-card position-relative">
+                                                    <div class="form-check w-auto parent-checkbox">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefaultnew">
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <figure class="card-img">
+                                                            <img src="./assets/images/add-spare.png" class="img-fluid" alt="">
+                                                            <input type="file" style="display:none;">
+                                                            Add spare
+                                                        </figure>
+                                                        <p>Add a spare card</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
