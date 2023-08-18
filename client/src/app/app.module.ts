@@ -46,6 +46,7 @@ import { HowitworkComponent } from './modules/howitwork/howitwork.component';
 import { TeamsComponent } from './modules/teams/teams.component';
 import { CheckoutComponent } from './modules/checkout/checkout.component';
 import { FrameComponent } from './modules/frame/frame.component';
+import { ExtraSidebarComponent } from './modules/common/extra-sidebar/extra-sidebar.component';
 
 
 @NgModule({
@@ -84,6 +85,7 @@ import { FrameComponent } from './modules/frame/frame.component';
     TeamsComponent,
     CheckoutComponent,
     FrameComponent,
+    ExtraSidebarComponent,
   ],
   imports: [
     BrowserModule,

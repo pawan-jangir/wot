@@ -1,62 +1,213 @@
 <!-- partial:partials/_navbar.html -->
 <app-header></app-header>
 
-  <!-- partial -->
-<div class="container-fluid page-body-wrapper">
-    <!-- partial:partials/_settings-panel.php -->
-    <app-sidebar></app-sidebar>
-
-    <div class="main-panel">
-        <div class="content-wrapper" style="padding: 6.5rem 1.7rem;">
-            <div class="page-header">
-                <h3 class="page-title">
-                  Relationship Managers
-                </h3>
-                <nav aria-label="breadcrumb">
-                  <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Relationship Managers</li>
-                  </ol>
-                </nav>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Relationship Managers</h4>
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="table-responsive">
-                        <table id="order-listing" class="table" datatable >
-                          <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Phone</th>
-                                <th>Email ID</th>
-                                <th>State</th>
-                                <th>Actions</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let item of rmList;let i=index">
-                                <td>{{ i+1 }}</td>
-                                <td>{{ item.first_name + ' ' + item.last_name}}</td>
-                                <td>{{ item.mobile }}</td>
-                                <td>{{ item.email }}</td>
-                                <td>{{ item.state }}</td>
-                                <td>
-                                  <button class="btn btn-outline-primary">View</button>
-                                </td>
-                            </tr>
-                          </tbody>
-                        </table>
+<div class="page-wrapper">
+  <div class="container-fluid">
+      <div class="d-flex align-items-start">
+          <app-sidebar></app-sidebar>
+          <div class="card-right-side" id="panel_wrapper">
+            
+  
+              <div class="top-margin">
+                  <div class="breadceumb-bar">
+                      <div class="row justify-content-between">
+                          <div class="col-lg-4">
+                              <div class="d-flex align-items-center">
+                                  <h4 class="mb-0 me-4"><span><a href=""><img src="images/arrow.png" class="img-fluid" alt=""></a></span> vCards</h4>
+                                  <a href="" class="btn btn-primary create-btn">+ Create</a>
+                              </div>
+                          </div>
+  
+                          <div class="col-lg-4">
+                              <ol class="breadcrumb mb-0 justify-content-end">
+                                  <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                  <li class="breadcrumb-item active" aria-current="page">vCards</li>
+                              </ol>
+                          </div>
                       </div>
-                    </div>
                   </div>
-                </div>
               </div>
-        </div>
-        <!-- content-wrapper ends -->
-        <app-footer></app-footer>
-    </div>
-    <!-- main-panel ends -->
-</div>
+  
+              <div class="bottom-table vcard-table mx-4">
+                  <div class="card border-0">
+                      <div class="card-body">
+                          <div class="table-responsive">
+                              <table class="table">
+                                  <thead>
+                                      <tr>
+                                          <th>vCards</th>
+                                          <th>Users</th>
+                                          <th>Stats</th>
+                                          <th>Action</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr>
+                                          <td>
+                                              <div class="d-flex align-items-start">
+                                                  <figure clas="mb-0 circle-img"></figure>
+                                                  <div class="user-details">
+                                                      <h5>Janie Doe</h5>
+                                                      <p>CEO and Founder</p>
+                                                      <span>Description Demo demo</span>
+                                                  </div>
+                                              </div>
+                                          </td>
+                                          <td>
+                                              <div class="d-flex align-items-start">
+                                                  <figure clas="mb-0 circle-img">pm</figure>
+                                                  <div class="user-details">
+                                                      <h5>Paul Muhembi</h5>
+                                                      <p>muhmbi@gmail.com</p>
+                                                  </div>
+                                              </div>
+                                          </td>
+                                          <td>
+                                              <p><strong>Views:</strong> 38</p>
+                                              <p><strong>Scans:</strong> 1</p>
+                                          </td>
+                                          <td>
+                                              <a href=""><img src="images/eye-icon.png" class="img-fluid" alt=""></a>
+                                              <a href=""><img src="images/edit-icon.png" class="img-fluid" alt=""></a>
+                                              <a href=""><img src="images/copy-icon.png" class="img-fluid" alt=""></a>
+                                              <a href=""><img src="images/delete-icon.png" class="img-fluid" alt=""></a>
+                                          </td>
+                                      </tr>
+  
+                                      <tr>
+                                          <td>
+                                              <div class="d-flex align-items-start">
+                                                  <figure clas="mb-0 circle-img"></figure>
+                                                  <div class="user-details">
+                                                      <h5>Janie Doe</h5>
+                                                      <p>CEO and Founder</p>
+                                                      <span>Description Demo demo</span>
+                                                  </div>
+                                              </div>
+                                          </td>
+                                          <td>
+                                              <div class="d-flex align-items-start">
+                                                  <figure clas="mb-0 circle-img">pm</figure>
+                                                  <div class="user-details">
+                                                      <h5>Paul Muhembi</h5>
+                                                      <p>muhmbi@gmail.com</p>
+                                                  </div>
+                                              </div>
+                                          </td>
+                                          <td>
+                                              <p><strong>Views:</strong> 38</p>
+                                              <p><strong>Scans:</strong> 1</p>
+                                          </td>
+                                          <td>
+                                              <a href=""><img src="images/eye-icon.png" class="img-fluid" alt=""></a>
+                                              <a href=""><img src="images/edit-icon.png" class="img-fluid" alt=""></a>
+                                              <a href=""><img src="images/copy-icon.png" class="img-fluid" alt=""></a>
+                                              <a href=""><img src="images/delete-icon.png" class="img-fluid" alt=""></a>
+                                          </td>
+                                      </tr>
+  
+                                      <tr>
+                                          <td>
+                                              <div class="d-flex align-items-start">
+                                                  <figure clas="mb-0 circle-img"></figure>
+                                                  <div class="user-details">
+                                                      <h5>Janie Doe</h5>
+                                                      <p>CEO and Founder</p>
+                                                      <span>Description Demo demo</span>
+                                                  </div>
+                                              </div>
+                                          </td>
+                                          <td>
+                                              <div class="d-flex align-items-start">
+                                                  <figure clas="mb-0 circle-img">pm</figure>
+                                                  <div class="user-details">
+                                                      <h5>Paul Muhembi</h5>
+                                                      <p>muhmbi@gmail.com</p>
+                                                  </div>
+                                              </div>
+                                          </td>
+                                          <td>
+                                              <p><strong>Views:</strong> 38</p>
+                                              <p><strong>Scans:</strong> 1</p>
+                                          </td>
+                                          <td>
+                                              <a href=""><img src="images/eye-icon.png" class="img-fluid" alt=""></a>
+                                              <a href=""><img src="images/edit-icon.png" class="img-fluid" alt=""></a>
+                                              <a href=""><img src="images/copy-icon.png" class="img-fluid" alt=""></a>
+                                              <a href=""><img src="images/delete-icon.png" class="img-fluid" alt=""></a>
+                                          </td>
+                                      </tr>
+  
+                                      <tr>
+                                          <td>
+                                              <div class="d-flex align-items-start">
+                                                  <figure clas="mb-0 circle-img"></figure>
+                                                  <div class="user-details">
+                                                      <h5>Janie Doe</h5>
+                                                      <p>CEO and Founder</p>
+                                                      <span>Description Demo demo</span>
+                                                  </div>
+                                              </div>
+                                          </td>
+                                          <td>
+                                              <div class="d-flex align-items-start">
+                                                  <figure clas="mb-0 circle-img">pm</figure>
+                                                  <div class="user-details">
+                                                      <h5>Paul Muhembi</h5>
+                                                      <p>muhmbi@gmail.com</p>
+                                                  </div>
+                                              </div>
+                                          </td>
+                                          <td>
+                                              <p><strong>Views:</strong> 38</p>
+                                              <p><strong>Scans:</strong> 1</p>
+                                          </td>
+                                          <td>
+                                              <a href=""><img src="images/eye-icon.png" class="img-fluid" alt=""></a>
+                                              <a href=""><img src="images/edit-icon.png" class="img-fluid" alt=""></a>
+                                              <a href=""><img src="images/copy-icon.png" class="img-fluid" alt=""></a>
+                                              <a href=""><img src="images/delete-icon.png" class="img-fluid" alt=""></a>
+                                          </td>
+                                      </tr>
+  
+                                      <tr>
+                                          <td>
+                                              <div class="d-flex align-items-start">
+                                                  <figure clas="mb-0 circle-img"></figure>
+                                                  <div class="user-details">
+                                                      <h5>Janie Doe</h5>
+                                                      <p>CEO and Founder</p>
+                                                      <span>Description Demo demo</span>
+                                                  </div>
+                                              </div>
+                                          </td>
+                                          <td>
+                                              <div class="d-flex align-items-start">
+                                                  <figure clas="mb-0 circle-img">pm</figure>
+                                                  <div class="user-details">
+                                                      <h5>Paul Muhembi</h5>
+                                                      <p>muhmbi@gmail.com</p>
+                                                  </div>
+                                              </div>
+                                          </td>
+                                          <td>
+                                              <p><strong>Views:</strong> 38</p>
+                                              <p><strong>Scans:</strong> 1</p>
+                                          </td>
+                                          <td>
+                                              <a href=""><img src="images/eye-icon.png" class="img-fluid" alt=""></a>
+                                              <a href=""><img src="images/edit-icon.png" class="img-fluid" alt=""></a>
+                                              <a href=""><img src="images/copy-icon.png" class="img-fluid" alt=""></a>
+                                              <a href=""><img src="images/delete-icon.png" class="img-fluid" alt=""></a>
+                                          </td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  </div>

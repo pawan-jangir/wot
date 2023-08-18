@@ -14,6 +14,9 @@ const schema = new mongoose.Schema({
   account_holder_name: {
     type: String,
   },
+  password: {
+    type: String,
+  },
   account_number: {
     type: String,
   },

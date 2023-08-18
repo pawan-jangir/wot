@@ -9,6 +9,10 @@ const multer = require("multer");
 const root = process.cwd();
 const path = require("path");
 const fs = require("fs");
+const bcrypt = require("bcrypt");
+const email_regex =
+  /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
 
 // Set The Storage Engine
 const storage = multer.diskStorage({
@@ -27,66 +31,60 @@ const upload = multer({
 
 class AuthController {
   static login = async (req, res) => {
-    const mobile_number = req.body.mobile_number;
+    const email = req.body.email;
     let msg = "Something went wrong please try again later";
-
-    var mobile_regex = /^\d{10}$/;
-
-    if (!mobile_regex.test(mobile_number)) {
-      return res.status(401).send("Invalid Mobile Number");
+    if (!req.body.email) {
+      return res.json({
+        message: "Please enter email",
+        success: false,
+      });
+    } else if (!req.body.password) {
+      return res.json({
+        message: "Please enter password",
+        success: false,
+      });
+    }
+    if (email.split('').includes('@') && !email_regex.test(email)) {
+      return res.json({
+        message: "Please enter valid email",
+        success: false,
+      });
     }
 
     try {
-      let user = await User.findOne({
-        mobile_number,
-      });
+      let user = await User.findOne({  $or : [{email: email },{mobile_number: email }]}).lean();
       if (!user) {
-        user = User({
-          mobile_number,
+        return res.json({
+          message: "User Not Found",
+          success: false,
         });
-        user = await user.save();
       }
-
-      let newOtp = await otpGenerator.generate(4, {
-        alphabets: false,
-        upperCase: false,
-        specialChars: false,
-      });
-      if (mobile_number == "8952829519") {
-        newOtp = 1234;
-      }
-
-      // newOtp = 1234;
-      let customerMobile = user.mobile_number;
-      sendSMS(customerMobile, newOtp);
-
-      const otpExist = await Otp.findOne({
-        user,
-      });
-
-      if (otpExist) {
-        await Otp.findOneAndUpdate(
-          {
-            _id: otpExist._id,
-          },
-          {
-            otp: newOtp,
-            update_at: Date.now(),
-          }
-        );
-      } else {
-        const otp = Otp({
-          user,
-          otp: newOtp,
-          created_at: Date.now(),
-          update_at: Date.now(),
+      const validPassword = await bcrypt.compare(
+        req.body.password,
+        user.password
+      );
+      if (!validPassword) {
+        return res.json({
+          message: "Email or Password invalid",
+          success: false,
         });
-        await otp.save();
       }
-      return res.status(200).send("OTP sent successfully");
+      const token = jwt.sign(
+        {
+          _id: user._id,
+        },
+        process.env.TOKEN_SECRET
+      );
+      user.password = null;
+      return res.json({
+        message: "You have successfully logged-in",
+        success: true,
+        data: user,
+        token: token,
+      });
     } catch (error) {
       console.log(error);
-      return res.status(401).send(msg);
+      return res.status(500).send(msg);
     }
   };
 

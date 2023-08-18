@@ -28,7 +28,7 @@ export class LoginComponentComponent implements OnInit {
     private toastr: ToastrService
     ) {
       if(this.auth.isLoggedIn){
-        this.router.navigateByUrl('/dashboard');
+        this.router.navigateByUrl('/user-profile');
       }
      
   }
@@ -55,16 +55,16 @@ export class LoginComponentComponent implements OnInit {
     else {
       this.commonService.parentHasClassError(document.querySelector("#email"), 'error')
     }
-    let passwordNote:any = document.querySelector('#confirm-password');
+    let passwordNote:any = document.querySelector('#password');
     if(!this.loginData.password) {
       errors = true;
-      elementRefList.push(document.querySelector("#confirm-password"));
+      elementRefList.push(document.querySelector("#password"));
     }
     else if(passwordNote.parentElement.classList.contains('error')) {
       errors = true;
     }
      else {
-      this.commonService.parentHasClassError(document.querySelector("#confirm-password"), 'error')
+      this.commonService.parentHasClassError(document.querySelector("#password"), 'error')
     }
     
     if(errors) {
@@ -75,8 +75,14 @@ export class LoginComponentComponent implements OnInit {
     } else {
       this.showLoading = true;
       this.auth.login(this.loginData).subscribe((res) => {
+        if(res.success==true){
+          this.toastr.success(res.message);
+          this.router.navigateByUrl('/dashboard');
+        }else{
+          this.toastr.error(res.message);
+        }
         this.showLoading = false;
-        this.router.navigateByUrl('/user-profile');
+       
       },
       (error) => {
         this.toastr.error(error);

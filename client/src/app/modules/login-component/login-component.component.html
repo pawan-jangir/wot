@@ -9,14 +9,14 @@
                         <h5>Welcome back!</h5>
                         <p>Sign in to continue </p>
 
-                        <form action="">
+                        <form action="javascript:void(0)" method="post">
                             <div class="form-group">
-                                <label for="">USER ID</label>
-                                <input type="text" class="form-control" placeholder="Email or Username">
+                                <label for="">USER EMAIL</label>
+                                <input type="text" class="form-control" placeholder="Email or Username" id="email" [(ngModel)]="loginData.email" [ngModelOptions]="{standalone: true}" input-validator>
                             </div>
                             <div class="form-group mt-4">
                                 <label for="">PASSWORD</label>
-                                <input type="text" class="form-control" placeholder="Password">
+                                <input type="password" class="form-control" placeholder="Password" id="password" [(ngModel)]="loginData.password" [ngModelOptions]="{standalone: true}" input-validator>
                             </div>
                             <div class="d-flex align-items-center justify-content-between mb-5 mt-3">
                                 <div class="form-check">
@@ -26,19 +26,19 @@
                                     </label>
                                 </div>
 
-                                <a href="" class="forgot-btn">Forgot password?</a>
+                                <!-- <a href="" class="forgot-btn">Forgot password?</a> -->
                             </div>
 
-                            <button type="button" class="btn btn-primary">Sign in</button>
+                            <button type="button" class="btn btn-primary" (click)="login()">Sign in</button>
 
-                            <button type="button" class="btn btn-secondary"><span><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- <button type="button" class="btn btn-secondary"><span><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M19.8503 9.1H10.6803V11.83H17.1903C16.8603 15.64 13.6903 17.27 10.6903 17.27C6.86027 17.27 3.50027 14.25 3.50027 10C3.50027 5.9 6.70027 2.73 10.7003 2.73C13.7903 2.73 15.6003 4.7 15.6003 4.7L17.5003 2.72C17.5003 2.72 15.0603 0 10.6003 0C4.92027 0 0.530273 4.8 0.530273 10C0.530273 15.05 4.66027 20 10.7503 20C16.1003 20 20.0003 16.33 20.0003 10.91C20.0003 9.76 19.8503 9.1 19.8503 9.1Z" fill="black"/>
                             </svg></span> Continue with Google</button>
 
                             <button type="button" class="btn btn-secondary"><span><svg width="30" height="30" viewBox="0 0 30 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M24.7329 18.7084C24.6927 14.3573 28.3884 12.2405 28.5574 12.142C26.4644 9.16794 23.2203 8.76159 22.0803 8.72919C19.3556 8.44974 16.7127 10.3181 15.3247 10.3181C13.909 10.3181 11.7717 8.75619 9.46814 8.80209C6.50384 8.84664 3.7307 10.5193 2.20977 13.1167C-0.929061 18.4127 1.4119 26.1955 4.41914 30.4763C5.92345 32.5729 7.68125 34.9138 9.98204 34.8314C12.233 34.741 13.0738 33.4328 15.7901 33.4328C18.4815 33.4328 19.2711 34.8314 21.6176 34.7788C24.0334 34.741 25.5543 32.6728 27.006 30.5573C28.7444 28.1543 29.4425 25.7878 29.4702 25.6663C29.4134 25.6474 24.7786 23.9234 24.7329 18.7084Z" fill="black"/><path d="M20.3003 5.91309C21.5109 4.43754 22.3393 2.43009 22.1093 0.392944C20.3571 0.468544 18.1657 1.57419 16.9038 3.01734C15.7874 4.28904 14.79 6.37344 15.0477 8.33364C17.016 8.47674 19.037 7.36569 20.3003 5.91309Z" fill="black"/></svg></span> Continue with Apple</button>
+                            <path d="M24.7329 18.7084C24.6927 14.3573 28.3884 12.2405 28.5574 12.142C26.4644 9.16794 23.2203 8.76159 22.0803 8.72919C19.3556 8.44974 16.7127 10.3181 15.3247 10.3181C13.909 10.3181 11.7717 8.75619 9.46814 8.80209C6.50384 8.84664 3.7307 10.5193 2.20977 13.1167C-0.929061 18.4127 1.4119 26.1955 4.41914 30.4763C5.92345 32.5729 7.68125 34.9138 9.98204 34.8314C12.233 34.741 13.0738 33.4328 15.7901 33.4328C18.4815 33.4328 19.2711 34.8314 21.6176 34.7788C24.0334 34.741 25.5543 32.6728 27.006 30.5573C28.7444 28.1543 29.4425 25.7878 29.4702 25.6663C29.4134 25.6474 24.7786 23.9234 24.7329 18.7084Z" fill="black"/><path d="M20.3003 5.91309C21.5109 4.43754 22.3393 2.43009 22.1093 0.392944C20.3571 0.468544 18.1657 1.57419 16.9038 3.01734C15.7874 4.28904 14.79 6.37344 15.0477 8.33364C17.016 8.47674 19.037 7.36569 20.3003 5.91309Z" fill="black"/></svg></span> Continue with Apple</button> -->
 
-                            <a href="" class="card-account">No account? <span>Get your card</span></a>
+                            <a href="/buycard" class="card-account">No account? <span>Get your card</span></a>
                         </form>
                     </div>
                 </div>

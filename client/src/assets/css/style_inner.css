@@ -1,0 +1,204 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar {
+    width: 250px;
+    position: fixed;
+    left: 0;
+}
+
+.sidebar .logo{
+    text-align: center;
+    padding: 12px 8px;
+    border-bottom: 1px #c63264 solid;
+}
+
+.sidebar ul li a{
+    color: #000;
+    font-size: 16px;
+    line-height: 20px;
+    text-decoration: none;
+    padding: 18px 30px;
+    display: block;
+}
+
+.header.header-two{
+    height: 60px;
+}
+
+header.header {
+    background: #e42165;
+    height: 120px;
+}
+
+header.header ul li.nav-item a.nav-link{
+    color: #fff;
+    font-size: 14px;
+}
+
+.card-right-side {
+    width: calc(100% - 250px);
+    margin-left: 238px;
+}
+
+.top-margin {
+    margin: -40px 24px 20px;
+}
+
+.header .dropdown-menu[data-bs-popper] {
+    left: -60px;
+}
+
+.breadceumb-bar {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.07);
+    padding: 25px;
+}
+
+.breadceumb-bar .breadcrumb li a{
+    color: #c63264;
+    text-decoration: none;
+}
+
+.bottom-table{
+    margin-top: 30px;
+}
+
+.bottom-table .card .card-body{
+    padding: 30px;
+    border-radius: 5px;
+    border-top: 2px #c63264 solid   ;
+}
+
+.bottom-table .table>:not(:first-child) {
+    border-top: 0;
+}
+
+.bottom-table .table{
+    border-collapse: collapse;
+}
+
+.bottom-table .table tr td, .bottom-table .table tr th {
+    padding: 20px 10px;
+    font-size: 15px;
+    color: #000;
+    border-color: #f6f6f6;
+}
+
+.bottom-table .table tr td label{
+    color: #c63264;
+    font-weight: 500;
+}
+
+.bottom-table .table tr td span.green{
+    width: auto;
+    padding: 4px 12px;
+    display: inline-block;
+    background: #65eb7a;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 30px;
+}
+
+.bottom-table .table tr:nth-child(odd){
+    background: #fafafa;
+}
+
+.bottom-table .table tr th{
+    background: #f5f5f5;
+}
+
+.form-group label{
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.form-control{
+    height: 42px;
+    font-size: 14px;
+}
+
+.form-control:focus{
+    outline: 0;
+    box-shadow: none;
+}
+
+.btn.btn-primary.delete-btn{
+    background: #fc5449;
+}
+
+.btn.btn-primary{
+    height: 42px;
+    font-size: 14px;
+    line-height: 40px;
+    padding: 0 20px;
+    background: #e81e68;
+    border: 0;
+}
+
+.btn.btn-primary:focus{
+    outline: 0;
+    box-shadow: none;
+}
+
+.vcard-table .table tbody tr td h5{
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 10px;
+}
+
+.vcard-table .table tbody tr td p, .vcard-table .table tbody tr td span{
+    font-size: 12px;
+    display: block;
+    line-height: 16px;
+    color: #98a5b8;
+    margin: 0;
+}
+
+.vcard-table .table tbody tr td figure{
+    width: 80px;
+    height: 80px;
+    background: #e81e68;
+    border-radius: 100%;
+    margin-right: 15px;
+    line-height: 80px;
+    font-size: 22px;
+    color: #fff;
+    text-align: center;
+}
+
+.vcard-table .table tbody tr td span{
+    color: #bebec8;
+}
+
+.vcard-table .table tbody tr td:last-child a{
+    width: 30px;
+    height: 30px;
+    line-height: 25px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 4px;
+    background: #e42165;
+}
+
+.vcard-table .table tbody tr td:last-child a:nth-child(2){
+    background: #63ee7b;
+}
+
+.vcard-table .table tbody tr td:last-child a:nth-child(3){
+    background: #ffa427;
+}
+
+.vcard-table .table tbody tr td:last-child a:nth-child(4){
+    background: #fd5646;
+}
+
+.btn.btn-primary.create-btn{
+    font-weight: 500;
+    font-size: 18px;
+}

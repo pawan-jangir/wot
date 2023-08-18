@@ -7,8 +7,8 @@ export const environment = {
   // url: 'https://civil.learnersquare.com/api/',
   // base_api: 'https://civil.learnersquare.com/api/',
   // base_url: 'https://civil.learnersquare.com/',
-  url: 'http://209.38.239.249:3061/app/',
-  base_api: 'http://209.38.239.249:3061/app/',
+  url: 'http://localhost:3061/app/',
+  base_api: 'http://localhost:3061/app/',
   base_url: 'http://localhost:4200/',
   collegeName : 'Test'
   

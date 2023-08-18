@@ -49,9 +49,9 @@ export class UserProfileComponent implements OnInit {
        this.userData = data.data;
        this.userData.name = data.data && data.data.name ? data.data.name : '';
        this.userData.email = data.data && data.data.email ? data.data.email : '';
-       this.userData.contact = data.data && data.data.contact ? data.data.contact : '';
-       this.userData.type = data.data && data.data.type ? data.data.type : '';
-       this.userProfilePic = data.data && data.data.image ? this.imgUrl+'uploads/users/'+data.data.image : './assets/dist/images/avtar.png';
+      //  this.userData.contact = data.data && data.data.contact ? data.data.contact : '';
+      //  this.userData.type = data.data && data.data.type ? data.data.type : '';
+      //  this.userProfilePic = data.data && data.data.image ? this.imgUrl+'uploads/users/'+data.data.image : './assets/dist/images/avtar.png';
       });
 
   }

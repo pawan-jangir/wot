@@ -16,7 +16,7 @@ import { ContactComponentComponent } from './modules/contact-component/contact-c
 import { TermsConditionsComponent } from './modules/terms-conditions/terms-conditions.component';
 import { PrivacyPolicyComponent } from './modules/privacy-policy/privacy-policy.component';
 // import { LogoutComponent } from './modules/logout/logout.component';
-// import { UserProfileComponent } from './modules/user-profile/user-profile.component';
+import { UserProfileComponent } from './modules/user-profile/user-profile.component';
 import { BusinessComponent } from './modules/business/business.component';
 import { ProductComponent } from './modules/product/product.component';
 import { SupportComponent } from './modules/support/support.component';
@@ -107,11 +107,16 @@ const routes: Routes = [
     path: 'privacy-policy',
     component: PrivacyPolicyComponent
   },
-  // {
-  //   path: 'user-profile',
-  //   canActivate:[AuthGuard],
-  //   component: UserProfileComponent
-  // },
+  {
+    path: 'user-profile',
+    canActivate:[AuthGuard],
+    component: UserProfileComponent
+  },
+  {
+    path: 'my-orders',
+    canActivate:[AuthGuard],
+    component: ListRmComponent
+  },
   {
     path: 'about',
     component: AboutUsComponent

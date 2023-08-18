@@ -28,21 +28,21 @@ export class ListRmComponent implements OnInit {
     private toastr: ToastrService,
     private router: Router
   ) { 
-    this.auth.listRM({}).subscribe((res) => {
-      this.showLoading = false;
-      if(res.success === true){
-        this.rmList= res.data
-      }else{
-        this.toastr.error(res.message);
-      }
-    },
-    (error) => {
-      //this.router.navigateByUrl('/dashboard');
-      console.log(error)
-      //this.toastr.error(error);
-      this.showLoading = false;
-    }
-    )
+    // this.auth.listRM({}).subscribe((res) => {
+    //   this.showLoading = false;
+    //   if(res.success === true){
+    //     this.rmList= res.data
+    //   }else{
+    //     this.toastr.error(res.message);
+    //   }
+    // },
+    // (error) => {
+    //   //this.router.navigateByUrl('/dashboard');
+    //   console.log(error)
+    //   //this.toastr.error(error);
+    //   this.showLoading = false;
+    // }
+    // )
   }
 
   ngOnInit(): void {
@@ -56,15 +56,15 @@ export class ListRmComponent implements OnInit {
   }
   ngAfterViewInit() {
 
-    var s3 = document.createElement("script");
-    s3.type = "text/javascript";
-    s3.src = "assets/js/jquery.dataTables.min.js";
-    this.elementRef.nativeElement.appendChild(s3);
+    // var s3 = document.createElement("script");
+    // s3.type = "text/javascript";
+    // s3.src = "assets/js/jquery.dataTables.min.js";
+    // this.elementRef.nativeElement.appendChild(s3);
 
-    var s = document.createElement("script");
-    s.type = "text/javascript";
-    s.src = "assets/js/data-table.js";
-    this.elementRef.nativeElement.appendChild(s);
+    // var s = document.createElement("script");
+    // s.type = "text/javascript";
+    // s.src = "assets/js/data-table.js";
+    // this.elementRef.nativeElement.appendChild(s);
 
     
   }

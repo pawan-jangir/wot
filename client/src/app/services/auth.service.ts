@@ -159,18 +159,18 @@ export class AuthService {
         'Content-Type': 'application/json',
       })
     };
-    return this.http.post<any>(this.baseApi+'login',data, httpOptions)
+    return this.http.post<any>(this.baseApi+'user/login',data, httpOptions)
       .pipe(map((res:any)=>{
         if(res && res.success){
-          let tokenResponse = res.data.TokenAndRefreshToken.original;
+          let tokenResponse = res.token;
           let user = {
             email : res.data.email,
             name : res.data.name,
           };
           localStorage.setItem('current_user', JSON.stringify(user));
-          localStorage.setItem('auth_token', tokenResponse.access_token);
+          localStorage.setItem('auth_token', res.token);
           this.currentAuthUser.next(user);
-          this.authTokenSubject.next(tokenResponse.access_token);
+          this.authTokenSubject.next(res.token);
         }
         return res
       }))
@@ -380,7 +380,7 @@ export class AuthService {
   }
   getProfileDetails(): Observable<any> {
     let token = this.getAuthToken;
-    return this.http.get<any>(this.baseApi+'profile', this.httpOptions)
+    return this.http.get<any>(this.baseApi+'user/get_user_profile', this.httpOptions)
       .pipe(map((res:any)=>{
         return res
       }))
