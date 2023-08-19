@@ -2067,6 +2067,247 @@ img.img-fluid.sm-spare-img {
     bottom: 22px;
 }
 
+/*-----------VCard-panel CSS(18-08-2023)---------------*/
+/* .sidebar {
+    width: 250px;
+    position: fixed;
+    left: 0;
+} */
+
+.header .navbar-nav .nav-item.dropdown .nav-link.dropdown-toggle::after {
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.sidebar .logo{
+    text-align: center;
+    padding: 12px 8px;
+    border-bottom: 1px #c63264 solid;
+}
+
+.sidebar ul li a{
+    color: #000;
+    font-size: 16px;
+    line-height: 20px;
+    text-decoration: none;
+    padding: 12px 10px;
+    display: block;
+    transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+}
+
+.sidebar ul li:not(:first-child){
+    margin-top: 8px;
+}
+
+.sidebar ul li.active a, .sidebar ul li:hover a{
+    background-color: #000;
+    color: #fff;
+}
+
+.header.header-two{
+    height: 60px;
+}
+
+header.header.vcard-header {
+    height: 120px;
+}
+
+header.header ul li.nav-item a.nav-link{
+    color: #fff;
+    font-size: 14px;
+}
+
+/* .card-right-side {
+    width: calc(100% - 250px);
+    margin-left: 238px;
+} */
+
+/* .top-margin {
+    margin: 0 24px 20px;
+} */
+
+.header .dropdown-menu[data-bs-popper] {
+    left: -60px;
+}
+
+.breadceumb-bar {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.07);
+    padding: 25px;
+}
+
+.breadceumb-bar .breadcrumb li a{
+    color: #ff1f00;
+    text-decoration: none;
+}
+
+.bottom-table{
+    margin-top: 30px;
+}
+
+.bottom-table .card .card-body{
+    padding: 30px;
+    border-radius: 5px;
+    border-top: 2px #000 solid;
+}
+
+.bottom-table .table>:not(:first-child) {
+    border-top: 0;
+}
+
+.bottom-table .table{
+    border-collapse: collapse;
+}
+
+.bottom-table .table tr td, .bottom-table .table tr th {
+    padding: 20px 10px;
+    font-size: 15px;
+    color: #000;
+    border-color: #f6f6f6;
+}
+
+.bottom-table .table tr td label{
+    color: #c63264;
+    font-weight: 500;
+}
+
+.bottom-table .table tr td span.green{
+    width: auto;
+    padding: 4px 12px;
+    display: inline-block;
+    background: #65eb7a;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 30px;
+}
+
+.bottom-table .table tr:nth-child(odd){
+    background: #fafafa;
+}
+
+.bottom-table .table tr th{
+    background: #f5f5f5;
+}
+
+.bottom-table .form-group label{
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.bottom-table .form-control{
+    height: 42px;
+    font-size: 14px;
+}
+
+.form-control:focus{
+    outline: 0;
+    box-shadow: none;
+}
+
+.bottom-button .btn.btn-primary.delete-btn{
+    background: #fc5449;
+}
+
+.bottom-button .btn.btn-primary{
+    height: 42px;
+    font-size: 14px;
+    line-height: 40px;
+    padding: 0 20px;
+    background: #ff1f00;
+    border: 0;
+}
+
+.bottom-button .btn.btn-primary:focus{
+    outline: 0;
+    box-shadow: none;
+}
+
+.vcard-table .table tbody tr td h5{
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 10px;
+}
+
+.vcard-table .table tbody tr td p, .vcard-table .table tbody tr td span{
+    font-size: 12px;
+    display: block;
+    line-height: 16px;
+    color: #98a5b8;
+    margin: 0;
+}
+
+.vcard-table .table tbody tr td figure{
+    width: 60px;
+    height: 60px;
+    background: #000;
+    border-radius: 100%;
+    margin-right: 15px;
+    line-height: 60px;
+    font-size: 18px;
+    color: #fff;
+    text-align: center;
+}
+
+.vcard-table .table tbody tr td span{
+    color: #bebec8;
+}
+
+.vcard-table .table tbody tr td:last-child a{
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 4px;
+    background: #000;
+    color: #fff;
+}
+
+.vcard-table .table tbody tr td:last-child a:nth-child(2){
+    background: #63ee7b;
+}
+
+.vcard-table .table tbody tr td:last-child a:nth-child(3){
+    background: #ffa427;
+}
+
+.vcard-table .table tbody tr td:last-child a:nth-child(4){
+    background: #fd5646;
+}
+
+.vcard-table .table tbody tr td a:not(:first-child){
+    margin-left: 5px;
+}
+
+.btn.btn-primary.create-btn{
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.page-wrapper.user-wrapper, .page-wrapper.order-wrapper{
+    margin-top: 120px;
+}
+
+.header .navbar-nav .nav-item .nav-link span.user-img {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    background-color: #fff;
+    border-radius: 100%;
+}
+
+.sidebar ul li a span {
+    display: inline-block;
+    margin-right: 20px;
+}
+
 
 /*----------Media CSS-------------*/
 
@@ -2340,12 +2581,50 @@ img.img-fluid.sm-spare-img {
 .product-left-side {
     padding-left: 30px;
 }
-    
+
+.bottom-table .card .card-body {
+    padding: 30px 15px;
+}
+
+.sidebar-btn{
+    color: #000;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.sidebar-btn:hover{
+    color: #000;
+}
+
+.sidebar{
+    position: fixed;
+    background-color: #fff;
+    width: 70%;
+    height: 100vh;
+    top: 90px;
+    right: -110%;
+    z-index: 9;
+    transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+}
+
+.sidebar.active{
+    right: 0;
+}
+
+.page-wrapper.user-wrapper, .page-wrapper.order-wrapper {
+    margin-top: 86px;
+}
+
 }
 
 @media screen and (max-width:767px){
 .frame-banner ul.list-inline::after {
     width: 60%;
+}
+
+.bottom-table .card .card-body {
+    padding: 10px;
 }
 
 .frame-banner ul.list-inline li {
@@ -2540,9 +2819,72 @@ section{
     height: 100%;
 }
 
+.bottom-table.vcard-table .table thead {
+    display: none;
+}
+
+.vcard-table .table tbody tr td figure {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    line-height: 40px;
+    font-size: 14px;
+}
+
+.vcard-table .table tbody tr td h5 {
+    font-size: 13px;
+    line-height: 16px;
+    margin: 0;
+}
+
+.bottom-table.vcard-table .table, .bottom-table.vcard-table .table tbody, .bottom-table.vcard-table .table tr, .bottom-table.vcard-table .table td {
+    display: block;
+    width: 100%;
+}
+.bottom-table.vcard-table .table tr {
+    margin-bottom: 15px;
+}
+.bottom-table.vcard-table .table td {
+    /* padding-left: 50%; */
+    text-align: right;
+    position: relative;
+}
+
+.user_dertails {
+    justify-content: end;
+    width: 180px;
+    margin-left: auto;
+}
+.user-details {
+    text-align: left;
+}
+
+.bottom-table.vcard-table .table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.breadceumb-bar {
+    padding: 15px;
+}
+
+.breadceumb-bar .breadcrumb li a, .breadceumb-bar .breadcrumb li{
+    font-size: 12px;
+}
+
+
+
 
 
 }
+
+
 
 @media screen and (max-width:479px) {
 
@@ -2556,202 +2898,3 @@ section{
     
 }
 
-/*-----------VCard-panel CSS(18-08-2023)---------------*/
-.sidebar {
-    width: 250px;
-    position: fixed;
-    left: 0;
-}
-
-.sidebar .logo{
-    text-align: center;
-    padding: 12px 8px;
-    border-bottom: 1px #c63264 solid;
-}
-
-.sidebar ul li a{
-    color: #000;
-    font-size: 16px;
-    line-height: 20px;
-    text-decoration: none;
-    padding: 18px 30px;
-    display: block;
-}
-
-.header.header-two{
-    height: 60px;
-}
-
-header.header.vcard-header {
-    height: 120px;
-}
-
-header.header ul li.nav-item a.nav-link{
-    color: #fff;
-    font-size: 14px;
-}
-
-.card-right-side {
-    width: calc(100% - 250px);
-    margin-left: 238px;
-}
-
-.top-margin {
-    margin: -40px 24px 20px;
-}
-
-.header .dropdown-menu[data-bs-popper] {
-    left: -60px;
-}
-
-.breadceumb-bar {
-    background: #fff;
-    border-radius: 4px;
-    box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.07);
-    padding: 25px;
-}
-
-.breadceumb-bar .breadcrumb li a{
-    color: #c63264;
-    text-decoration: none;
-}
-
-.bottom-table{
-    margin-top: 30px;
-}
-
-.bottom-table .card .card-body{
-    padding: 30px;
-    border-radius: 5px;
-    border-top: 2px #c63264 solid   ;
-}
-
-.bottom-table .table>:not(:first-child) {
-    border-top: 0;
-}
-
-.bottom-table .table{
-    border-collapse: collapse;
-}
-
-.bottom-table .table tr td, .bottom-table .table tr th {
-    padding: 20px 10px;
-    font-size: 15px;
-    color: #000;
-    border-color: #f6f6f6;
-}
-
-.bottom-table .table tr td label{
-    color: #c63264;
-    font-weight: 500;
-}
-
-.bottom-table .table tr td span.green{
-    width: auto;
-    padding: 4px 12px;
-    display: inline-block;
-    background: #65eb7a;
-    color: #fff;
-    font-size: 14px;
-    border-radius: 30px;
-}
-
-.bottom-table .table tr:nth-child(odd){
-    background: #fafafa;
-}
-
-.bottom-table .table tr th{
-    background: #f5f5f5;
-}
-
-.bottom-table .form-group label{
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.bottom-table .form-control{
-    height: 42px;
-    font-size: 14px;
-}
-
-.form-control:focus{
-    outline: 0;
-    box-shadow: none;
-}
-
-.bottom-button .btn.btn-primary.delete-btn{
-    background: #fc5449;
-}
-
-.bottom-button .btn.btn-primary{
-    height: 42px;
-    font-size: 14px;
-    line-height: 40px;
-    padding: 0 20px;
-    background: #e81e68;
-    border: 0;
-}
-
-.bottom-button .btn.btn-primary:focus{
-    outline: 0;
-    box-shadow: none;
-}
-
-.vcard-table .table tbody tr td h5{
-    font-size: 15px;
-    line-height: 20px;
-    font-weight: 700;
-    color: #000;
-    margin: 0 0 10px;
-}
-
-.vcard-table .table tbody tr td p, .vcard-table .table tbody tr td span{
-    font-size: 12px;
-    display: block;
-    line-height: 16px;
-    color: #98a5b8;
-    margin: 0;
-}
-
-.vcard-table .table tbody tr td figure{
-    width: 80px;
-    height: 80px;
-    background: #e81e68;
-    border-radius: 100%;
-    margin-right: 15px;
-    line-height: 80px;
-    font-size: 22px;
-    color: #fff;
-    text-align: center;
-}
-
-.vcard-table .table tbody tr td span{
-    color: #bebec8;
-}
-
-.vcard-table .table tbody tr td:last-child a{
-    width: 30px;
-    height: 30px;
-    line-height: 25px;
-    text-align: center;
-    display: inline-block;
-    border-radius: 4px;
-    background: #e42165;
-}
-
-.vcard-table .table tbody tr td:last-child a:nth-child(2){
-    background: #63ee7b;
-}
-
-.vcard-table .table tbody tr td:last-child a:nth-child(3){
-    background: #ffa427;
-}
-
-.vcard-table .table tbody tr td:last-child a:nth-child(4){
-    background: #fd5646;
-}
-
-.btn.btn-primary.create-btn{
-    font-weight: 500;
-    font-size: 18px;
-}
